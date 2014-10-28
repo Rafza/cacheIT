@@ -1,4 +1,36 @@
-<div class="page-wrapper">
+<!-- 
+
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>'Allo, 'Allo!</h1>
+    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
+    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Features:</h1>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
+        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+      <p>Angular Fullstack v2.0.13 |
+        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
+         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+  </div>
+</footer>
+ -->
+
+ <div class="page-wrapper">
     <!-- header-11 -->
     <header class="header-11">
         <div class="container">
@@ -9,19 +41,24 @@
                         <a class="brand" href="#"><img src="template_assets/img/logo@2x.png" width="50" height="50" alt=""> EOR Banking</a>
                     </div>
                     <div class="collapse navbar-collapse pull-right">
-                        <ul class="nav pull-left">
-                            <li class="active"><a href="#">HOME</a></li>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">Info</a></li>
-                        </ul>
-                        <form class="navbar-form pull-left">
+                        <form class="navbar-form pull-left form" name="form" ng-submit="login(form)" novalidate>
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="Your E-mail">
+                                <input class="form-control" ng-model="user.email" type="text" placeholder="Your E-mail">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="password" class="form-control"ng-model="user.password" placeholder="Password" required>
                             </div>
-                            <a class="btn btn-primary" href="#">SIGN IN</a>
+                            <div class="form-group has-error">
+          <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && submitted">
+             Please enter your email and password.
+          </p>
+          <p class="help-block" ng-show="form.email.$error.email && submitted">
+             Please enter a valid email.
+          </p>
+
+          <p class="help-block">{{ errors.other }}</p>
+        </div>
+                            <button class="btn btn-primary" type="submit">Login</button>
                             <a class="btn btn-danger" href="#">Forgot login?</a>
                         </form>
                     </div>
@@ -192,33 +229,3 @@
         </div>
     </footer>
 </div>
-
-<!-- <div ng-include="'components/navbar/navbar.html'"></div>
-
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<footer class="footer">
-  <div class="container">
-      <p>Angular Fullstack v2.0.13 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
-</footer>
- -->

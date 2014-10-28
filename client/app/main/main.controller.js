@@ -1,22 +1,25 @@
 'use strict';
 
 angular.module('cacheItApp')
-  .controller('MainCtrl', function ($scope, $http) {
-    $scope.awesomeThings = [];
+  .controller('MainCtrl', function ($scope, Auth, $location) {
+    $scope.user = {};
+    $scope.errors = {};
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-    });
+    $scope.login = function(form) {
+      $scope.submitted = true;
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
+      if(form.$valid) {
+        Auth.login({
+          email: $scope.user.email,
+          password: $scope.user.password
+        })
+        .then( function() {
+          // Logged in, redirect to home
+          $location.path('/signup');
+        })
+        .catch( function(err) {
+          $scope.errors.other = err.message;
+        });
       }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
     };
   });
