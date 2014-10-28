@@ -40,24 +40,24 @@
                         <button type="button" class="navbar-toggle"></button>
                         <a class="brand" href="#"><img src="template_assets/img/logo@2x.png" width="50" height="50" alt=""> EOR Banking</a>
                     </div>
-                    <div class="collapse navbar-collapse pull-right">
+                    <div class="collapse navbar-collapse pull-right" ng-controller="LoginCtrl">
                         <form class="navbar-form pull-left form" name="form" ng-submit="login(form)" novalidate>
                             <div class="form-group">
-                                <input class="form-control" ng-model="user.email" type="text" placeholder="Your E-mail">
+                                <input class="form-control" ng-model="user.email" type="text" placeholder="E-mail">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control"ng-model="user.password" placeholder="Password" required>
                             </div>
                             <div class="form-group has-error">
-          <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && submitted">
-             Please enter your email and password.
-          </p>
-          <p class="help-block" ng-show="form.email.$error.email && submitted">
-             Please enter a valid email.
-          </p>
+                              <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && submitted">
+                                 Please enter your email and password.
+                              </p>
+                              <p class="help-block" ng-show="form.email.$error.email && submitted">
+                                 Please enter a valid email.
+                              </p>
 
-          <p class="help-block">{{ errors.other }}</p>
-        </div>
+                              <p class="help-block">{{ errors.other }}</p>
+                            </div>
                             <button class="btn btn-primary" type="submit">Login</button>
                             <a class="btn btn-danger" href="#">Forgot login?</a>
                         </form>
@@ -77,24 +77,49 @@
                     <p>
                         Your money, your future. Use our technology created by really smart people.
                     </p>
-                    <div class="signup-form">
-                        <form>
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="Your E-mail">
+
+                    <div class="signup-form" ng-controller="SignupCtrl">
+                        <form class="form" name="signupForm" ng-submit="register(signupForm)" novalidate>
+                            <div class="form-group" ng-class="{ 'has-success': signupForm.name.$valid && submitted,
+                                            'has-error': signupForm.name.$invalid && submitted }">
+
+                              <input type="text" name="name" class="form-control" ng-model="signup.name" placeholder="Name" required/>
+                              <p class="help-block" ng-show="signupForm.name.$error.required && submitted">
+                              A name is required</p>
                             </div>
-                            <div class="form-group">
-                                <div>
-                                    <input type="password" class="form-control" placeholder="Password">
-                                </div>
-                                <div>
-                                    <input type="password" class="form-control" placeholder="Confirmation">
-                                </div>
+
+                            <div class="form-group" ng-class="{ 'has-success': signupForm.email.$valid && submitted,
+                                                            'has-error': signupForm.email.$invalid && submitted }">
+
+                              <input type="email" name="email" class="form-control" ng-model="signup.email"
+                                 placeholder="E-mail" required mongoose-error/>
+                              <p class="help-block" ng-show="signupForm.email.$error.email && submitted">
+                              Doesn't look like a valid email.</p>
+                              <p class="help-block" ng-show="signupForm.email.$error.required && submitted">
+                              What's your email address?</p>
+                              <p class="help-block" ng-show="signupForm.email.$error.mongoose">
+                              {{ errors.email }}</p>
                             </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-block btn-info">Sign Up</button>
-                            </div>
-                        </form>
-                    </div>
+
+                          <div class="form-group" ng-class="{ 'has-success': signupForm.password.$valid && submitted, 'has-error': signupForm.password.$invalid && submitted }">
+
+                            <input type="password" name="password" class="form-control" ng-model="signup.password"
+                                   ng-minlength="3" placeholder="Password" required mongoose-error/>
+                            <p class="help-block"
+                               ng-show="(signupForm.password.$error.minlength || signupForm.password.$error.required) && submitted">
+                              Password must be at least 3 characters.
+                            </p>
+                            <p class="help-block" ng-show="signupForm.password.$error.mongoose">
+                              {{ errors.password }}
+                            </p>
+                          </div>
+
+                          <div>
+                            <button class="btn btn-block btn-info" type="submit">Sign up</button>
+                          </div>
+                          </form>
+                      </div>
+
                     <div class="additional-links">
                         By signing up you agree to <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
                     </div>
@@ -125,61 +150,8 @@
         </div>
     </section>
 
-    <!-- price-1 -->
-    <section class="price-1">
-        <div class="container">
-            <h3>Take a look at our Accounts</h3>
-            <p class="lead">
-                Totally not a terrible deal at all
-            </p>
-            <div class="row plans">
-                <div class="col-sm-4">
-                    <div class="plan">
-                        <div class="title">Saver</div>
-                        <div class="price">$19/month</div>
-                        <div class="description">
-                            $2,000 maximum<br>
-                            0.1% interest<br>
-                            2 accounts<br>
-                            first 10 day free
-                        </div>
-                        <a class="btn disabled" href="#">Your Current Plan</a>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="plan">
-                        <div class="title">Investor</div>
-                        <div class="price">$39/month</div>
-                        <div class="description">
-                            $10,000 maximum<br>
-                            0.3% interest<br>
-                            5 accounts<br>
-                            first 30 day free
-                        </div>
-                        <a class="btn btn-primary" href="#">Change to this Plan</a>
-
-                        <div class="ribbon">NEW</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="plan">
-                        <div class="title">Mogul</div>
-                        <div class="price">$59/month</div>
-                        <div class="description">
-                            <b>Unlimited</b> maximum<br>
-                            1% interest<br>
-                            <b>unlimited</b> accounts<br>
-                            first 100 day free
-                        </div>
-                        <a class="btn btn-primary" href="#">Change to this Plan</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- content-13  -->
-    <section class="content-13 subscribe-form bg-turquoise">
+<!--     <section class="content-13 subscribe-form bg-turquoise">
         <div class="container">
             <div class="row">
                 <form>
@@ -194,7 +166,7 @@
                 </form>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- footer-2 -->
     <footer class="footer-2 bg-midnight-blue">

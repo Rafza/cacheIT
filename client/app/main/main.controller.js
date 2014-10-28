@@ -1,7 +1,7 @@
 'use strict';
-
+// Login handling
 angular.module('cacheItApp')
-  .controller('MainCtrl', function ($scope, Auth, $location) {
+  .controller('LoginCtrl', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -22,4 +22,39 @@ angular.module('cacheItApp')
         });
       }
     };
+
+  });
+
+// Signup Handling
+angular.module('cacheItApp')
+  .controller('SignupCtrl', function ($scope, Auth, $location) {
+    $scope.user = {};
+    $scope.errors = {};
+
+    $scope.register = function(signupForm) {
+      $scope.submitted = true;
+
+      if(signupForm.$valid) {
+        Auth.createUser({
+          name: $scope.signup.name,
+          email: $scope.signup.email,
+          password: $scope.signup.password
+        })
+        .then( function() {
+          // Account created, redirect to home
+          $location.path('/signup');
+        })
+        .catch( function(err) {
+          err = err.data;
+          $scope.errors = {};
+
+          // Update validity of form fields that match the mongoose errors
+          angular.forEach(err.errors, function(error, field) {
+            signupForm[field].$setValidity('mongoose', false);
+            $scope.errors[field] = error.message;
+          });
+        });
+      }
+    };
+
   });
