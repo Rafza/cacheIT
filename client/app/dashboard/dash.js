@@ -5,7 +5,7 @@ angular.module('cacheItApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('dash', {
-        url: '/',
+        url: '/dash',
         templateUrl: 'app/dashboard/dash.html',
         controller: 'DashCtrl'
     });

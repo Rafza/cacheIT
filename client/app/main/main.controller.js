@@ -15,7 +15,7 @@ angular.module('cacheItApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/signup');
+          $location.path('/dash');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;
@@ -42,7 +42,7 @@ angular.module('cacheItApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/signup');
+          $location.path('/dash');
         })
         .catch( function(err) {
           err = err.data;
