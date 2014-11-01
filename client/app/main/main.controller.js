@@ -1,7 +1,8 @@
 'use strict';
 // Login handling
-angular.module('cacheItApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location) {
+var myModule = angular.module('cacheItApp');
+
+myModule.controller('LoginCtrl', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -26,8 +27,8 @@ angular.module('cacheItApp')
   });
 
 // Signup Handling
-angular.module('cacheItApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location) {
+
+myModule.controller('SignupCtrl', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
 

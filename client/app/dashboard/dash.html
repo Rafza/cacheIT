@@ -1,4 +1,4 @@
-
+<div ng-if="checkLogin()">
 <!-- Header -->
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
   <div class="container-fluid">
@@ -11,7 +11,7 @@
       <a class="navbar-brand" href="#">Dashboard</a>
     </div>
     <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
+      <!-- <ul class="nav navbar-nav navbar-right">
 
         <li class="dropdown">
           <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i> Admin <span class="caret"></span></a>
@@ -19,7 +19,14 @@
             <li><a href="#">My Profile</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+        <li><a href="" ng-click="logout()"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+      </ul> -->
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li> -->
+        <!-- <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li> -->
+        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
       </ul>
     </div>
   </div><!-- /container -->
@@ -88,7 +95,7 @@
         <div class="panel-heading"><h4>Checking</h4></div>
         <div class="panel-body">
 
-          <span class="glyphicon glyphicon-usd"></span> 100,000
+          <span class="glyphicon glyphicon-usd"></span> -9000.00
 
         </div><!--/panel-body-->
       </div><!--/panel-->
@@ -105,8 +112,8 @@
             <th>Balance</th></tr>
           </thead>
           <tbody>
-            <tr><td>..</td><td>..</td><td>..</td><td>..</td><td>..</td></tr>
-            <tr><td>..</td><td>..</td><td>..</td><td>..</td><td>..</td></tr>
+            <tr><td>10/20/14</td><td>Donuts</td><td>9,001.00</td><td>0</td><td>-9000.00</td></tr>
+            <tr><td>10/10/14</td><td>Moneyz from parents</td><td>0</td><td>1.00</td><td>1.00</td></tr>
           </tbody>
         </table>
 
@@ -171,3 +178,4 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dalog -->
 </div><!-- /.modal -->
+</div>
