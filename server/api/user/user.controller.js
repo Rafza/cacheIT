@@ -29,7 +29,6 @@ exports.withdraw = function(req, res, next) {
   var checkingAmt = String(req.body.checkingAmt);
 /*TODO: Continue with this*/
   User.findById(userId, function (err, user) {
-    if(user.authenticate(oldPass))
       user.saving = user.saving + savingAmt;
       user.checking = user.saving + checkingAmt;
       user.save(function(err) {

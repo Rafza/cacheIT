@@ -2,7 +2,7 @@
 'use strict';
 angular.module('cacheItApp')
   .controller('DashCtrl', function ($scope, $location, Auth) {
-    $scope.items = ['myaccount', 'transfer', 'setting'];
+    $scope.items = ['myaccount', 'transfer', 'setting', 'teller'];
     $scope.selection = $scope.items[0];
 
     $scope.testVal = 111333;
