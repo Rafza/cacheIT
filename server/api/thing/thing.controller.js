@@ -19,6 +19,14 @@ exports.index = function(req, res) {
     return res.json(200, things);
   });
 };
+// Get a single thing by name
+exports.showName = function(req, res) {
+  console.log("What's up?" + req.params.name);
+  Thing.find({ name : req.params.name}, function (err, thingName) {
+  if(err) { return handleError(res, err); }
+    return res.json(200, thingName);
+  });
+};
 
 // Get a single thing
 exports.show = function(req, res) {
