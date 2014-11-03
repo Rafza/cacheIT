@@ -43,7 +43,8 @@
           <!-- Delete Account Begin -->
           <div class="col-sm-12">
             <h3>Delete Account</h3>
-            <button class="btn btn-lg btn-danger" type="submit">Delete</button>
+            <!-- <button class="btn btn-lg btn-danger" type="submit">Delete</button> -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm">Delete Account</button>
           </div>
           <!-- Delete Account End -->
         </div>
@@ -53,3 +54,20 @@
 
 
 <!--EMyAccount View-->
+<!-- Small modal -->
+
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+        <div class="modal-header">          
+          <h4 class="modal-title" id="mySmallModalLabel">Are you sure?</h4>
+        </div>
+        <div class="modal-body">
+            <button class="btn btn-danger" ng-click="confirm()">Confirm</button>
+            <button class="btn btn-default" type="button" class="close" data-dismiss="modal"><span aria-hidden="true"">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
