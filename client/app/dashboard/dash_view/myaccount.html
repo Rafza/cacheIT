@@ -6,10 +6,10 @@
   <!-- center left-->
   <div class="col-md-6">
     <div class="panel panel-default">
-      <div class="panel-heading"><h4>Checking</h4></div>
+      <div class="panel-heading"><h4>Checking</h4><pre>{{acc.getCurrentUser()}}</pre></div>
       <div class="panel-body">
 
-        <span class="glyphicon glyphicon-usd"></span> {{acc.checkBal}}
+        <span class="glyphicon glyphicon-usd"></span> {{acc.getCurrentUser().checking}}
 
       </div><!--/panel-body-->
     </div><!--/panel-->
@@ -76,7 +76,7 @@
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Saving</h4></div>
       <div class="panel-body">
-        <span class="glyphicon glyphicon-usd"></span> {{acc.savBal}}
+        <span class="glyphicon glyphicon-usd"></span> {{acc.getCurrentUser().saving}}
 
       </div>
     </div>
