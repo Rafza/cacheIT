@@ -21,7 +21,7 @@ exports.index = function(req, res) {
 };
 
 /**
- * Get a account info
+ * Withdraw Money 
  */
 exports.setAccount = function(req, res, next) {
   var userId = req.user._id;
@@ -35,7 +35,7 @@ exports.setAccount = function(req, res, next) {
       user.save(function(err) {
         if (err) return validationError(res, err);
         res.send(200);
-      });    
+      });
   });
 };
 /**
