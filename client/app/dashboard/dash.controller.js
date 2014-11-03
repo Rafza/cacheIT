@@ -18,8 +18,8 @@ angular.module('cacheItApp')
       if($scope.isActive('/login') == false)
       {
           console.log( 'Logged Out' );
-          $location.path('/');
-          return false;
+          //$location.path('/');
+          return true;
       }
       return true;
     };
