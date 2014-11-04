@@ -36,9 +36,14 @@
                     <option value="Saving Account">Withdrawal</option>
                   </select>
                 </form></td> 
-          <td><input type="text" style="width: 150px"></td>
-          <!--<td><input type="text" class="form-control input-xs" placeholder="$" />
-          </td>-->
+          <td><div class="col-sm-9">
+              <div class="input-group">
+                <div class="input-group-addon" style="height:30px">$</div>
+                  <input class="form-control" placeholder="0.00" type="deposit" 
+                  style="height:36px">
+                </div>
+            </div></td>
+          <!--<td><input type="text" style="width: 150px"></td>-->
           <td><button class="btn btn-xs btn-primary">Submit</button>
           </td>
           <td>{{tran.balance}}</td>         
