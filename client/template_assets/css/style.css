@@ -878,11 +878,11 @@ section * {
   font-family: "Lato", sans-serif;
 }
 .header-11 .navbar .navbar-form {
-  padding: 30px 0 19px 30px;
+  padding: 25px 0 19px 30px;
 }
 .header-11 .navbar .form-control {
   background-color: rgba(255, 255, 255, 0.25);
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.75);
 }
 .header-11 .navbar .form-control .placeholder {
   color: rgba(255, 255, 255, 0.75);
@@ -978,8 +978,8 @@ section * {
   margin-top: 36px;
 }
 .header-11-sub {
-  padding-top: 110px;
-  padding-bottom: 110px;
+  padding-top: 150px;
+  padding-bottom: 150px;
   color: #bdc3c7;
   position: relative;
 }
@@ -1426,7 +1426,7 @@ section * {
 }
 .footer-2 a {
   color: #bdc3c7;
-  font-weight: normal;
+  font-weight: 300;
 }
 .footer-2 a:hover,
 .footer-2 a:focus,

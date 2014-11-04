@@ -14,10 +14,10 @@
 }
 
 video#bgvid {
-    position: fixed; right: 0; bottom: 0;
+    position: fixed; right: 0; top: 0;
     min-width: 100%; min-height: 720px;
     width: auto; height: auto; z-index: -100;
-	background: url(polina.jpg) no-repeat;
+	background: url(http://img.wallpaperstock.net:81/cute-cat-wallpapers_34549_1280x720.jpg) no-repeat;
 	background-size: cover;
 }
 
@@ -35,4 +35,19 @@ video#bgvid {
     padding: 30px 0;
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
+}
+
+.footer-2 {
+    background-color: rgba(44, 62, 80, 0.6);
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.features {
+    padding-top: 0px;
+    padding-bottom: 300px;
+    width: 100%;
+    bottom: 0;
+    margin-bottom: -20px;
 }
