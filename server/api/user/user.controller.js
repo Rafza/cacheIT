@@ -21,6 +21,23 @@ exports.index = function(req, res) {
 };
 
 /**
+ * Withdraw Money
+ */
+exports.withdraw = function(req, res, next) {
+  var userId = req.user._id;
+  var savingAmt = String(req.body.savingAmt);
+  var checkingAmt = String(req.body.checkingAmt);
+/*TODO: Continue with this*/
+  User.findById(userId, function (err, user) {
+      user.saving = user.saving + savingAmt;
+      user.checking = user.saving + checkingAmt;
+      user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+  });
+};
+/**
  * Creates a new user
  */
 exports.create = function (req, res, next) {

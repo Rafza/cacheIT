@@ -1,0 +1,73 @@
+<!--MyAccount View-->
+
+  <a href=""><strong><i class="glyphicon glyphicon-dashboard"></i> Setting</strong></a>
+  <hr>
+  <div class="container">
+        <div class="row">
+          <!-- Change Password Begin -->
+          <div class="col-sm-12">
+            <h3>Change Password</h3>
+          </div>
+          <div class="col-sm-6">
+            <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+
+              <div class="form-group">
+                <label>Current Password</label>
+
+                <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
+                       mongoose-error/>
+                <p class="help-block" ng-show="form.password.$error.mongoose">
+                    {{ errors.other }}
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label>New Password</label>
+
+                <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
+                       ng-minlength="3"
+                       required/>
+                <p class="help-block"
+                   ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+                  Password must be at least 3 characters.
+                </p>
+              </div>
+
+              <p class="help-block"> {{ message }} </p>
+
+              <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+            </form>
+            <br>
+          </div>
+          <!-- Change Password End -->
+          <!-- Delete Account Begin -->
+          <div class="col-sm-12">
+            <h3>Delete Account</h3>
+            <!-- <button class="btn btn-lg btn-danger" type="submit">Delete</button> -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm">Delete Account</button>
+          </div>
+          <!-- Delete Account End -->
+        </div>
+      </div>
+
+      <hr>
+
+
+<!--EMyAccount View-->
+<!-- Small modal -->
+
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+        <div class="modal-header">          
+          <h4 class="modal-title" id="mySmallModalLabel">Are you sure?</h4>
+        </div>
+        <div class="modal-body">
+            <button class="btn btn-danger" ng-click="confirm()">Confirm</button>
+            <button class="btn btn-default" type="button" class="close" data-dismiss="modal"><span aria-hidden="true"">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>

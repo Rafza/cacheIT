@@ -6,7 +6,15 @@ var mongoose = require('mongoose'),
 var ThingSchema = new Schema({
   name: String,
   info: String,
-  active: Boolean
+  active: Boolean,
+  bankAcc: {
+            saving: Number,
+            checking: Number
+          },
+  transactions :  [
+                    { date : String, description : String, debit : Number,
+                      credit : Number , balance : Number}
+                  ]
 });
 
 module.exports = mongoose.model('Thing', ThingSchema);

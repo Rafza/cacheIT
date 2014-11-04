@@ -1,0 +1,133 @@
+<!--MyAccount View-->
+
+<a href=""><strong><i class="glyphicon glyphicon-dashboard"></i> My Account</strong></a>
+<hr>
+<div class="row" ng-controller="AccountCtrl as acc">
+  <!-- center left-->
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Checking</h4><pre>{{acc.getCurrentUser()}}</pre></div>
+      <div class="panel-body">
+
+        <span class="glyphicon glyphicon-usd"></span> {{acc.getCurrentUser().checking}}
+
+      </div><!--/panel-body-->
+    </div><!--/panel-->
+
+    <!-- Deposit and Withdraw Form Begin -->
+    <form class="form-horizontal" role="form">
+      <!-- Deposit Begin-->
+      <!-- <div class="form-group">
+        <div class="col-sm-9">
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input class="form-control" type="deposit" placeholder="0.00">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn btn-primary" type="button">Deposit</button>
+        </div>
+      </div> -->
+      <!-- Deposit Ends -->
+
+      <!-- Withdraw Begin-->
+      <div class="form-group">
+        <div class="col-sm-9">
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input class="form-control" type="deposit" placeholder="0.00">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn btn-primary" type="button">Withdraw</button>
+        </div>
+      </div>
+      <!-- Withdraw Ends -->
+    </form>
+    <!-- Deposit and Withdraw Form End -->
+    <!--/tabs-->
+    <div ng-init="transactions = [
+    {date:'10/30/2014', description:'Paycheck', debit:'0', credit:'1000', balance: '1000'},
+    {date:'11/1/2014', description:'Mugged', debit:'1,000', credit:'0', balance: '0'}
+
+    ]">
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr><th>Date</th>
+        <th>Description</th>
+        <th>Debit</th>
+        <th>Credit</th>
+        <th>Balance</th></tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="tran in transactions | orderBy:reverse" >
+          <td>{{tran.date}}</td>
+          <td>{{tran.description}}</td>
+          <td>{{tran.debit}}</td>
+          <td>{{tran.credit}}</td>
+          <td>{{tran.balance}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div><!--/col-->
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Saving</h4></div>
+      <div class="panel-body">
+        <span class="glyphicon glyphicon-usd"></span> {{acc.getCurrentUser().saving}}
+
+      </div>
+    </div>
+    <!-- Deposit and Withdraw Form Begin -->
+    <form class="form-horizontal" role="form">
+      <!-- Deposit Begin-->
+      <!-- <div class="form-group">
+        <div class="col-sm-9">
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input class="form-control" type="deposit" placeholder="0.00">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn btn-primary" type="button">Deposit</button>
+        </div>
+      </div> -->
+      <!-- Deposit Ends -->
+
+      <!-- Withdraw Begin-->
+      <div class="form-group">
+        <div class="col-sm-9">
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input class="form-control" type="deposit" placeholder="0.00">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn btn-primary" type="button">Withdraw</button>
+        </div>
+      </div>
+      <!-- Withdraw Ends -->
+    </form>
+    <!-- Deposit and Withdraw Form End -->
+    <table class="table table-striped">
+      <thead>
+        <tr><th>Date</th>
+          <th>Description</th>
+          <th>Debit</th>
+          <th>Credit</th>
+          <th>Balance</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>..</td><td>..</td><td>..</td><td>..</td><td>..</td></tr>
+          <tr><td>..</td><td>..</td><td>..</td><td>..</td><td>..</td></tr>
+        </tbody>
+      </table>
+
+
+
+    </div><!--/col-span-6-->
+  </div><!--/row-->
+  <hr>
+  <!-- MyAccount View End -->
