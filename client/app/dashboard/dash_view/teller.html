@@ -32,10 +32,18 @@
                 </form></td>
           <td><form method="post">
               <select name="Transaction">
-                    <option value="Checking Account">Deposit</option>
-                    <option value="Saving Account">Withdrawal</option>
+                    <option value="Deposit">Deposit</option>
+                    <option value="Withdrawal">Withdrawal</option>
+                    <option value="Transfer" data-toggle="modal" data-target=".bs-example-modal-sm">Transfer</option>
+                    <!--<button onclick="window.open('http://www.google.com','name','width=200,height=200');">Open</button>-->
+
+
+
+
+
                   </select>
                 </form></td> 
+
           <td><div class="col-sm-9">
               <div class="input-group">
                 <div class="input-group-addon" style="height:30px">$</div>
@@ -51,7 +59,7 @@
         </tr>
       </tbody>
     </table>
-
+<!-- closing Account-->
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -66,8 +74,6 @@
       </div>
     </div>
   </div>
-
-
 
 
 <!-- Added content of teller view here End -->
