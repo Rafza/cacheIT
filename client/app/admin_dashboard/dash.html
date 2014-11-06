@@ -1,0 +1,92 @@
+<div ng-if="checkLogin()">
+  <!-- Header -->
+  <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">EveryoneRichBank</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <!-- <ul class="nav navbar-nav navbar-right">
+
+        <li class="dropdown">
+        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i> Admin <span class="caret"></span></a>
+        <ul id="g-account-menu" class="dropdown-menu" role="menu">
+        <li><a href="#">My Profile</a></li>
+      </ul>
+    </li>
+    <li><a href="" ng-click="logout()"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+  </ul> -->
+  <ul class="nav navbar-nav navbar-right">
+    <!-- <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li> -->
+    <!-- <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li> -->
+    <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
+    <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+    <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
+  </ul>
+</div>
+</div><!-- /container -->
+</div>
+<!-- /Header -->
+
+<!-- Main -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <!-- Left column -->
+      <a href="#"><strong>Dashboard</strong></a>
+
+      <hr>
+
+      <ul class="list-unstyled">
+        <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">
+          <h5>Links <i class="glyphicon glyphicon-chevron-down"></i></h5>
+        </a>
+        <ul class="list-unstyled collapse in" id="userMenu" ng-model="selection">
+          <!-- <li class="active"> <a href="/" ng-click=""><i class="glyphicon glyphicon-home"></i> Home</a></li> -->
+          <li><a href="#" ng-click="selection=items[0]"><i class="glyphicon glyphicon-gift"></i> Teller</a></li>
+        </ul>
+      </li>
+    </li>
+  </ul>
+</div>
+
+<!-- /col-3 -->
+<div class="col-sm-9">
+
+  <div class="animate-switch-container"
+  ng-switch on="selection">
+  <div class="animate-switch" ng-switch-when="teller">
+    <div ng-include="'app/admin_dashboard/dash_view/teller.html'"></div>
+  </div>
+
+  <div class="animate-switch" ng-switch-default>
+    <div ng-include="'app/admin_dashboard/dash_view/teller.html'"></div>
+  </div>
+</div>
+<!-- <div ng-include="'app/dashboard/dash_view/myaccount.html'"></div> -->
+<!--col-3 end -->
+
+<footer class="text-center">Powered by <strong>CacheIT</strong></footer>
+<div class="modal" id="addWidgetModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Add Widget</h4>
+      </div>
+      <div class="modal-body">
+        <p>Add a widget stuff here..</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" data-dismiss="modal" class="btn">Close</a>
+        <a href="#" class="btn btn-primary">Save changes</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dalog -->
+</div><!-- /.modal -->
+</div>
