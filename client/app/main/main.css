@@ -39,15 +39,36 @@ video#bgvid {
 
 .footer-2 {
     background-color: rgba(44, 62, 80, 0.6);
+    margin-top: 40px;
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
     font-size: 12px;
 }
 
 .features {
-    padding-top: 0px;
-    padding-bottom: 300px;
+    background-color: #fff;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    height: 304px;
     width: 100%;
     bottom: 0;
-    margin-bottom: -20px;
+    margin-bottom: 0px;
 }
+
+.features h2 {
+    font-size: 33px;
+    font-weight: normal;
+    color: #000;
+    margin-bottom: 15px;
+    font-family: "Lato", Arial, sans-serif;
+    font-weight: 300;
+    text-align: center;
+}
+
+.features .container {
+    width: 1220px;
+    height: 198px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
