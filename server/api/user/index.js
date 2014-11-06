@@ -12,7 +12,10 @@ router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
-router.get('/:id/withdraw', auth.isAuthenticated(), controller.withdraw);//My New Method
+
+//Method used to withdraw from saving and checking
+router.put('/:id/withdraw', auth.hasRole('admin'), controller.withdraw);
+
 router.post('/', controller.create);
 
 module.exports = router;

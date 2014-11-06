@@ -14,4 +14,8 @@ angular.module('cacheItApp')
         }
       });
     };
+
+    $scope.add = function(user, amt) {
+      User.where({ id: user._id }).update({ checking: 3939 }, callback);
+    };
   });

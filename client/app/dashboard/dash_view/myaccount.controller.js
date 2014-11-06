@@ -6,13 +6,17 @@ angular.module('cacheItApp').controller('AccountCtrl', AccCtrl);
 // Using different style of declaring controller using this keyword
 function AccCtrl($location, Auth) {
   this.savBal = 1234;
-  this.checkBal = 1337;  
+  this.checkBal = 1337;
   this.isLoggedIn = Auth.isLoggedIn;
   this.isAdmin = Auth.isAdmin;
   this.getCurrentUser = Auth.getCurrentUser;
 }
+//Description: Method to withdraw money from account.
+//Param: Double amount, amount to with draw
+//       String accType, the account type - saving or checking
+AccCtrl.prototype.withdraw = function(amount, accType) {
 
-
+};
 //
 // angular.module('controllerAsExample', [])
 //   .controller('SettingsController1', SettingsController1);
@@ -28,9 +32,7 @@ function AccCtrl($location, Auth) {
 //   alert(this.name);
 // };
 //
-// SettingsController1.prototype.addContact = function() {
-//   this.contacts.push({type: 'email', value: 'yourname@example.org'});
-// };
+
 //
 // SettingsController1.prototype.removeContact = function(contactToRemove) {
 //  var index = this.contacts.indexOf(contactToRemove);

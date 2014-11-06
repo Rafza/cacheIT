@@ -21,13 +21,61 @@ exports.index = function(req, res) {
 };
 // Get a single thing by name
 exports.showName = function(req, res) {
-  console.log("What's up?" + req.params.name);
-  Thing.find({ name : req.params.name}, function (err, thingName) {
+  var userId = req.params.name;
+  console.log("What's up?" + userId);
+
+
+  Thing.findById(userId,function(err,docs) {
   if(err) { return handleError(res, err); }
-    return res.json(200, thingName);
+    console.log(docs.info);
+    return res.json(200, docs);
   });
 };
+// Updates an existing thing in the DB.
+exports.withdraw = function(req, res) {
 
+  var newAmt = Number(req.params.amt);
+  var id = String(req.params.id);
+  //var userId = req.user._id;
+  console.log("id: " + id);
+  console.log("Amount: " + newAmt);
+
+  // Begin Find
+  Thing.findById(id,function(err,docs) {
+    var oldAmt = Number(docs.bankAcc.checking);
+    console.log("Old Amount: " + oldAmt);
+    console.log("New Amount: " + newAmt);
+    newAmt = oldAmt - newAmt;
+    console.log("New Total: " + newAmt);
+    docs.bankAcc.checking = newAmt;
+    //Begin Save to DB
+    docs.save(function(err) {
+      if (err) return validationError(res, err);
+        res.send(200);
+    });// End Save to DB
+
+  });// End Find
+};
+/**
+ * Change a users password
+ */
+// exports.changePassword = function(req, res, next) {
+//   var userId = req.user._id;
+//   var oldPass = String(req.body.oldPassword);
+//   var newPass = String(req.body.newPassword);
+//
+//   User.findById(userId, function (err, user) {
+//     if(user.authenticate(oldPass)) {
+//       user.password = newPass;
+//       user.save(function(err) {
+//         if (err) return validationError(res, err);
+//         res.send(200);
+//       });
+//     } else {
+//       res.send(403);
+//     }
+//   });
+// };
 // Get a single thing
 exports.show = function(req, res) {
   Thing.findById(req.params.id, function (err, thing) {

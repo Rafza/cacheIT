@@ -102,6 +102,15 @@ angular.module('cacheItApp')
       },
 
       /**
+       * Withdraw a given amount from saving or checking
+       *
+       * @return {Object} user
+       */
+      withdraw: function(name, amount, accType, callback) {
+
+        //return currentUser;
+      },
+      /**
        * Check if a user is logged in
        *
        * @return {Boolean}
