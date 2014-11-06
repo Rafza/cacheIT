@@ -1,7 +1,13 @@
 // dash.controller.js
 'use strict';
 angular.module('cacheItApp')
-  .controller('DashCtrl', function ($scope, $location, Auth) {
+  .controller('DashCtrl', function ($scope, $location, Auth, User) {
+
+    //This method is used to check the user authentication by performing
+    //an action that a logged in user can execute. The user authentication
+    //automatically handles this causing it to act as login check.
+    //User.get();
+
     $scope.items = ['myaccount', 'transfer', 'setting', 'teller'];
     $scope.selection = $scope.items[0];
 
@@ -16,18 +22,6 @@ angular.module('cacheItApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
-
-    $scope.checkLogin = function() {
-      console.log("User is: " + $scope.isLoggedIn());
-      //console.log($scope.isActive('/logout'));
-      if($scope.isActive('/login') == false)
-      {
-          console.log( 'Logged Out' );
-          //$location.path('/');
-          return true;
-      }
-      return true;
-    };
 
 
     $scope.logout = function() {

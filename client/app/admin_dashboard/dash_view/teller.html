@@ -1,90 +1,116 @@
 <!--Teller View Begin-->
-<a href=""><strong><i class="glyphicon glyphicon-dashboard"></i> Teller Tool</strong></a>
-<hr>
-<div class="row">
-  <!-- Added content of teller view here Begin -->
+<div ng-controller="TellerCtrl">
+  <a href=""><strong><i class="glyphicon glyphicon-dashboard"></i> Teller Tool</strong></a>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Added content of teller view here Begin -->
 
-  <div ng-init="transactions = [
-  {no:'2',customer: 'user2',balance: '$1000594235'},
-  {no:'1',customer: 'user1',balance: '$2324234234'}
-  ]">
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr><th>No</th>
-      <th>Customer</th>
-      <th>Account</th>
-      <th>Transaction</th>
-      <th>Amount</th>
-      <th></th>
-      <th>Balance</th></tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="tran in transactions | orderBy:reverse" >
-        <td>{{tran.no}}</td>
-        <td>{{tran.customer}}</td>
+      <!-- <div ng-init="transactions = [
+      {no:'2',customer: 'user2',balance: '$1000594235'},
+      {no:'1',customer: 'user1',balance: '$2324234234'}
+      ]">
+    </div> -->
 
-        <!-- Account Type select  dropdown BEGIN-->
-        <td>
-          <form method="post">
-          <select name="Account Types">
-            <option value="Checking Account">Checking Account</option>
-            <option value="Saving Account">Saving Account</option>
-          </select>
-        </form>
-        </td>
-        <!-- Account Type select  dropdown END-->
 
-        <!-- Transaction Type select dropdown  BEGIN-->
-        <td>
-          <form method="post">
-          <select name="Transaction">
-            <option value="Deposit">Deposit</option>
-            <option value="Withdrawal">Withdrawal</option>
-            <option value="Transfer" data-toggle="modal" data-target=".bs-example-modal-sm">Transfer</option>
-            <!--<button onclick="window.open('http://www.google.com','name','width=200,height=200');">Open</button>-->
-          </select>
-        </form>
-        </td>
-        <!-- Transaction Type select dropdown  END-->
-<!--
-        <!-- Deposit Amount Fiel Begin-->
-        <td><div class="col-sm-9">
-          <div class="input-group">
-            <div class="input-group-addon" style="height:30px">$</div>
-            <input class="form-control" placeholder="0.00" type="deposit"
-            style="height:36px">
-          </div>
+    <!-- <pre ng-repeat="usr in users" ng-hide="usr.role=='admin'"><div ng-repeat="
+      (key,data) in usr">{{key}} : {{data}}<br></div></pre> -->
+
+
+      <div ng-init='showID=true'> </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th ng-show="showID">UserID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Account Type</th>
+            <th>Amount</th>
+            <th>Action</th>
+            <th>Checking</th>
+            <th>Saving</th>
+            <th>Balance</th>
+            <th>Close Account</th></tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in users | orderBy:'email'" ng-hide="user.role=='admin'">
+              <td ng-show="showID">
+                <button class="btn btn-xs btn-info"
+                ng-model="singleModel" ng-init="singleModel='Show'" btn-checkbox
+                btn-checkbox-true="user._id"
+                btn-checkbox-false="'Show'">{{singleModel}}</button>
+
+              </td>
+              <td>{{user.name}}</td>
+              <td>{{user.email}}
+                <td>
+                  <!-- Account Type select  dropdown BEGIN-->
+                  <div class="btn-group">
+                    <label class="btn btn-xs btn-success" ng-model="accRadioModel" btn-radio="'Checking'" uncheckable>Checking</label>
+                    <label class="btn btn-xs btn-success" ng-model="accRadioModel" btn-radio="'Saving'" uncheckable>Saving</label>
+                  </div>
+
+                  <!-- Account Type select  dropdown END-->
+                </td>
+
+
+                <!-- Deposit Amount Fiel Begin-->
+                <!-- <td><div class="col-sm-9">
+                <div class="input-group">
+                <div class="input-group-addon" style="height:30px">$</div>
+                <input class="form-control" placeholder="0.00" type="deposit"
+                style="height:36px">
+              </div>
+            </div>
+          </td> -->
+          <!-- Deposit Amount Fiel END -->
+
+          <!--<td><input type="text" style="width: 150px"></td>-->
+          <td>
+              <input type="number" ng-model="actionAmount" ng-init="actionAmount=0" class="form-control input-sm">
+          </td>
+
+
+
+          <!-- Transaction Type select dropdown  BEGIN-->
+          <td>
+              <button class="btn btn-xs btn-success" ng-click="depositAmt(user._id, user.checking, user.saving, actionAmount,accRadioModel)">Deposit</button>
+              <button class="btn btn-xs btn-success" ng-click="withdrawAmt(user._id, user.checking, user.saving, actionAmount,accRadioModel)">Withdraw</button>
+
+          </td>
+          <!-- Transaction Type select dropdown  END-->
+          <!-- Checking -->
+          <td>{{user.checking | currency:"" }}</td>
+          <!-- Saving -->
+          <td>{{user.saving | currency:""}}</td>
+          <!-- Balance -->
+          <td>{{user.saving + user.checking | currency:""}}</td>
+          <!-- Close Account -->
+          <td><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm">Close</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- closing Account-->
+  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title" id="mySmallModalLabel">Are you sure?</h4>
         </div>
-      </td>
-      <!-- Deposit Amount Fiel END -->
- -->
-      <!--<td><input type="text" style="width: 150px"></td>-->
-      <td><button class="btn btn-xs btn-primary">Submit</button>
-      </td>
-      <td>{{tran.balance}}</td>
-      <td><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm">Close Account</button></td>
-    </tr>
-  </tbody>
-</table>
-<!-- closing Account-->
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h4 class="modal-title" id="mySmallModalLabel">Are you sure?</h4>
-      </div>
-      <div class="modal-body">
-        <button class="btn btn-danger" ng-click="confirm()">Confirm</button>
-        <button class="btn btn-default" type="button" class="close" data-dismiss="modal"><span aria-hidden="true"">Cancel</button>
+        <div class="modal-body">
+          <button class="btn btn-danger" ng-click="confirm()">Confirm</button>
+          <button class="btn btn-default" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Cancel</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 
-  <!-- Added content of teller view here End -->
-</div><!--/row-->
-<hr>
+    <!-- Added content of teller view here End -->
+  </div><!--/row-->
+  <hr>
+
+</div><!-- ng-controller div -->
 <!--Teller View End-->

@@ -16,7 +16,12 @@ myModule.controller('LoginCtrl', function ($scope, Auth, $location) {
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/dash');
+          if($scope.user.email=="admin@admin.com") {            
+            $location.path('/admin_dash');
+          } else {
+            $location.path('/dash');
+          }
+
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

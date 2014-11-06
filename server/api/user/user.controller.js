@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
@@ -20,15 +21,20 @@ exports.index = function(req, res) {
   });
 };
 
-/**
- * Withdraw Money
- */
-exports.withdraw = function(req, res, next) {
-  var id = req.user._id;
-  var newAmt = Number(req.body.savingAmt);
-  //var accType = String(req.body.checkingAmt);
-  console.log("ID: " + id + " New Amt: " + newAmt);
+// Updates an existing thing in the DB.
+exports.update = function(req, res) {
+  if(req.body._id) { delete req.body._id; }
+  User.findById(req.params.id, function (err, usr) {
+    if (err) { return handleError(res, err); }
+    if(!usr) { return res.send(404); }
+    var updated = _.merge(usr, req.body);
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, usr);
+    });
+  });
 };
+
 /**
  * Creates a new user
  */

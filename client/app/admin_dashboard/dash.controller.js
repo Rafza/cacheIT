@@ -16,7 +16,7 @@ angular.module('cacheItApp')
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.checkLogin = function() {
-      console.log("User is: " + $scope.isLoggedIn());
+    //  console.log("User is: " + $scope.isLoggedIn());
       //console.log($scope.isActive('/logout'));
       if($scope.isActive('/login') == false)
       {

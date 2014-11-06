@@ -64,19 +64,38 @@ Thing.find({}).remove(function() {
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
-    name: 'Test User',
-    email: 'test@test.com',
+    name: 'Test User0',
+    email: 'test0@test.com',
     password: 'test',
-    checking: -100,
-    saving: 2.99
-  }, {
+    checking: 4487,
+    saving: 7898
+  },{
+    provider: 'local',
+    name: 'Test User1',
+    email: 'test1@test.com',
+    password: 'test',
+    checking: 78,
+    saving: 934
+  },{
+    provider: 'local',
+    name: 'Test User2',
+    email: 'test2@test.com',
+    password: 'test',
+    checking: 4936,
+    saving: 45
+  },{
+    provider: 'local',
+    name: 'Test User3',
+    email: 'test3@test.com',
+    password: 'test',
+    checking: 778,
+    saving: 356
+  },{
     provider: 'local',
     role: 'admin',
     name: 'Admin',
     email: 'admin@admin.com',
-    password: 'admin',
-    checking: 9999,
-    saving: 1337
+    password: 'admin'
   }, function() {
     console.log('finished populating users');
   }

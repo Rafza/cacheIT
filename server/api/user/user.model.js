@@ -16,7 +16,11 @@ var UserSchema = new Schema({
   salt: String,
   accountType: String,
   saving: Number,
-  checking: Number
+  checking: Number,
+  transactions :  [
+                    { date : String, description : String, debit : Number,
+                      credit : Number , balance : Number}
+                  ]
 });
 
 /**
