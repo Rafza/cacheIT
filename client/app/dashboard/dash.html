@@ -37,28 +37,52 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-3">
-      <!-- Left column -->
+      <!-- Left column --><!--
       <a href="#"><strong>Dashboard</strong></a>
 
       <hr>
-
+      
       <ul class="list-unstyled">
         <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">
           <h5>Links <i class="glyphicon glyphicon-chevron-down"></i></h5>
-        </a>
-        <ul class="list-unstyled collapse in" id="userMenu" ng-model="selection">
-          <!-- <li class="active"> <a href="/" ng-click=""><i class="glyphicon glyphicon-home"></i> Home</a></li> -->
+        </a>-->
+        <!--
+        <ul class="list-unstyled collapse in" id="userMenu" ng-model="selection">-->
+          <!-- <li class="active"> <a href="/" ng-click=""><i class="glyphicon glyphicon-home"></i> Home</a></li> --> <!--
           <li><a href="#" ng-click="selection=items[0]"><i class="glyphicon glyphicon-credit-card"></i> My Account </a></li>
           <li><a href="#" ng-click="selection=items[1]"><i class="glyphicon glyphicon-transfer"></i> Transfer</a></li>
           <li><a href="#" ng-click="selection=items[2]"><i class="glyphicon glyphicon-cog"></i> Setting</a></li>
           <li><a href="#" ng-click="selection=items[3]"><i class="glyphicon glyphicon-gift"></i> Teller</a></li>
-        </ul>
+        </ul>-->
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav side-nav">
+            <li class="active">
+              <a href="#" ng-click="">Dashboard</a>
+            </li>
+            <li>
+              <a href="#" ng-click="selection=items[0]">My Account <i class="glyphicon glyphicon-credit-card"></i></a>
+            </li>
+            <li>
+             <a href="#" ng-click="selection=items[1]">Transfer <i class="glyphicon glyphicon-transfer"></i> </a>
+            </li>
+            <li>
+              <a href="#" ng-click="selection=items[2]">Setting <i class="glyphicon glyphicon-cog"></i></a>
+            </li>
+            <li>
+              <a href="#" ng-click="selection=items[3]">Teller <i class="glyphicon glyphicon-gift"></i></a>
+            </li>
+          </ul>
+        </div>
       </li>
     </li>
   </ul>
 </div>
 
+
+
 <!-- /col-3 -->
+
 <div class="col-sm-9">
 
   <div class="animate-switch-container"
@@ -76,6 +100,7 @@
     <div ng-include="'app/dashboard/dash_view/myaccount.html'"></div>
   </div>
 </div>
+
 <!-- <div ng-include="'app/dashboard/dash_view/myaccount.html'"></div> -->
 <!--col-3 end -->
 
