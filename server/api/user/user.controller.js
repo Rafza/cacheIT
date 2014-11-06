@@ -1,4 +1,12 @@
 'use strict';
+/**
+ * Using Rails-like standard naming convention for endpoints.
+ * GET     /things              ->  index
+ * POST    /things              ->  create
+ * GET     /things/:id          ->  show
+ * PUT     /things/:id          ->  update
+ * DELETE  /things/:id          ->  destroy
+ */
 
 var _ = require('lodash');
 var User = require('./user.model');
@@ -23,17 +31,28 @@ exports.index = function(req, res) {
 
 // Updates an existing thing in the DB.
 exports.update = function(req, res) {
+  console.log("update(): "+ req.body.transactions) ;
   if(req.body._id) { delete req.body._id; }
   User.findById(req.params.id, function (err, usr) {
     if (err) { return handleError(res, err); }
     if(!usr) { return res.send(404); }
     var updated = _.merge(usr, req.body);
+    //http://stackoverflow.com/questions/26372523/document-sub-arrays-stored-as-duplicate-values-of-the-first-entry-in-mongo
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, usr);
     });
   });
 };
+
+// exports.updateById =  function(req, res) {
+//     {$push: {items: item}},
+//     {safe: true, upsert: true},
+//     function(err, model) {
+//         console.log(err);
+//     }
+//
+// };
 
 /**
  * Creates a new user
@@ -108,6 +127,10 @@ exports.me = function(req, res, next) {
   });
 };
 
+// Handles Error
+function handleError(res, err) {
+  return res.send(500, err);
+}
 /**
  * Authentication callback
  */

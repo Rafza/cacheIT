@@ -68,7 +68,28 @@ User.find({}).remove(function() {
     email: 'test0@test.com',
     password: 'test',
     checking: 4487,
-    saving: 7898
+    saving: 7898,
+    transactions :
+    [{
+      date : '10/30/2014',
+      description : 'Transaction Test',
+      debit : 0 ,
+      credit : 100 ,
+      balance : 100
+    },
+    {
+      date : '11/1/2014',
+      description : 'Another Transaction',
+      debit : 50 ,
+      credit : 0 ,
+      balance : 50},
+    {
+      date : '11/2/2014',
+      description : 'Another One',
+      debit : 75 ,
+      credit : 0 ,
+      balance : -25
+    }]
   },{
     provider: 'local',
     name: 'Test User1',

@@ -13,7 +13,7 @@
     </div> -->
 
 
-    <!-- <pre ng-repeat="usr in users" ng-hide="usr.role=='admin'"><div ng-repeat="
+     <!-- <pre ng-repeat="usr in users" ng-hide="usr.role=='admin'"><div ng-repeat="
       (key,data) in usr">{{key}} : {{data}}<br></div></pre> -->
 
 
@@ -27,6 +27,7 @@
             <th>Account Type</th>
             <th>Amount</th>
             <th>Action</th>
+            <th>History</th>
             <th>Checking</th>
             <th>Saving</th>
             <th>Balance</th>
@@ -74,11 +75,13 @@
 
           <!-- Transaction Type select dropdown  BEGIN-->
           <td>
-              <button class="btn btn-xs btn-success" ng-click="depositAmt(user._id, user.checking, user.saving, actionAmount,accRadioModel)">Deposit</button>
-              <button class="btn btn-xs btn-success" ng-click="withdrawAmt(user._id, user.checking, user.saving, actionAmount,accRadioModel)">Withdraw</button>
+              <button class="btn btn-xs btn-success" ng-click="depositAmt(user, actionAmount,accRadioModel)">Deposit</button>
+              <button class="btn btn-xs btn-success" ng-click="withdrawAmt(user, actionAmount,accRadioModel)">Withdraw</button>
 
           </td>
           <!-- Transaction Type select dropdown  END-->
+          <!-- Transcation History -->
+          <td><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".my-transaction-modal" ng-click="setTrans(user.transactions)">Show</button></td
           <!-- Checking -->
           <td>{{user.checking | currency:"" }}</td>
           <!-- Saving -->
@@ -91,7 +94,7 @@
       </tbody>
     </table>
   </div>
-  <!-- closing Account-->
+  <!-- Closing Account Modal-->
   <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -106,7 +109,46 @@
         </div>
       </div>
     </div>
+<!-- Transaction History Modal -->
 
+<div class="modal fade my-transaction-modal" tabindex="-1" role="dialog" aria-labelledby="historyModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title" id="historyModal">Transcation History</h4>
+      </div>
+
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Debit</th>
+              <th>Credit</th>
+              <th>Bal</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="tact in currentTrans">
+                <th>{{tact.date}}</th>
+                <th>{{tact.description}}</th>
+                <th>{{tact.debit}}</th>
+                <th>{{tact.credit}}</th>
+                <th>{{tact.balance}}</th>
+              </tr>
+            <tbody>
+        </table>
+
+      </div>
+<div class="modal-footer">
+        <button class="btn btn-danger" ng-click="confirm()">Confirm</button>
+        <button class="btn btn-default" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <!-- Added content of teller view here End -->
   </div><!--/row-->
