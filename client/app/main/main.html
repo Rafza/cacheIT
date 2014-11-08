@@ -1,151 +1,151 @@
 <div class="page-wrapper">
-    <!-- header-11 -->
-    <header class="header-11">
-    	<div class="transbox">
-	        <div class="container">
-	            <div class="row">
-	                <div class="navbar col-sm-12" role="navigation">
-	                    <div class="navbar-header">
-	                        <button type="button" class="navbar-toggle"></button>
-	                        <a class="brand" href="#"><img src="template_assets/img/logo.png" width="50" height="50" alt=""> EveryoneRichBank</a>
-	                    </div>
-	                    <div class="collapse navbar-collapse pull-right" ng-controller="LoginCtrl">
-	                        <form class="navbar-form pull-left form" name="form" ng-submit="login(form)" novalidate>
-	                            <div class="form-group">
-	                                <input class="form-control" ng-model="user.email" type="text" placeholder="E-mail">
-	                            </div>
-	                            <div class="form-group">
-	                                <input type="password" class="form-control"ng-model="user.password" placeholder="Password" required>
-	                            </div>
-	                            <div class="form-group has-error">
-	                              <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && submitted">
-	                                 Please enter your email and password.
-	                              </p>
-	                              <p class="help-block" ng-show="form.email.$error.email && submitted">
-	                                 Please enter a valid email.
-	                              </p>
-	                              <p class="help-block">{{ errors.other }}</p>
-	                            </div>
-	                            <button class="btn btn-primary" type="submit">Login</button>
-	                            <a class="btn btn-danger" href="#">Forgot Login?</a>
-	                        </form>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-        </div>
-    </header>
-    <section class="header-11-sub">
-        <!--<div class="background">
-            &nbsp;
-        </div>-->
-	<video autoplay loop poster="http://img.wallpaperstock.net:81/cute-cat-wallpapers_34549_1280x720.jpg" id="bgvid">
-		<source src="http://cacheit.me/video/thecity.webm" type="video/webm">
-		<source src="http://cacheit.me/video/thecity.mp4" type="video/mp4">
-	</video>
-        <div class="container">
-            <div class="row">
-                <div class="transparent_overlay_box">
-                    <h3>Create an Account</h3>
-                    <p>
-                        Your money, your future. Use our technology created by really smart people.
-                    </p>
-                    <div class="signup-form" ng-controller="SignupCtrl">
-                        <form class="form" name="signupForm" ng-submit="register(signupForm)" novalidate>
-                            <div class="form-group" ng-class="{ 'has-success': signupForm.name.$valid && submitted,
-                                            'has-error': signupForm.name.$invalid && submitted }">
-
-                              	<input type="text" name="name" class="form-control" ng-model="signup.name" placeholder="Name" required/>
-                              	<p class="help-block" ng-show="signupForm.name.$error.required && submitted">
-                              	A name is required</p>
-                            </div>
-
-                            <div class="form-group" ng-class="{ 'has-success': signupForm.email.$valid && submitted,
-                                                            'has-error': signupForm.email.$invalid && submitted }">
-
-                              	<input type="email" name="email" class="form-control" ng-model="signup.email"
-                                placeholder="E-mail" required mongoose-error/>
-                              	<p class="help-block" ng-show="signupForm.email.$error.email && submitted">
-                              	Doesn't look like a valid email.</p>
-                              	<p class="help-block" ng-show="signupForm.email.$error.required && submitted">
-                              	What's your email address?</p>
-                              	<p class="help-block" ng-show="signupForm.email.$error.mongoose">
-                              	{{ errors.email }}</p>
-                            </div>
-
-                          	<div class="form-group" ng-class="{ 'has-success': signupForm.password.$valid && submitted, 'has-error': signupForm.password.$invalid && submitted }">
-
-                            	<input type="password" name="password" class="form-control" ng-model="signup.password"
-                                   ng-minlength="3" placeholder="Password" required mongoose-error/>
-                            	<p class="help-block"
-                               	ng-show="(signupForm.password.$error.minlength || signupForm.password.$error.required) && submitted">
-                              		Password must be at least 3 characters.
-                            	</p>
-                            	<p class="help-block" ng-show="signupForm.password.$error.mongoose">
-                            	  {{ errors.password }}
-                            	</p>
-                          	</div>
-
-                          	<div>
-                            	<button class="btn btn-block btn-info" type="submit">Sign up</button>
-                        	</div>
-                        </form>
-                    </div>
-                    <div class="additional-links">
-                        By signing up you agree to <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
-                    </div>
+  <!-- header-11 -->
+  <header class="header-11">
+    <div class="transbox">
+      <div class="container">
+        <div class="row">
+          <div class="navbar col-sm-12" role="navigation">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle"></button>
+              <a class="brand" href="#"><img src="template_assets/img/logo.png" width="50" height="50" alt=""> EveryoneRichBank</a>
+            </div>
+            <div class="collapse navbar-collapse pull-right" ng-controller="LoginCtrl">
+              <form class="navbar-form pull-left form" name="form" ng-submit="login(form)" novalidate>
+                <div class="form-group">
+                  <input class="form-control" ng-model="user.email" type="text" placeholder="E-mail">
                 </div>
-                <div class="collist">
-                	FILLERTEXT
+                <div class="form-group">
+                  <input type="password" class="form-control"ng-model="user.password" placeholder="Password" required>
                 </div>
+                <div class="form-group has-error">
+                  <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && submitted">
+                    Please enter your email and password.
+                  </p>
+                  <p class="help-block" ng-show="form.email.$error.email && submitted">
+                    Please enter a valid email.
+                  </p>
+                  <p class="help-block">{{ errors.other }}</p>
+                </div>
+                <button class="btn btn-primary" type="submit">Login</button>
+                <a class="btn btn-danger" href="#">Forgot Login?</a>
+              </form>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </header>
+  <section class="header-11-sub">
+    <!--<div class="background">
+    &nbsp;
+  </div>-->
+  <video autoplay loop poster="http://img.wallpaperstock.net:81/cute-cat-wallpapers_34549_1280x720.jpg" id="bgvid">
+    <source src="http://cacheit.me/video/thecity.webm" type="video/webm"></source>
+    <source src="http://cacheit.me/video/thecity.mp4" type="video/mp4"></source>
+  </video>
+  <div class="container">
+    <div class="row">
+      <div class="transparent_overlay_box">
+        <h3>Create an Account</h3>
+        <p>
+          Your money, your future. Use our technology created by really smart people.
+        </p>
+        <div class="signup-form" ng-controller="SignupCtrl">
+          <form class="form" name="signupForm" ng-submit="register(signupForm)" novalidate>
+            <div class="form-group" ng-class="{ 'has-success': signupForm.name.$valid && submitted,
+            'has-error': signupForm.name.$invalid && submitted }">
+
+            <input type="text" name="name" class="form-control" ng-model="signup.name" placeholder="Name" required/>
+            <p class="help-block" ng-show="signupForm.name.$error.required && submitted">
+              A name is required</p>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-success': signupForm.email.$valid && submitted,
+            'has-error': signupForm.email.$invalid && submitted }">
+
+            <input type="email" name="email" class="form-control" ng-model="signup.email"
+            placeholder="E-mail" required mongoose-error/>
+            <p class="help-block" ng-show="signupForm.email.$error.email && submitted">
+              Doesn't look like a valid email.</p>
+              <p class="help-block" ng-show="signupForm.email.$error.required && submitted">
+                What's your email address?</p>
+                <p class="help-block" ng-show="signupForm.email.$error.mongoose">
+                  {{ errors.email }}</p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-success': signupForm.password.$valid && submitted, 'has-error': signupForm.password.$invalid && submitted }">
+
+                  <input type="password" name="password" class="form-control" ng-model="signup.password"
+                  ng-minlength="3" placeholder="Password" required mongoose-error/>
+                  <p class="help-block"
+                  ng-show="(signupForm.password.$error.minlength || signupForm.password.$error.required) && submitted">
+                  Password must be at least 3 characters.
+                </p>
+                <p class="help-block" ng-show="signupForm.password.$error.mongoose">
+                  {{ errors.password }}
+                </p>
+              </div>
+
+              <div>
+                <button class="btn btn-block btn-info" type="submit">Sign up</button>
+              </div>
+            </form>
+          </div>
+          <div class="additional-links">
+            By signing up you agree to <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
+          </div>
+        </div>
+        <div class="collist">
+          FILLERTEXT
+        </div>
+      </div>
+    </div>
+  </section>
 
 
-    <section class="features">
-    	<h2>
-    		Sample Text
-    	</h2>
-    	<p>
-    		Some sub text below that
-    	</p>
-    	<div class="container">
-    		<div class="row">
-    		</div>
-    	</div>
-    </section>
-    
-    <!-- footer-2 -->
-    <footer class="footer-2">
-        <div class="container">
-            <nav class="pull-left">
-                <ul>
-                    <li class="active">
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">Company</a>
-                    </li>
-                    <li>
-                        <a href="#">Portfolio</a>
-                    </li>
-                    <li>
-                        <a href="#">Blog</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="social-btns pull-right">
-                <a href="#"><div class="fui-vimeo"></div><div class="fui-vimeo"></div></a>
-                <a href="#"><div class="fui-facebook"></div><div class="fui-facebook"></div></a>
-                <a href="#"><div class="fui-twitter"></div><div class="fui-twitter"></div></a>
-            </div>
-            <div class="additional-links">
-                Powered by CacheIT
-            </div>
-        </div>
-    </footer>
+  <section class="features">
+    <h2>
+      Sample Text
+    </h2>
+    <p>
+      Some sub text below that
+    </p>
+    <div class="container">
+      <div class="row">
+      </div>
+    </div>
+  </section>
+
+  <!-- footer-2 -->
+  <footer class="footer-2">
+    <div class="container">
+      <nav class="pull-left">
+        <ul>
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">Company</a>
+          </li>
+          <li>
+            <a href="#">Portfolio</a>
+          </li>
+          <li>
+            <a href="#">Blog</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="social-btns pull-right">
+        <a href="#"><div class="fui-vimeo"></div><div class="fui-vimeo"></div></a>
+        <a href="#"><div class="fui-facebook"></div><div class="fui-facebook"></div></a>
+        <a href="#"><div class="fui-twitter"></div><div class="fui-twitter"></div></a>
+      </div>
+      <div class="additional-links">
+        Powered by CacheIT
+      </div>
+    </div>
+  </footer>
 </div>

@@ -1,10 +1,17 @@
 'use strict';
 
 angular.module('cacheItApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User) {
+  .controller('AdminCtrl', function ($scope,$location, $http, Auth, User) {
+
+    //Check LoginIn with callback redirect -- Alex
+    // Auth.isLoggedInAsync(function(loggedIn) {
+    // if (next.authenticate && !loggedIn) {
+    // $location.path('/'); }
+    // });
 
     // Use the User $resource to fetch all users
-    $scope.users = User.query();
+    //$scope.users = User.query();
+    //$scope.users;
 
     $scope.delete = function(user) {
       User.remove({ id: user._id });

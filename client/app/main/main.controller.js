@@ -1,4 +1,7 @@
 'use strict';
+/*
+ * Two Seperate Controllers to Handle Login/Signup for main.html
+ */
 // Login handling
 var myModule = angular.module('cacheItApp');
 
@@ -16,7 +19,7 @@ myModule.controller('LoginCtrl', function ($scope, Auth, $location) {
         })
         .then( function() {
           // Logged in, redirect to home
-          if($scope.user.email=="admin@admin.com") {            
+          if($scope.user.email=="admin@admin.com") {
             $location.path('/admin_dash');
           } else {
             $location.path('/dash');
@@ -32,7 +35,6 @@ myModule.controller('LoginCtrl', function ($scope, Auth, $location) {
   });
 
 // Signup Handling
-
 myModule.controller('SignupCtrl', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};

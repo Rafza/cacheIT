@@ -7,6 +7,7 @@ angular.module('cacheItApp')
       .state('admin_dash', {
         url: '/admin_dash',
         templateUrl: 'app/admin_dashboard/dash.html',
-        controller: 'AdminDashCtrl'
+        controller: 'AdminDashCtrl',
+        authenticate: true
     });
 });

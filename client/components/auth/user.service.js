@@ -17,12 +17,6 @@ angular.module('cacheItApp')
         params: {
           id:'me'
         }
-      },
-      withdrawAmount: {
-        method: 'PUT',
-        params: {
-          controller:'withdraw'
-        }
       }
 	  });
   });
