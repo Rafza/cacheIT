@@ -43,8 +43,11 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
     if( type == 'Saving' ) {
       var newAmount = parseFloat(sav)+parseFloat(amt);
       // console.log("Deposit to Saving: " + amt + " Sav + Amt: " + newAmount);
-
-
+      //
+      // trans.forEach(function(entry){
+      //   delete entry._id;
+      // });
+      //
       // trans = trans.concat([{
       //   date : $scope.getTime(),
       //   description : 'Deposit to Saving',
@@ -52,12 +55,16 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
       //   credit : amt ,
       //   balance : newAmount
       // }]);
-      //
-      // console.log(  angular.toJson(trans));
+      // var myVar = angular.toJson(trans, true);
+      // console.log( myVar  );
 
 
+      // var myData = { saving : newAmount, transactions : trans};
+
+
+      // console.log("My Data: " + angular.toJson(myData) );
       // BEGIN put function
-      $http.put('/api/users/' + userID + '/update', { saving : newAmount     }).
+      $http.put('/api/users/' + userID + '/update',  { saving : newAmount } ).
       success(function(data, status, headers, config) {
         // this callback will be called asynchronously
         // when the response is available
@@ -115,7 +122,7 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
     if( type == 'Saving' && sav-amt >= 0 ) {
       var newAmount = sav-amt;
       // console.log("Withdraw Saving: " + amt + " Sav - Amt: " + newAmount + "Date: " + $scope.getTime() );
-      $http.put('/api/users/' + userID + '/update', { saving : newAmount, transactions : {$push: { date : "10/30/2025" }} } ).
+      $http.put('/api/users/' + userID + '/update', { saving : newAmount } ).
       success(function(data, status, headers, config) {
         // this callback will be called asynchronously
         // when the response is available

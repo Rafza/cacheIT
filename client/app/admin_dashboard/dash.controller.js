@@ -2,7 +2,7 @@
 'use strict';
 angular.module('cacheItApp')
   .controller('AdminDashCtrl', function ($scope, $location, Auth) {
-    $scope.items = ['teller'];
+    $scope.items = ['transfer','teller'];//TODO: Change back to teller first
     $scope.selection = $scope.items[0];
 
     $scope.menu = [{

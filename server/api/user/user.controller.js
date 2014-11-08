@@ -31,17 +31,38 @@ exports.index = function(req, res) {
 
 // Updates an existing thing in the DB.
 exports.update = function(req, res) {
-  console.log("update(): "+ req.body.transactions) ;
+  console.log("update() looping");
+  if(req.body.transactions) {
+    req.body.transactions.forEach(function(transacts) {
+        console.log("Date: "+ transacts.date);
+        console.log("Description: "+ transacts.description);
+        console.log("Debit: "+ transacts.debit);
+        console.log("Credit: "+ transacts.credit);
+        console.log("Bal: "+ transacts.balance);
+
+    });
+  };
+
   if(req.body._id) { delete req.body._id; }
   User.findById(req.params.id, function (err, usr) {
     if (err) { return handleError(res, err); }
     if(!usr) { return res.send(404); }
+      console.log("Usr: "+ usr);
     var updated = _.merge(usr, req.body);
     //http://stackoverflow.com/questions/26372523/document-sub-arrays-stored-as-duplicate-values-of-the-first-entry-in-mongo
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, usr);
     });
+  });
+};
+
+// Push an existing thing in the DB.
+exports.push = function(req, res) {
+  if(req.body._id) { delete req.body._id; }
+    User.transactions.push(req.body, function (err,usr) {
+    if (err) { return handleError(res, err); }
+    if(!usr) { return res.send(404); }
   });
 };
 

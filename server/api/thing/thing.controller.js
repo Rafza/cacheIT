@@ -14,6 +14,24 @@ var Thing = require('./thing.model');
 
 // Get list of things
 exports.index = function(req, res) {
+
+
+  // var myvar1 = {
+  //   'saving' : 123,
+  //   'transactions' : [{'id' :1}, {'id' : 2}]
+  //   };
+  // var myvar2 = {
+  //   'saving' : 123,
+  //   'transactions' : [{'id' : 3}, {'id' : 4}]
+  //   };
+  // myvar1.push(myvar2);
+  //
+  //
+  // console.log(myvar1);
+  // var updated = _.extend(myvar1, myvar2);
+  // console.log(updated);
+
+
   Thing.find(function (err, things) {
     if(err) { return handleError(res, err); }
     return res.json(200, things);
@@ -96,6 +114,20 @@ exports.create = function(req, res) {
 // Updates an existing thing in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
+  Thing.findById(req.params.id, function (err, thing) {
+    if (err) { return handleError(res, err); }
+    if(!thing) { return res.send(404); }
+    var updated = _.merge(thing, req.body);
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, thing);
+    });
+  });
+};
+
+// Updates an existing thing in the DB.
+exports.update = function(req, res) {
+
   Thing.findById(req.params.id, function (err, thing) {
     if (err) { return handleError(res, err); }
     if(!thing) { return res.send(404); }

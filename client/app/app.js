@@ -29,7 +29,7 @@ angular.module('cacheItApp', [
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if(response.status === 401) {
-          $location.path('/login');
+          $location.path('/');
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
@@ -46,7 +46,7 @@ angular.module('cacheItApp', [
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
         if (next.authenticate && !loggedIn) {
-          $location.path('/login');
+          $location.path('/');
         }
       });
     });

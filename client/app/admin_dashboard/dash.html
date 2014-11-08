@@ -48,7 +48,8 @@
         </a>
         <ul class="list-unstyled collapse in" id="userMenu" ng-model="selection">
           <!-- <li class="active"> <a href="/" ng-click=""><i class="glyphicon glyphicon-home"></i> Home</a></li> -->
-          <li><a href="#" ng-click="selection=items[0]"><i class="glyphicon glyphicon-gift"></i> Teller</a></li>
+          <li><a href="#" ng-click="selection=items[0]"><i class="glyphicon glyphicon-gift"></i> Manage Account</a></li>
+          <li><a href="#" ng-click="selection=items[1]"><i class="glyphicon glyphicon-transfer"></i> Transfer</a></li>
         </ul>
       </li>
     </li>
@@ -58,12 +59,13 @@
 <!-- /col-3 -->
 <div class="col-sm-9">
 
-  <div class="animate-switch-container"
-  ng-switch on="selection">
+  <div class="animate-switch-container" ng-switch on="selection">
   <div class="animate-switch" ng-switch-when="teller">
     <div ng-include="'app/admin_dashboard/dash_view/teller.html'"></div>
   </div>
-
+  <div class="animate-switch" ng-switch-when="transfer">
+    <div ng-include="'app/admin_dashboard/dash_view/transfer.html'"></div>
+  </div>
   <div class="animate-switch" ng-switch-default>
     <div ng-include="'app/admin_dashboard/dash_view/teller.html'"></div>
   </div>

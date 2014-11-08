@@ -4,6 +4,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 
+var transSchema = new Schema({
+  date : String,
+  description : String,
+  debit : Number,
+  credit : Number,
+  balance : Number
+});
+
 var UserSchema = new Schema({
   name: String,
   email: { type: String, lowercase: true },
@@ -17,10 +25,7 @@ var UserSchema = new Schema({
   accountType: String,
   saving: Number,
   checking: Number,
-  transactions :  [
-                    { date : String, description : String, debit : Number,
-                      credit : Number , balance : Number}
-                  ]
+  transactions :  [transSchema]
 });
 
 /**

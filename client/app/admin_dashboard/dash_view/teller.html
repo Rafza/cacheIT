@@ -24,10 +24,9 @@
           <th ng-show="showID">UserID</th>
           <th>Name</th>
           <th>Email</th>
-          <th>AccountType</th>
+          <th>Account Type</th>
           <th>Amount</th>
-          <th>Deposit/Withdraw</th>
-          <th>History</th>
+          <th>Deposit/Withdraw</th>          
           <th>Checking</th>
           <th>Saving</th>
           <th>Balance</th>
@@ -88,7 +87,7 @@
       </td>
       <!-- Transaction Type select dropdown  END-->
       <!-- Transcation History -->
-      <td><button type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target=".my-transaction-modal" ng-click="setTrans(user.transactions)"><span class="glyphicon glyphicon-list"> Show</span></button></td
+
         <!-- Checking -->
         <td>{{user.checking | currency:"" }}</td>
         <!-- Saving -->
@@ -96,7 +95,7 @@
         <!-- Balance -->
         <td>{{user.saving + user.checking | currency:""}}</td>
         <!-- Close Account -->
-        <td><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm"><span class="glyphicon glyphicon-fire"> Close</span></button></td>
+        <td><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm"><span class="glyphicon glyphicon-trash"> Close</span></button></td>
       </tr>
     </tbody>
   </table>
@@ -123,7 +122,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title" id="historyModal">Transcation History</h4>
+          <h4 class="modal-title" id="historyModal">Statement</h4>
         </div>
 
         <div class="modal-body">
