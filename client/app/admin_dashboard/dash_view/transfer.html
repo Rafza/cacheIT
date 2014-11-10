@@ -1,0 +1,115 @@
+<!--Teller View Begin-->
+<div ng-controller="TranCtrl">
+  <a href=""><strong><i class="glyphicon glyphicon-dashboard"></i> Transfer Tool</strong></a>
+  <hr>
+  <div class="row">
+
+    <div class="col-md-1"></div>
+
+    <!-- Left Column BEGIN-->
+    <div class="col-md-4"><!-- col-md-12 BEGIN -->
+      <!-- Added content of transfer view here BEGIN -->
+      <label>From:</label>
+      <select class="form-control input-sm" ng-model="fromAccSelected" ng-options="opt for opt in fromAccOptions">
+        <!-- <option></option> -->
+      </select>
+      <br>
+      <label>User:</label>
+      <select class="form-control input-sm" ng-model="fromUserSelected" ng-options="opt for opt in fromUsers">
+        <!-- <option></option> -->
+      </select>
+      <br>
+      Amount: <input type="number" class="form-control" ng-model="fromAmount">
+    </div>
+    <!-- Left Column END-->
+
+    <div class="col-md-1"></div>
+
+    <!-- Right Column BEGIN-->
+    <div class="col-md-4">
+      <label>To:</label>
+      <select class="form-control input-sm" ng-model="toAccSelected" ng-options="opt for opt in toAccOptions">
+        <!-- <option></option> -->
+      </select>
+      <br>
+      <label>User:</label>
+      <select class="form-control input-sm" ng-model="toUserSelected" ng-options="opt for opt in toUsers">
+        <!-- <option></option> -->
+      </select>
+      <br>
+      Amount: <input type="number" class="form-control" ng-model="toAmount">
+      <br>
+      <button type="button" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".transfer-modal-sm" ng-click="setTrans(user.transactions)">Submit</button>
+
+
+
+      <!-- Added content of transfer view here End -->
+    </div>
+    <!-- Right Column END-->
+
+  </div><!--/row-->
+  <hr>
+</div><!-- ng-controller div -->
+<!--Teller View End-->
+
+
+
+<!-- Transfer Modal-->
+<div class="modal fade transfer-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <br>
+  <br>
+  <br><br>
+  <br>
+  <br><br>
+  <br>
+  <br><br>
+
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title" id="mySmallModalLabel">Are you sure?</h4>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="row">
+
+          <div class="col-md-6">
+
+            <h5>From:</h5>
+            <hr>
+            <strong>Account: </strong> Checking
+            <br>
+            <strong>Account Name: </strong> User0
+            <br>
+            <strong>Amount: </strong>  $$$$
+            <br>
+
+          </div>
+
+
+          <div class="col-md-6">
+
+            <h5>To:</h5>
+            <hr>
+            <strong>Account: </strong> Checking
+            <br>
+            <strong>Account Name: </strong> User0
+            <br>
+            <strong>Amount: </strong>  $$$$
+            <br>
+
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-danger" ng-click="confirm()">Confirm</button>
+        <button class="btn btn-default pull-right" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
