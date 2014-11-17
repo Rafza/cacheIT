@@ -39,6 +39,10 @@ angular.module('cacheItApp')
         return deferred.promise;
       },
 
+      checkUsers: function(users) {
+
+      },
+
       /**
        * Delete access token and user info
        *

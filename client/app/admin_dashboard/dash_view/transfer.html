@@ -4,22 +4,35 @@
   <hr>
   <div class="row">
 
-    <div class="col-md-1"></div>
+    <div class="col-md-2"></div>
 
     <!-- Left Column BEGIN-->
-    <div class="col-md-4"><!-- col-md-12 BEGIN -->
+    <div class="col-md-6"><!-- col-md-12 BEGIN -->
       <!-- Added content of transfer view here BEGIN -->
-      <label>From:</label>
+
+
+
+<!--       <label>From:</label>
       <select class="form-control input-sm" ng-model="fromAccSelected" ng-options="opt for opt in fromAccOptions">
-        <!-- <option></option> -->
-      </select>
+        <!-- <option></option> 
+      </select> -->
+
+
+
       <br>
-      <label>User:</label>
-      <select class="form-control input-sm" ng-model="fromUserSelected" ng-options="opt for opt in fromUsers">
-        <!-- <option></option> -->
-      </select>
+      <label>From:</label>
+      <input class="form-control" ng-model="user.emailFrom" type="text" placeholder="Email">
       <br>
-      Amount: <input type="number" class="form-control" ng-model="fromAmount">
+      <!-- Amount: <input type="number" class="form-control" ng-model="fromAmount"> -->
+       
+      <label>To:</label>
+      <input class="form-control" ng-model="user.emailTo" type="text" placeholder="Email">
+      </br>
+      <label>Amount:</label>
+      <input type="text" placeholder="0.00" class="form-control" />
+
+      <br>
+      <button type="button" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".transfer-modal-sm" ng-click="transfer()">Submit</button>
     </div>
     <!-- Left Column END-->
 
@@ -27,19 +40,23 @@
 
     <!-- Right Column BEGIN-->
     <div class="col-md-4">
-      <label>To:</label>
+
+
+
+
+
+      <!-- <label>To:</label>
       <select class="form-control input-sm" ng-model="toAccSelected" ng-options="opt for opt in toAccOptions">
-        <!-- <option></option> -->
+        <!-- <option></option> 
       </select>
-      <br>
-      <label>User:</label>
-      <select class="form-control input-sm" ng-model="toUserSelected" ng-options="opt for opt in toUsers">
+ -->
+
+
+      
         <!-- <option></option> -->
-      </select>
       <br>
-      Amount: <input type="number" class="form-control" ng-model="toAmount">
-      <br>
-      <button type="button" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".transfer-modal-sm" ng-click="setTrans(user.transactions)">Submit</button>
+      <!-- Amount: <input type="number" class="form-control" ng-model="toAmount"> -->
+      
 
 
 
