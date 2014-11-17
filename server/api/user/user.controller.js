@@ -29,6 +29,17 @@ exports.index = function(req, res) {
   });
 };
 
+// Get a single player by name
+exports.showName = function(req, res) {
+  User.find({ email: req.params.name }, function (err, usr) {
+    if(err) { return handleError(res, err); }
+    if(!usr) { return res.send(404); }
+    console.log(usr);
+    return res.json(usr);
+  });
+};
+
+
 // Updates an existing thing in the DB.
 exports.update = function(req, res) {
   console.log("update() looping");

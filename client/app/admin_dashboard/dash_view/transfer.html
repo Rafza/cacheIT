@@ -8,31 +8,34 @@
 
     <!-- Left Column BEGIN-->
     <div class="col-md-6"><!-- col-md-12 BEGIN -->
-      <!-- Added content of transfer view here BEGIN -->
+      <form name="myForm">
+        <!-- Added content of transfer view here BEGIN -->
+        <br>
+        <div class="form-group" ng-class="{ 'has-success': !errorFrom  && submitted,
+        'has-error': errorFrom && submitted }">
+          <label>From:</label>
+          <input class="form-control" ng-model="user.emailFrom" type="text" placeholder="Email">
+        </div>
+        <br>
+        <!-- Amount: <input type="number" class="form-control" ng-model="fromAmount"> -->
 
+        <div class="form-group" ng-class="{ 'has-success': !errorTo  && submitted,
+        'has-error': errorTo && submitted }">
+        <label>To:</label>
+        <input class="form-control"  type='email' ng-model="user.emailTo"  placeholder="Email" required>
+        </div>
 
-
-<!--       <label>From:</label>
-      <select class="form-control input-sm" ng-model="fromAccSelected" ng-options="opt for opt in fromAccOptions">
-        <!-- <option></option> 
-      </select> -->
-
-
-
-      <br>
-      <label>From:</label>
-      <input class="form-control" ng-model="user.emailFrom" type="text" placeholder="Email">
-      <br>
-      <!-- Amount: <input type="number" class="form-control" ng-model="fromAmount"> -->
-       
-      <label>To:</label>
-      <input class="form-control" ng-model="user.emailTo" type="text" placeholder="Email">
-      </br>
-      <label>Amount:</label>
-      <input type="text" placeholder="0.00" class="form-control" />
-
-      <br>
-      <button type="button" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".transfer-modal-sm" ng-click="transfer()">Submit</button>
+        </br>
+        <div class="form-group" ng-class="{ 'has-success': !errorAmount  && submitted,
+        'has-error': errorAmount && submitted }">
+        <label>Amount:</label>
+        <input type="text" ng-model="user.amount" placeholder="0.00" class="form-control" />
+        </div>
+        <br>
+        <button type="button" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".transfer-modal-sm">Submit</button>
+        <br>
+      </form>
+      <!-- <pre>FROM: {{user.emailFrom}} <br>{{!!myForm.$error.email}} <br>{{!!myForm.$error.required}} <br>AMT: {{user.amount}}</pre> -->
     </div>
     <!-- Left Column END-->
 
@@ -41,92 +44,73 @@
     <!-- Right Column BEGIN-->
     <div class="col-md-4">
 
-
-
-
-
-      <!-- <label>To:</label>
-      <select class="form-control input-sm" ng-model="toAccSelected" ng-options="opt for opt in toAccOptions">
-        <!-- <option></option> 
-      </select>
- -->
-
-
-      
-        <!-- <option></option> -->
-      <br>
-      <!-- Amount: <input type="number" class="form-control" ng-model="toAmount"> -->
-      
-
-
-
       <!-- Added content of transfer view here End -->
     </div>
     <!-- Right Column END-->
 
   </div><!--/row-->
   <hr>
-</div><!-- ng-controller div -->
-<!--Teller View End-->
+  <!-- <pre>{{users | json}}</pre> -->
 
 
 
-<!-- Transfer Modal-->
-<div class="modal fade transfer-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <br>
-  <br>
-  <br><br>
-  <br>
-  <br><br>
-  <br>
-  <br><br>
+  <!-- Transfer Modal-->
+  <div class="modal fade transfer-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <br>
+    <br>
+    <br><br>
+    <br>
+    <br><br>
+    <br>
+    <br><br>
 
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
 
-      <div class="modal-header">
-        <h4 class="modal-title" id="mySmallModalLabel">Are you sure?</h4>
-      </div>
-
-      <div class="modal-body">
-
-        <div class="row">
-
-          <div class="col-md-6">
-
-            <h5>From:</h5>
-            <hr>
-            <strong>Account: </strong> Checking
-            <br>
-            <strong>Account Name: </strong> User0
-            <br>
-            <strong>Amount: </strong>  $$$$
-            <br>
-
-          </div>
-
-
-          <div class="col-md-6">
-
-            <h5>To:</h5>
-            <hr>
-            <strong>Account: </strong> Checking
-            <br>
-            <strong>Account Name: </strong> User0
-            <br>
-            <strong>Amount: </strong>  $$$$
-            <br>
-
-
-          </div>
-
+        <div class="modal-header">
+          <h4 class="modal-title" id="mySmallModalLabel">Confirm Transfer?</h4>
         </div>
-      </div>
 
-      <div class="modal-footer">
-        <button class="btn btn-danger" ng-click="confirm()">Confirm</button>
-        <button class="btn btn-default pull-right" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Cancel</button>
+        <div class="modal-body">
+
+          <div class="row">
+
+            <div class="col-md-6">
+              <hr>
+              <strong>From Account </strong> {{user.emailFrom}}
+              <br>
+              <strong>To Account: </strong> {{user.emailTo}}
+              <br>
+              <strong>Amount: </strong>  {{user.amount | currency}}
+              <br>
+
+            </div>
+
+
+            <!-- <div class="col-md-6">
+
+              <h5>To:</h5>
+              <hr>
+              <strong>Account: </strong> Checking
+              <br>
+              <strong>Account Name: </strong> User0
+              <br>
+              <strong>Amount: </strong>  $$$$
+              <br>
+              <pre>All: {{errorFlag}}</pre>
+              <pre>From: {{errorFrom}}</pre>
+              <pre>To: {{errorTo}}</pre>
+            </div> -->
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-danger" data-dismiss="modal" ng-click="confirm()">Confirm</button>
+          <button class="btn btn-default pull-right" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Cancel</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+</div><!-- ng-controller div -->
+<!--Teller View End-->

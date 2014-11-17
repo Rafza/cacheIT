@@ -20,53 +20,95 @@ var myApp = angular.module('cacheItApp');
 //   }
 // }]);
 
-myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User) {
-  $scope.users = User.query();
-
-  //$scope.fromAccOptions=['Checking', 'Saving'];
-  //$scope.toAccOptions=['Checking', 'Saving'];  
-  // $scope.fromAccSelected = $scope.fromAccOptions[0];
-  // $scope.toAccSelected = $scope.toAccOptions[0];
-
-   // $scope.accOptions=['Checking', 'Saving'];
-
-  // $scope.accSelected = $scope.accOptions[0];
-  // $scope.newChecking;
-  // $scope.newSaving;
-
-/////
-  // $scope.user = {};
-  // $scope.errors = {};
-
-  // $scope.transfer = function(form) {
-  //   //$scope.fromUser = user.emailTo;
-  //   //$scope.toUser = user.emailFrom;
-
-  //   $http.get('/api/users').success(function(users) {
-  //     $scope.people = users;
-  //     console.log(users);
-  //   });
+myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q) {
+  // $scope.user.emailFrom = "test0@test.com";
+  // $scope.user.emailTo = "test1@test.com";
+  // $scope.user.amount = 10;
+  // $scope.users = User.query();
+  $scope.errorFlag = false;
+  $scope.errorFrom = false;
+  $scope.errorTo = false;
+  $scope.errorAmount = false;
+  $scope.submitted = false;
+  $scope.confirm = function() {
+    $scope.submitted = true;
 
 
-    // do validation later
-    // $scope.submitted = true;
+  //  $scope.checkUsers($scope.user.emailFrom, $scope.user.emailTo, function(){});
+  $q.all([
+    Auth.checkUser($scope.user.emailFrom, function(result) {
+       console.log("checkUser() callback emailFrom: " + result);
+       $scope.errorFrom = result;
+     }),
+    Auth.checkUser($scope.user.emailTo, function(result) {
+       console.log("checkUser() callback emailTo: " + result);
+       $scope.errorTo = result;
+     })
+  ]).then(function(data) {
 
-    // if(form.$valid) {
-    //   Auth.login({
-    //     email: $scope.user.email,
-    //     password: $scope.user.password
-    //   })
-    //   .then( function() {
+    if(!$scope.errorFrom && !$scope.errorTo) {
+      var fromID = data[0][0]._id;
+      var fromOldAmt = data[0][0].checking;
 
-    //   })
-    //   .catch( function(err) {
-    //     $scope.errors.other = err.message;
-    //   });
-    // }
+      var toID = data[1][0]._id;
+      var toOldAmt = data[1][0].checking;
+      var amount = $scope.user.amount;
+      // var overdraw = false;
 
-    ////
- // };
+      if(amount <= fromOldAmt) {
+        console.log("data[0] :" + angular.toJson(fromID) );
+        var fromNewAmt = parseFloat(fromOldAmt)-parseFloat(amount);
 
+        // BEGIN put function
+        $http.put('/api/users/' + fromID + '/update',  { checking : fromNewAmt } ).
+        success(function(data, status, headers, config) {
+          // this callback will be called asynchronously
+          // when the response is available
+          console.log("Success Withdraw! Returning new saving amount:");
+          console.log(data.checking);
+          //$scope.newChecking = data.checking;
+          // usr.saving = data.saving;
+          // TODO: return json to update only one row to reduce refreshing effect
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+        // END put function
+        console.log("data[1] :" + angular.toJson(toID) );
+        var toNewAmt = parseFloat(toOldAmt)+parseFloat(amount);
+
+        // BEGIN put function
+        $http.put('/api/users/' + toID + '/update',  { checking : toNewAmt } ).
+        success(function(data, status, headers, config) {
+          // this callback will be called asynchronously
+          // when the response is available
+          console.log("Success Deposit! Returning new saving amount:");
+          console.log(data.checking);
+          //$scope.newChecking = data.checking;
+          // usr.saving = data.saving;
+          // TODO: return json to update only one row to reduce refreshing effect
+        }).
+        error(function(data, status, headers, config) {
+          console.log("Failed Withdraw!: ");
+          // console.log(data.checking);
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+        // END put function
+
+        $scope.errorAmount = false;
+      } else {
+        console.log("Overdrawing fromUser");
+        $scope.errorAmount = true;
+      }
+
+    }
+    console.log("after checking both users: " + $scope.errorFrom + " | " + $scope.errorTo);
+  });
+
+
+  };
 
   $scope.getTime = function() {
 

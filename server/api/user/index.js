@@ -14,7 +14,8 @@ router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 
 //Method used to withdraw from saving and checking
-router.put('/:id/update', auth.hasRole('admin'), controller.update);
+router.get('/:name/name', controller.showName);
+router.put('/:id/update', auth.isAuthenticated(), controller.update);
 
 router.post('/', controller.create);
 
