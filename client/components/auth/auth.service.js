@@ -85,6 +85,8 @@ angular.module('cacheItApp')
        */
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
+        user.checking = 0;
+        user.saving = 0;
 
         return User.save(user,
           function(data) {

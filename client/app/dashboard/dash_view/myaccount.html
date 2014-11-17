@@ -17,7 +17,7 @@
     <!-- Deposit and Withdraw Form Begin -->
     <form class="form-horizontal" role="form">
       <!-- Deposit Begin-->
-      <!-- <div class="form-group">
+      <div class="form-group">
         <div class="col-sm-9">
           <div class="input-group">
             <div class="input-group-addon">$</div>
@@ -25,9 +25,9 @@
           </div>
         </div>
         <div class="col-sm-3">
-          <button class="btn btn-primary" type="button">Deposit</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm"><span> Deposit</span></button>
         </div>
-      </div> -->
+      </div>
       <!-- Deposit Ends -->
 
       <!-- Withdraw Begin-->
@@ -83,7 +83,7 @@
     <!-- Deposit and Withdraw Form Begin -->
     <form class="form-horizontal" role="form">
       <!-- Deposit Begin-->
-      <!-- <div class="form-group">
+      <div class="form-group">
         <div class="col-sm-9">
           <div class="input-group">
             <div class="input-group-addon">$</div>
@@ -91,9 +91,9 @@
           </div>
         </div>
         <div class="col-sm-3">
-          <button class="btn btn-primary" type="button">Deposit</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm"><span> Deposit</span></button>
         </div>
-      </div> -->
+      </div>
       <!-- Deposit Ends -->
 
       <!-- Withdraw Begin-->
@@ -107,7 +107,11 @@
         <div class="col-sm-3">
           <button class="btn btn-primary" type="button">Withdraw</button>
         </div>
+
+
+
       </div>
+
       <!-- Withdraw Ends -->
     </form>
     <!-- Deposit and Withdraw Form End -->
@@ -127,7 +131,23 @@
 
 
 
+
     </div><!--/col-span-6-->
   </div><!--/row-->
   <hr>
+
+  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title" id="mySmallModalLabel">Are you sure?</h4>
+      </div>
+      <div class="modal-body">
+        <button class="btn btn-danger" ng-click="confirm()">Confirm</button>
+        <button class="btn btn-default" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- MyAccount View End -->
