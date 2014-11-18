@@ -2,24 +2,6 @@
 'use strict';
 var myApp = angular.module('cacheItApp');
 
-// myApp.directive('ngFocus', [function() {
-//   var FOCUS_CLASS = "ng-focused";
-//   return {
-//     restrict: 'A',
-//     require: 'ngModel',
-//     link: function(scope, element, attrs, ctrl) {
-//       ctrl.$focused = false;
-//       element.bind('focus', function(evt) {
-//         element.addClass(FOCUS_CLASS);
-//         scope.$apply(function() {ctrl.$focused = true;});
-//       }).bind('blur', function(evt) {
-//         element.removeClass(FOCUS_CLASS);
-//         scope.$apply(function() {ctrl.$focused = false;});
-//       });
-//     }
-//   }
-// }]);
-
 myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q) {
   $scope.users = User.query();
   // begin same Account added
@@ -70,15 +52,13 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
       var toOldAmt = 0;
       var fromOldAmt = 0;
 
-      if('Checking' == from){
+      if('Checking' == from && 'Saving' == to){
         fromOldAmt = data[0][0].checking;
-      } else {
-        fromOldAmt = data[0][0].saving;
-      }
-      if('Checking' == to) {
-        toOldAmt = data[0][0].checking;
-      } else {
         toOldAmt = data[0][0].saving;
+      }
+       else if('Checking' == to && 'Saving' == from) {
+        fromOldAmt = data[0][0].saving;
+        toOldAmt = data[0][0].checking;
       }
 
       var amount = $scope.user .amountAcc;
@@ -94,10 +74,11 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
 
         // BEGIN put function
         var sendDataFrom;
-        if('Checking' == from) {
+        if('Checking' == from && 'Saving' == to) {
           sendDataFrom = { checking : fromNewAmt };
-        } else{
-          sendDataFrom = { saving : fromNewAmt };
+        }
+        else if('Checking' == to && 'Saving' == from){
+          sendDataFrom = { saving  : fromNewAmt };
         }
         // console.log("New Amount to withdraw: " + sendDataFrom + " | " + fromNewAmt);
         $http.put('/api/users/' + accID + '/update', sendDataFrom ).
@@ -121,10 +102,11 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
 
 
         var sendDataTo;
-        if('Checking' == from) {
-          sendDataTo = { checking : toNewAmt };
-        } else{
+        if('Checking' == from && 'Saving' == to) {
           sendDataTo = { saving : toNewAmt };
+        }
+        else if('Checking' == to && 'Saving' == from){
+          sendDataTo = { checking  : toNewAmt };
         }
         // BEGIN put function
         $http.put('/api/users/' + accID + '/update', sendDataTo).
