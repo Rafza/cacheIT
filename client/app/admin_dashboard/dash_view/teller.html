@@ -26,7 +26,7 @@
           <th>Email</th>
           <th>Account Type</th>
           <th>Amount</th>
-          <th>Deposit/Withdraw</th>          
+          <th>Deposit/Withdraw</th>
           <th>Checking</th>
           <th>Saving</th>
           <th>Balance</th>
@@ -52,10 +52,10 @@
 
 
 
-                  <!-- <label>Account Type:</label> -->
-            <select class="form-control input-sm" ng-model="accSelected" ng-options="opt for opt in accOptions">
-              <!-- <option></option> -->
-            </select>
+              <!-- <label>Account Type:</label> -->
+              <select class="form-control input-sm" ng-model="accSelected" ng-options="opt for opt in accOptions">
+                <!-- <option></option> -->
+              </select>
 
               <!-- Account Type select  dropdown END-->
             </td>
@@ -88,17 +88,17 @@
       <!-- Transaction Type select dropdown  END-->
       <!-- Transcation History -->
 
-        <!-- Checking -->
-        <td>{{user.checking | currency:"" }}</td>
-        <!-- Saving -->
-        <td>{{user.saving | currency:""}}</td>
-        <!-- Balance -->
-        <td>{{user.saving + user.checking | currency:""}}</td>
-        <!-- Close Account -->
-        <td><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm"><span class="glyphicon glyphicon-trash"> Close</span></button></td>
-      </tr>
-    </tbody>
-  </table>
+      <!-- Checking -->
+      <td>{{user.checking | currency:"" }}</td>
+      <!-- Saving -->
+      <td>{{user.saving | currency:""}}</td>
+      <!-- Balance -->
+      <td>{{user.saving + user.checking | currency:""}}</td>
+      <!-- Close Account -->
+      <td><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="closeAccount(user._id)"><span class="glyphicon glyphicon-trash"> Close</span></button></td>
+    </tr>
+  </tbody>
+</table>
 </div>
 <!-- Closing Account Modal-->
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -106,9 +106,21 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title" id="mySmallModalLabel">Are you sure?</h4>
+        <h4 class="modal-title" id="mySmallModalLabel">What do you want to close?</h4>
       </div>
       <div class="modal-body">
+
+        <div class="col-md-3"></div>
+
+        <div class="btn-group">
+          <label class="btn btn-info" ng-model="radioModel" btn-radio="'checking'" uncheckable>Checking</label>
+          <label class="btn btn-info" ng-model="radioModel" btn-radio="'saving'" uncheckable>Saving</label>
+          <label class="btn btn-info" ng-model="radioModel" btn-radio="'both'" uncheckable>Account</label>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
         <button class="btn btn-danger" ng-click="confirm()">Confirm</button>
         <button class="btn btn-default" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Cancel</button>
         </div>

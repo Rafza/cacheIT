@@ -5,8 +5,8 @@
     <li class="list-group-item" ng-repeat="user in users">
         <strong>{{user.name}}</strong><br>
         <span class="text-muted">{{user.email}}</span>
-        <button ng-click="deposit(user,1000)" class="btn btn-lg btn-primary" type="button">Increment</button>
-        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+        <!-- <button ng-click="deposit(user,1000)" class="btn btn-lg btn-primary" type="button">Increment</button> -->
+        <a ng-click="delete(user.name,user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
     </li>
   </ul>
 </div>
