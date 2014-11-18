@@ -27,8 +27,16 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
   $scope.accSelected = $scope.accOptions[0];
   $scope.newChecking;
   $scope.newSaving;
-  $scope.getTime = function() {
+  $scope.currentUser;
 
+  //Transaction Modal Function
+  $scope.transactionModal = function(myUser) {
+    $scope.currentUser = myUser;
+  }
+
+
+
+  $scope.getTime = function() {
     return $scope.date = new Date();
   };
 
