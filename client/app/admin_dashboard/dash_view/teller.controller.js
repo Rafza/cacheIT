@@ -52,10 +52,10 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
     } else {
       switch(accType) {
         case 'checking':
-          myData = { checking : null, accountType : 'checking' };
+          myData = { checking : null, accountType : 'saving' };
           break;
         case 'saving':
-          myData = { saving : null, accountType : 'saving' };
+          myData = { saving : null, accountType : 'checking' };
           break;
       }
 

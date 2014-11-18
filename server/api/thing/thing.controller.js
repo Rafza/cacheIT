@@ -68,7 +68,7 @@ exports.withdraw = function(req, res) {
     docs.bankAcc.checking = newAmt;
     //Begin Save to DB
     docs.save(function(err) {
-      if (err) return validationError(res, err);
+      if (err) return handleError(res, err);
         res.send(200);
     });// End Save to DB
 

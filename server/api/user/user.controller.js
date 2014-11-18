@@ -52,7 +52,7 @@ exports.update = function(req, res) {
         console.log("Bal: "+ transacts.balance);
 
     });
-  };
+  }
 
   if(req.body._id) { delete req.body._id; }
   User.findById(req.params.id, function (err, usr) {
