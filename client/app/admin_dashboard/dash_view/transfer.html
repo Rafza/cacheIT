@@ -4,31 +4,83 @@
   <hr>
   <div class="row">
 
-    <div class="col-md-2"></div>
+
+    <!-- beginnig of Same Account -->
+    <div class="col-md-6">
+
+      <form name="myForm">
+        <!-- Added content of transfer view here BEGIN -->
+
+        <br>
+        <label style = "color:#16A186"><strong>Same Account</strong></label>
+        <br>
+        <div class="form-group" ng-class="{ 'has-success': !errorAcc  && submitted,
+        'has-error': errorAcc && submitted }">
+         </br>
+          <label style = "color:#16A186">Account Email</label>
+          <input class="form-control" ng-model="user.emailAcc" type="text" placeholder="Email">
+        </br>
+          <label style = "color:#16A186">From:</label>
+          <br>
+            <select class="form-control input-sm" ng-model="accSelectedFrom" ng-options="   opt for opt in accOptionsFrom">
+            </select>
+          </br>
+
+          
+        
+        <!-- Amount: <input type="number" class="form-control" ng-model="fromAmount"> -->
+
+<!--         <div class="form-group" ng-class="{ 'has-success': !errorTo  && submitted,
+        'has-error': errorToAcc && submitted }"> -->
+        <label style = "color:#16A186">To:</label>
+        <br>
+            <select class="form-control input-sm" ng-model="accSelectedTo" ng-options="   opt for opt in accOptionsTo">
+            </select>
+<!--         </div> -->
+
+      </div>
+        </br>
+        <div class="form-group" ng-class="{ 'has-success': !errorAmt  && submitted,
+        'has-error': errorAmt && submitted }">
+        <label style = "color:#16A186">Amount:</label>
+        <input type="text" ng-model="user.amountAcc" placeholder="0.00" class="form-control" />
+        </div>
+        <br>
+        <button type="button" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".sameTransfer-modal-sm">Submit</button>
+        <br>
+      </form>
+    </div>
+
+<!-- END of Same Account  -->
+
+
+<!-- Beginning of Different Account  -->
 
     <!-- Left Column BEGIN-->
     <div class="col-md-6"><!-- col-md-12 BEGIN -->
       <form name="myForm">
         <!-- Added content of transfer view here BEGIN -->
         <br>
+        <label style = "color:#16A186"><strong>Different Account</strong></label>
+        <br>
         <div class="form-group" ng-class="{ 'has-success': !errorFrom  && submitted,
         'has-error': errorFrom && submitted }">
-          <label>From:</label>
+      </br>
+          <label style = "color:#16A186">From:</label>
           <input class="form-control" ng-model="user.emailFrom" type="text" placeholder="Email">
         </div>
         <br>
         <!-- Amount: <input type="number" class="form-control" ng-model="fromAmount"> -->
-
         <div class="form-group" ng-class="{ 'has-success': !errorTo  && submitted,
         'has-error': errorTo && submitted }">
-        <label>To:</label>
+        <label style = "color:#16A186">To:</label>
         <input class="form-control"  type='email' ng-model="user.emailTo"  placeholder="Email" required>
         </div>
 
         </br>
         <div class="form-group" ng-class="{ 'has-success': !errorAmount  && submitted,
         'has-error': errorAmount && submitted }">
-        <label>Amount:</label>
+        <label style = "color:#16A186">Amount:</label>
         <input type="text" ng-model="user.amount" placeholder="0.00" class="form-control" />
         </div>
         <br>
@@ -37,6 +89,7 @@
       </form>
       <!-- <pre>FROM: {{user.emailFrom}} <br>{{!!myForm.$error.email}} <br>{{!!myForm.$error.required}} <br>AMT: {{user.amount}}</pre> -->
     </div>
+    <!-- Beginning of Different Account  -->
     <!-- Left Column END-->
 
     <div class="col-md-1"></div>
@@ -50,15 +103,57 @@
 
   </div><!--/row-->
   <hr>
-  <!-- <pre>{{users | json}}</pre> -->
+<!--   <pre>{{users.emailAcc | json}}</pre> -->
 
 
 
-  <!-- Transfer Modal-->
-  <div class="modal fade transfer-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<!-- Same Account Transfer Modal -->
+  <div class="modal fade sameTransfer-modal-sm" tabindex="-1" role="dialog" aria-labelledby="historyModal" aria-hidden="true">
     <br>
     <br>
     <br><br>
+    <br>
+    <br><br>
+
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title" id="historyModal">Confirm Transfer?</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="row">
+
+            <div class="col-md-6">
+              <hr>
+              <strong>Account Email:</strong> {{user.emailAcc}}
+              <br>
+              <strong>From: </strong> {{accSelectedFrom}}
+              <br>
+              <strong>To: </strong> {{accSelectedTo}}
+              <br>
+              <strong>Amount: </strong>  {{user.amountAcc | currency}}
+              <br>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-danger" data-dismiss="modal" ng-click="confirmAcc()">Confirm</button>
+          <button class="btn btn-default pull-right" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  <!-- Different Account Transfer Modal-->
+  <div class="modal fade transfer-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <br>
     <br>
     <br><br>
     <br>
