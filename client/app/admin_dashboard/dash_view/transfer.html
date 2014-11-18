@@ -2,44 +2,53 @@
 <div ng-controller="TranCtrl">
   <a href=""><strong><i class="glyphicon glyphicon-dashboard"></i> Transfer Tool</strong></a>
   <hr>
+  <form class="form-horizontal" role="form">
+
+    <div class="form-group">
+      <label class="col-md-5 control-label" style = "color:#16A186"><strong>Transfer Type:</strong></label>
+      <div class="col-md-6">
+      <div class="btn-group">
+          <label class="btn btn-info" ng-model="radioModelType" btn-radio="'Internal'" uncheckable>Internal</label>
+          <label class="btn btn-info" ng-model="radioModelType" btn-radio="'External'" uncheckable>External</label>
+        </div>
+      </div>
+    </div>
+  </form>
   <div class="row">
-
-
+    <div class="col-md-3"> </div>
     <!-- beginnig of Same Account -->
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="radioModelType=='Internal'">
 
       <form name="myForm">
         <!-- Added content of transfer view here BEGIN -->
 
         <br>
-        <label style = "color:#16A186"><strong>Same Account</strong></label>
+        <label style = "color:#16A186"><strong>Internal Transfer</strong></label>
         <br>
+        <br>
+
         <div class="form-group" ng-class="{ 'has-success': !errorAcc  && submitted,
         'has-error': errorAcc && submitted }">
-         </br>
           <label style = "color:#16A186">Account Email</label>
           <input class="form-control" ng-model="user.emailAcc" type="text" placeholder="Email">
-        </br>
-          <label style = "color:#16A186">From:</label>
-          <br>
-            <select class="form-control input-sm" ng-model="accSelectedFrom" ng-options="   opt for opt in accOptionsFrom">
-            </select>
-          </br>
+        </div>
 
-          
-        
+        <div class="form-group" ng-class="{ 'has-success': !errorType  && submitted,
+        'has-error': errorType && submitted }">
+          <label style = "color:#16A186">From:</label>
+          <select class="form-control input-sm"  ng-model="accSelectedFrom" ng-options="   opt for opt in accOptionsFrom">
+          </select>
+        </div>
         <!-- Amount: <input type="number" class="form-control" ng-model="fromAmount"> -->
 
-<!--         <div class="form-group" ng-class="{ 'has-success': !errorTo  && submitted,
-        'has-error': errorToAcc && submitted }"> -->
+        <div class="form-group" ng-class="{ 'has-success': !errorType  && submitted,
+        'has-error': errorType && submitted }">
         <label style = "color:#16A186">To:</label>
-        <br>
+
             <select class="form-control input-sm" ng-model="accSelectedTo" ng-options="   opt for opt in accOptionsTo">
             </select>
-<!--         </div> -->
+        </div>
 
-      </div>
-        </br>
         <div class="form-group" ng-class="{ 'has-success': !errorAmt  && submitted,
         'has-error': errorAmt && submitted }">
         <label style = "color:#16A186">Amount:</label>
@@ -57,15 +66,15 @@
 <!-- Beginning of Different Account  -->
 
     <!-- Left Column BEGIN-->
-    <div class="col-md-6"><!-- col-md-12 BEGIN -->
+    <div class="col-md-6" ng-show="radioModelType=='External'"><!-- col-md-12 BEGIN -->
       <form name="myForm">
         <!-- Added content of transfer view here BEGIN -->
         <br>
-        <label style = "color:#16A186"><strong>Different Account</strong></label>
+        <label style = "color:#16A186"><strong>External Transfer</strong></label>
         <br>
         <div class="form-group" ng-class="{ 'has-success': !errorFrom  && submitted,
         'has-error': errorFrom && submitted }">
-      </br>
+        </br>
           <label style = "color:#16A186">From:</label>
           <input class="form-control" ng-model="user.emailFrom" type="text" placeholder="Email">
         </div>
@@ -102,6 +111,8 @@
     <!-- Right Column END-->
 
   </div><!--/row-->
+  <br>
+  <div ng-show="errorType" class="alert alert-danger" role="alert">Cannot transfer to the same account type!</div>
   <hr>
 <!--   <pre>{{users.emailAcc | json}}</pre> -->
 
