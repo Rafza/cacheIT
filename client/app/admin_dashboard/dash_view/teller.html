@@ -60,7 +60,7 @@
             </td> -->
             <!-- Deposit or Withdraw Modal Button -->
             <td>
-              <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target=".bs-withdrawDeposit-modal-sm" ng-click="transactionModal(user)">
+              <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target=".bs-withdrawDeposit-modal-sm" ng-click="updateCurrentUser(user)">
                 <span>Transaction</span>
               </button>
             </td>
@@ -75,7 +75,7 @@
             <td>{{user.saving + user.checking | currency:""}}</td>
             <!-- Close Account -->
             <td>
-              <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="closeAccount(user._id)">
+              <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="updateCurrentUser(user)">
                 <span class="glyphicon glyphicon-trash"> Close</span>
               </button>
             </td>
@@ -104,8 +104,8 @@
 
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger" ng-click="confirm()">Confirm</button>
-        <button class="btn btn-default" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal" ng-click="closeAccount(radioModel)">Confirm</button>
+        <button class="btn btn-default" type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">Cancel</button>
         </div>
       </div>
     </div>
@@ -124,7 +124,7 @@
             <div class="form-group">
             <!-- Checking -->
             <div class="form-group">
-              <label class="col-sm-4 control-label">Checking</label>
+              <label class="col-sm-4 control-label"><strong>Checking</strong></label>
               <div class="col-sm-8">
                 <p >{{currentUser.checking | currency}}</p>
               </div>
@@ -132,7 +132,7 @@
 
             <!-- Saving -->
             <div class="form-group">
-              <label class="col-sm-4 control-label">Saving</label>
+              <label class="col-sm-4 control-label"><strong>Saving</strong></label>
               <div class="col-sm-8">
                 <p>{{currentUser.saving | currency}}</p>
               </div>
@@ -140,14 +140,14 @@
 
             <!-- Balance -->
             <div class="form-group">
-              <label class="col-sm-4 control-label">Balance</label>
+              <label class="col-sm-4 control-label"><strong>Balance</strong></label>
               <div class="col-sm-8">
                 <p>{{currentUser.saving + currentUser.checking | currency}}</p>
               </div>
             </div>
             <hr>
               <!-- Account Type -->
-              <label for="inputAccType" class="col-sm-4 control-label">Account Type</label>
+              <label for="inputAccType" class="col-sm-4 control-label"><strong>Account Type</strong></label>
               <div class="col-sm-8">
                 <select class="form-control input-sm" ng-model="accSelected" ng-options="opt for opt in accOptions"></select>
               </div>
@@ -155,17 +155,22 @@
 
             <!-- Amount  -->
             <div class="form-group">
-              <label class="col-sm-4 control-label">Amount</label>
+              <label class="col-sm-4 control-label"><strong>Amount</strong></label>
               <div class="col-sm-8">
                 <input type="number" ng-model="actionAmount" ng-init="actionAmount=0" class="form-control input-sm">
               </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-4 control-label"><strong>Action</strong></label>
+                <div class="col-sm-8">
+                  <button class="btn btn-sm btn-success" ng-click=" depositAmt(currentUser, actionAmount, accSelected); actionAmount=0"><span class="glyphicon glyphicon-import"></span> Deposit</button>
+                  <button class="btn btn-sm btn-success" ng-click=" withdrawAmt(currentUser, actionAmount, accSelected); actionAmount=0"><span class="glyphicon glyphicon-export"></span> Withdraw</button>
+                </div>
             </div>
           </form>
 
         </div>
         <div class="modal-footer">
-          <button class="btn btn-success" ng-click=" depositAmt(currentUser, actionAmount, accSelected); actionAmount=0"><span class="glyphicon glyphicon-import"></span> Deposit</button>
-          <button class="btn btn-success" ng-click=" withdrawAmt(currentUser, actionAmount, accSelected); actionAmount=0"><span class="glyphicon glyphicon-export"></span> Withdraw</button>
           <button class="btn btn-info" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Done</button>
           </div>
         </div>

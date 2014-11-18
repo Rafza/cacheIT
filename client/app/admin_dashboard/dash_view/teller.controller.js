@@ -30,11 +30,56 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
   $scope.currentUser;
 
   //Transaction Modal Function
-  $scope.transactionModal = function(myUser) {
+  $scope.updateCurrentUser = function(myUser) {
     $scope.currentUser = myUser;
   }
 
+  $scope.delete = function(user) {
+    User.remove({ id: user._id });
+    angular.forEach($scope.users, function(u, i) {
+      if (u === user) {
+        $scope.users.splice(i, 1);
+      }
+    });
+  };
 
+  $scope.closeAccount = function(accType) {
+    var usr = $scope.currentUser;
+    var myData;
+    if(accType=='both') {
+      $scope.delete(usr);
+      $scope.users = User.query();
+    } else {
+      switch(accType) {
+        case 'checking':
+          myData = { checking : null, accountType : 'checking' };
+          break;
+        case 'saving':
+          myData = { saving : null, accountType : 'saving' };
+          break;
+      }
+
+
+      console.log(myData);
+
+
+      $http.put('/api/users/' + usr._id + '/update',  myData ).
+      success(function(data, status, headers, config) {
+        usr.checking = data.checking;
+        usr.saving = data.saving;
+
+        console.log("Success Delete!");
+      }).
+      error(function(data, status, headers, config) {
+
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+      });
+      // END put function
+    }
+
+
+  }
 
   $scope.getTime = function() {
     return $scope.date = new Date();
