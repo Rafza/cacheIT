@@ -12,8 +12,8 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
 
   $scope.accOptionsTo=['Checking', 'Saving'];
   $scope.accSelectedTo = $scope.accOptionsTo[0];
-  console.log("From checking------: "+$scope.accSelectedFrom);
-  console.log("To saving-----t: "+$scope.accSelectedTo);
+  // console.log("From checking------: "+$scope.accSelectedFrom);
+  // console.log("To saving-----t: "+$scope.accSelectedTo);
   $scope.errorAcc = false;
   $scope.errorAmt = false;
   $scope.errorType = false;
@@ -36,7 +36,7 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
 
     // begin new added
     Auth.checkUser($scope.user.emailAcc, function(result) {
-       console.log("checkUser() callback emailAcc: " + result);
+       // console.log("checkUser() callback emailAcc: " + result);
        $scope.errorAcc = result;
      })//finish new added
   ]).then(function(data) {
@@ -45,8 +45,8 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
     {
       var from = $scope.accSelectedFrom;
       var to = $scope.accSelectedTo;
-      console.log("FROM ****"+from)
-      console.log("TO ****"+to)
+      // console.log("FROM ****"+from)
+      // console.log("TO ****"+to)
       var accID = data[0][0]._id;
 
       var toOldAmt = 0;
@@ -62,23 +62,25 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
       }
 
       var amount = $scope.user .amountAcc;
-      console.log("from Amount"+fromOldAmt);
-      console.log("to Amount "+toOldAmt);
+      console.log("from Amount:-"+fromOldAmt);
+      console.log("to Amount:- "+toOldAmt);
       // console.log("From same Account: "+from);
       // console.log("To same Account: "+to);
       // console.log("From same Account: "+amount);
     }
       if(amount <= fromOldAmt && from != to) {
-        console.log("data[0] :" + angular.toJson(accID) );
+        // console.log("data[0] :" + angular.toJson(accID) );
         var fromNewAmt = parseFloat(fromOldAmt)-parseFloat(amount);
 
         // BEGIN put function
         var sendDataFrom;
         if('Checking' == from && 'Saving' == to) {
           sendDataFrom = { checking : fromNewAmt };
+          console.log("I am here in from checking");
         }
         else if('Checking' == to && 'Saving' == from){
           sendDataFrom = { saving  : fromNewAmt };
+          console.log("I am here in from saving");
         }
         // console.log("New Amount to withdraw: " + sendDataFrom + " | " + fromNewAmt);
         $http.put('/api/users/' + accID + '/update', sendDataFrom ).
@@ -86,8 +88,8 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
           // this callback will be called asynchronously
           // when the response is available
           console.log("Success Withdraw! Returning new saving amount:");
-          console.log("NEW amount ON FROM C" + data.checking);
-          console.log("NEW amount ON FROM S" + data.saving);
+          console.log("NEW amount ON FROM C " + data.checking);
+          console.log("NEW amount ON FROM S " + data.saving);
           //$scope.newChecking = data.checking;
           // usr.saving = data.saving;
           // TODO: return json to update only one row to reduce refreshing effect
@@ -97,8 +99,9 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
           // or server returns response with an error status.
         });
         // END put function
-        console.log("data[1] :" + angular.toJson(accID) );
+        // console.log("data[1] :" + angular.toJson(accID) );
         var toNewAmt = parseFloat(toOldAmt)+parseFloat(amount);
+        console.log("Amount after add-------------------------: "+toNewAmt);
 
 
         var sendDataTo;
@@ -113,8 +116,9 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
         success(function(data, status, headers, config) {
           // this callback will be called asynchronously
           // when the response is available
-          console.log("Success Deposit! Returning new saving amount:");
-          console.log("NEW AMOUNT ON TO "+data.to);
+          console.log("Success Deposit! Returning new saving amount ***:");
+          console.log("NEW AMOUNT ON TO "+data.checking);
+          console.log("NEW AMOUNT ON TO "+data.saving);;
           //$scope.newChecking = data.checking;
           // usr.saving = data.saving;
           // TODO: return json to update only one row to reduce refreshing effect
