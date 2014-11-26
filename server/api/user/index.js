@@ -17,6 +17,9 @@ router.get('/:id', auth.isAuthenticated(), controller.show);
 router.get('/:name/name', controller.showName);
 router.put('/:id/update', auth.isAuthenticated(), controller.update);
 
+//Push document
+router.put('/:name/push', auth.isAuthenticated(), controller.pushCreate);
+
 router.post('/', controller.create);
 
 module.exports = router;
