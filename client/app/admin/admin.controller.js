@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cacheItApp')
-  .controller('AdminCtrl', function ($scope, Modal, $location, $http, Auth, User) {
+  .controller('AdminCtrl', function ($scope, Modal, $location, $http, Auth, User, Transaction) {
 
     //Check LoginIn with callback redirect -- Alex
     // Auth.isLoggedInAsync(function(loggedIn) {
@@ -35,4 +35,23 @@ angular.module('cacheItApp')
     $scope.add = function(user, amt) {
       User.where({ id: user._id }).update({ checking: 3939 }, callback);
     };
+    // Function: sendData()
+    // Paramater:
+    // user - the email for the user you want to update
+    // transaction = {
+    //   description : String,
+    //   debit : Number,
+    //   credit : Number,
+    // }
+    // ex. var transaction = { debit : 3333, credit : 4444, description : "Hi" };
+    // Returns: void
+    $scope.sendData = function(user, transaction) {
+      Transaction.push(user, transaction)
+      .then( function(data) {
+        console.log("SUccess! " + data);
+      })
+      .catch( function(err) {
+        console.log("Failed!");
+      });eter
+    }
   });

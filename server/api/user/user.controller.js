@@ -68,7 +68,7 @@ exports.update = function(req, res) {
   });
 };
 
-// Push an existing gameData in the DB.
+// Push an existing transaction in the DB.
 exports.pushCreate = function(req, res) {
   var bodyData = req.body;
   var myName = req.params.name;
@@ -84,7 +84,7 @@ exports.pushCreate = function(req, res) {
   //   }
   // }
   if(req.body._id) { delete req.body._id; }
-  User.findOneAndUpdate({name : myName },{$pushAll : bodyData}, {upsert:true},
+  User.findOneAndUpdate({email : myName },{$pushAll : bodyData}, {upsert:true},
   function(err, data) {
     if(!data) {
       return res.send(404);
