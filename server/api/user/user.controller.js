@@ -59,7 +59,7 @@ exports.update = function(req, res) {
     if (err) { return handleError(res, err); }
     if(!usr) { return res.send(404); }
       console.log("Usr: "+ usr);
-    var updated = _.merge(usr, req.body);
+    var updated = _.extend(usr, req.body);
     //http://stackoverflow.com/questions/26372523/document-sub-arrays-stored-as-duplicate-values-of-the-first-entry-in-mongo
     updated.save(function (err) {
       if (err) { return handleError(res, err); }

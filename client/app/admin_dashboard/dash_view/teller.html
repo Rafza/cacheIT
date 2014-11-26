@@ -30,6 +30,7 @@
           <th>Checking</th>
           <th>Saving</th>
           <th>Balance</th>
+          <th>Account Statement</th>
           <th>Close Account</th></tr>
         </thead>
         <tbody>
@@ -73,6 +74,12 @@
             <td>{{user.saving | currency:""}}</td>
             <!-- Balance -->
             <td>{{user.saving + user.checking | currency:""}}</td>
+            <!-- Statement -->
+            <td>
+              <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target=".my-transaction-modal" ng-click="updateCurrentUser(user)">
+                <span class="glyphicon glyphicon-list"> Statement</span>
+              </button>
+            </td>
             <!-- Close Account -->
             <td>
               <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="updateCurrentUser(user)">
@@ -186,7 +193,7 @@
             <h4 class="modal-title" id="historyModal">Statement</h4>
           </div>
 
-          <div class="modal-body">
+          <div class="modal-body" ng-model="currentTrans=currentUser.transactions">
             <table class="table">
               <thead>
                 <tr>
@@ -211,7 +218,7 @@
               </div>
               <div class="modal-footer">
                 <!-- <button class="btn btn-success" ng-click="confirm()">Done</button> -->
-                <button class="btn btn-default" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Done</button>
+                <button class="btn btn-info" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Done</button>
                 </div>
               </div>
             </div>
