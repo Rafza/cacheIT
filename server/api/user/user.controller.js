@@ -68,14 +68,33 @@ exports.update = function(req, res) {
   });
 };
 
-// Push an existing thing in the DB.
-exports.push = function(req, res) {
+// Push an existing gameData in the DB.
+exports.pushCreate = function(req, res) {
+  var bodyData = req.body;
+  var myName = req.params.name;
+  // console.log("Pushing to " + myName + " Data: " + bodyData);
+  // var myData = {
+  //   riskyrisky: {
+  //     hold : 1,
+  //     pass : 2
+  //   },
+  //   safesafe: {
+  //     hold : 1,
+  //     pass : 2
+  //   }
+  // }
   if(req.body._id) { delete req.body._id; }
-    User.transactions.push(req.body, function (err,usr) {
+  User.findOneAndUpdate({name : myName },{$pushAll : bodyData}, {upsert:true},
+  function(err, data) {
+    if(!data) {
+      return res.send(404);
+    }
     if (err) { return handleError(res, err); }
-    if(!usr) { return res.send(404); }
+    console.log("Data returned: " + data);
+    return res.json(200, data);
   });
 };
+
 
 // exports.updateById =  function(req, res) {
 //     {$push: {items: item}},
