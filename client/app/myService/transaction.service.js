@@ -45,24 +45,24 @@ angular.module('cacheItApp')
        * @param  {JSON} callback - optional
        * @return {Promise}
        */
-      push: function(username, data , callback) {
+       // for checking satatement push
+      push: function(username, data , int, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
         var query = '/api/users/' + username + '/push';
 
-        var newBalance = parseFloat(data.debit) + parseFloat(data.credit);
-
-        var myJson = {
-          transactions :
-          [{
-            description : data.description,
-            debit : data.debit,
-            credit : data.credit,
-            balance : newBalance
-          }]
-        };
-
-        $http.put(query, myJson).
+        //var newBalance = parseFloat(data.debit) + parseFloat(data.credit);
+        if (int == 1) {
+          var checkJson = {
+            checkTransactions :
+            [{
+              description : data.description,
+              debit : data.debit,
+              credit : data.credit,
+              balance : data.balance
+            }]
+          };
+        $http.put(query, checkJson).
         success(function(data) {
           deferred.resolve(data);
           return cb();
@@ -73,7 +73,29 @@ angular.module('cacheItApp')
         }.bind(this));
 
         return deferred.promise;
-      }//End push method
+        }
+        else if(int ==0){
+          var savJson = {
+            savTransactions :
+            [{
+              description : data.description,
+              debit : data.debit,
+              credit : data.credit,
+              balance : data.balance
+            }]
+          };
+        $http.put(query, savJson).
+        success(function(data) {
+          deferred.resolve(data);
+          return cb();
+        }).
+        error(function(err) {
+          deferred.reject(err);
+          return cb(err);
+        }.bind(this));
 
+        return deferred.promise;
+        }
+      }//End checking statement push
     };//Return
   });

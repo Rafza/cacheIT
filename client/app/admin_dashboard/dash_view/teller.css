@@ -1,0 +1,15 @@
+.scrollbar
+{
+	margin-left: 15px;
+	float: left;
+	height: 250px;
+	width: 520px;
+	overflow-y: scroll;
+	margin-bottom: 5px;
+}
+
+.force-overflow
+{
+	min-height: 13px;
+}
+

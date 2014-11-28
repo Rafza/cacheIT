@@ -20,7 +20,7 @@ myApp.directive('ngFocus', [function() {
   }
 }]);
 
-myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
+myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Transaction) {
   $scope.users = User.query();
   $scope.accountType = ["Saving","Checking","Transfer"];
   $scope.accOptions=['Checking', 'Saving'];
@@ -89,7 +89,9 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
     var userID = usr._id;
     var chk = usr.checking;
     var sav = usr.saving;
-    var trans = usr.transactions;
+    //var trans = usr.transactions;    
+    var checkTrans = usr.checkTransactions;
+    var savTrans = usr.savTransactions;
 
 
     console.log("Called Deposit.");
@@ -119,6 +121,16 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
       // BEGIN put function
       $http.put('/api/users/' + userID + '/update',  { saving : newAmount } ).
       success(function(data, status, headers, config) {
+        var transaction = { credit : amt , balance : newAmount, description : "Deposit" };
+        Transaction.push(data.email,transaction,0)
+        .then( function(data) {
+          console.log("SUccess! " + data);
+        })
+        .catch( function(err) {
+          console.log("Failed!");
+        });
+
+
         // this callback will be called asynchronously
         // when the response is available
         console.log("Success Deposit! Returning new saving amount:");
@@ -142,6 +154,15 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
       // BEGIN put function
       $http.put('/api/users/' + userID + '/update', { checking : newAmount} ).
       success(function(data, status, headers, config) {
+        var transaction = { credit : amt , balance : newAmount, description : "Deposit" };
+        Transaction.push(data.email,transaction,1)
+        .then( function(data) {
+          console.log("Success! " + data);
+        })
+        .catch( function(err) {
+          console.log("Failed!");
+        });
+        //var transaction = { debit : , credit : amt, description : "Deposit" };
         // this callback will be called asynchronously
         // when the response is available
         console.log("Success Deposit! Returning new checking amount:");
@@ -169,7 +190,9 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
     var userID = usr._id;
     var chk = usr.checking;
     var sav = usr.saving;
-    var trans = usr.transactions;
+    //var trans = usr.transactions;
+    var checkTrans = usr.checkTransactions;
+    var savTrans = usr.savTransactions;
 
     // console.log("Called Withdraw.");
     if( type == 'Saving' && sav-amt >= 0 ) {
@@ -177,6 +200,18 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
       // console.log("Withdraw Saving: " + amt + " Sav - Amt: " + newAmount + "Date: " + $scope.getTime() );
       $http.put('/api/users/' + userID + '/update', { saving : newAmount } ).
       success(function(data, status, headers, config) {
+
+
+        var transaction = { debit : amt, balance : newAmount, description : "Withdraw" };
+        Transaction.push(data.email,transaction,0)
+        .then( function(data) {
+          console.log("Success! " + data);
+        })
+        .catch( function(err) {
+          console.log("Failed!");
+        });
+
+
         // this callback will be called asynchronously
         // when the response is available
         console.log("Success Withdraw! Returning new saving amount:");
@@ -196,6 +231,15 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
       // console.log("Withdraw from Checking: " + amt + " Chk - Amt: " + newAmount);
       $http.put('/api/users/' + userID + '/update', { checking : newAmount}).
       success(function(data, status, headers, config) {
+
+        var transaction = { debit : amt, balance : newAmount, description : "Withdraw" };
+        Transaction.push(data.email,transaction,1)
+        .then( function(data) {
+          console.log("Success! " + data);
+        })
+        .catch( function(err) {
+          console.log("Failed!");
+        });
         // this callback will be called asynchronously
         // when the response is available
         console.log("Success Withdraw! Returning new checking amount:");
@@ -220,8 +264,12 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User) {
 
 
   $scope.setTrans = function(trans) {
-    console.log(trans);
-    $scope.currentTrans = trans;
+    //console.log(trans);
+    console.log(checkTrans);
+    console.log(savTrans);
+    //$scope.currentTrans = trans;
+    $scope.currentTrans = checkTrans;
+    $scope.currentTrans = savTrans;
     // $scope.currentTrans = trans.concat([{
     //                          date : $scope.getTime(),
     //                          description : 'Deposit to Saving',

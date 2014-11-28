@@ -43,6 +43,11 @@ exports.showName = function(req, res) {
 // Updates an existing thing in the DB.
 exports.update = function(req, res) {
   console.log("update() looping");
+  // if(req.body.checkTransactions) {
+  //   req.body.checkTransactions.forEach(function(transacts)}
+  // if(req.body.savTransactions) {
+  //   req.body.savTransactions.forEach(function(transacts);}
+
   if(req.body.transactions) {
     req.body.transactions.forEach(function(transacts) {
         console.log("Date: "+ transacts.date);

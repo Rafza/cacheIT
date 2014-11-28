@@ -2,7 +2,7 @@
 'use strict';
 var myApp = angular.module('cacheItApp');
 
-myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q) {
+myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q, Transaction) {
   $scope.users = User.query();
   // begin same Account added
   $scope.accountType = ["Saving","Checking","Transfer"];
@@ -74,17 +74,43 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
 
         // BEGIN put function
         var sendDataFrom;
+        var int;
         if('Checking' == from && 'Saving' == to) {
           sendDataFrom = { checking : fromNewAmt };
+          int = 1;
           console.log("I am here in from checking");
         }
         else if('Checking' == to && 'Saving' == from){
           sendDataFrom = { saving  : fromNewAmt };
+          int = 0;
           console.log("I am here in from saving");
         }
         // console.log("New Amount to withdraw: " + sendDataFrom + " | " + fromNewAmt);
         $http.put('/api/users/' + accID + '/update', sendDataFrom ).
         success(function(data, status, headers, config) {
+          // calling push fucntion for statement
+        if( int == 1){
+          console.log("Trying to print statement! comon man i can do this :) ");
+          var transaction = { debit : amount , balance : fromNewAmt, description : "Transfer to saving" };
+          Transaction.push(data.email,transaction,1)
+          .then( function(data) {
+            console.log("SUccess! " + data);
+          })
+          .catch( function(err) {
+            console.log("Failed!");
+          });
+        }
+        else if( int == 0){
+          var transaction = { debit : amount , balance : fromNewAmt, description : "Transfer to checking" };
+          Transaction.push(data.email,transaction,0)
+          .then( function(data) {
+            console.log("SUccess! " + data);
+          })
+          .catch( function(err) {
+            console.log("Failed!");
+          });
+        }
+
           // this callback will be called asynchronously
           // when the response is available
           console.log("Success Withdraw! Returning new saving amount:");
@@ -105,15 +131,40 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
 
 
         var sendDataTo;
+        var flag;
         if('Checking' == from && 'Saving' == to) {
           sendDataTo = { saving : toNewAmt };
+          flag = 0;
         }
         else if('Checking' == to && 'Saving' == from){
           sendDataTo = { checking  : toNewAmt };
+          flag = 1;
         }
         // BEGIN put function
         $http.put('/api/users/' + accID + '/update', sendDataTo).
         success(function(data, status, headers, config) {
+        // calling push function for statement
+        if ( flag == 0){
+          var transaction = { credit : amount , balance : toNewAmt, description : "received from checking" };
+          Transaction.push(data.email,transaction,0)
+          .then( function(data) {
+            console.log("SUccess! " + data);
+          })
+          .catch( function(err) {
+            console.log("Failed!");
+          });
+        }
+        else if ( flag == 1){
+          var transaction = { credit : amount , balance : toNewAmt, description : "received from saving" };
+          Transaction.push(data.email,transaction,1)
+          .then( function(data) {
+            console.log("SUccess! " + data);
+          })
+          .catch( function(err) {
+            console.log("Failed!");
+          });
+        }
+
           // this callback will be called asynchronously
           // when the response is available
           console.log("Success Deposit! Returning new saving amount ***:");
@@ -184,6 +235,14 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
         // BEGIN put function
         $http.put('/api/users/' + fromID + '/update',  { checking : fromNewAmt } ).
         success(function(data, status, headers, config) {
+        var transaction = { debit : amount , balance : fromNewAmt, description : "Transfered"};
+        Transaction.push(data.email,transaction,1)
+        .then( function(data) {
+          console.log("SUccess! " + data);
+        })
+        .catch( function(err) {
+          console.log("Failed!");
+        });
           // this callback will be called asynchronously
           // when the response is available
           console.log("Success Withdraw! Returning new saving amount:");
@@ -203,6 +262,14 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q)
         // BEGIN put function
         $http.put('/api/users/' + toID + '/update',  { checking : toNewAmt } ).
         success(function(data, status, headers, config) {
+        var transaction = { credit : amount , balance : toNewAmt, description : "Transfered" };
+        Transaction.push(data.email,transaction,1)
+        .then( function(data) {
+          console.log("SUccess! " + data);
+        })
+        .catch( function(err) {
+          console.log("Failed!");
+        });
           // this callback will be called asynchronously
           // when the response is available
           console.log("Success Deposit! Returning new saving amount:");

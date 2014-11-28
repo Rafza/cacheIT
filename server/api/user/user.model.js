@@ -4,12 +4,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 
+
+
 var transSchema = new Schema({  
   description : String,
   debit : Number,
   credit : Number,
   balance : Number,
-  date : { type : Date, default: Date.now }
+  //date : {type: Number, default: function(){return new Date().getTime()}}
+  date : { type : Date, default: Date.now}
 });
 
 var UserSchema = new Schema({
@@ -25,7 +28,8 @@ var UserSchema = new Schema({
   accountType: String,
   saving: Number,
   checking: Number,
-  transactions :  [transSchema]
+  checkTransactions :  [transSchema],
+  savTransactions : [transSchema]
 });
 
 /**

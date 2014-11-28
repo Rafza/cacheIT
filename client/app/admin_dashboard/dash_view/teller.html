@@ -5,130 +5,114 @@
   <div class="row">
     <div class="col-md-12">
       <!-- Added content of teller view here Begin -->
-
-      <!-- <div ng-init="transactions = [
-      {no:'2',customer: 'user2',balance: '$1000594235'},
-      {no:'1',customer: 'user1',balance: '$2324234234'}
-      ]">
-    </div> -->
-
-
-    <!-- <pre ng-repeat="usr in users" ng-hide="usr.role=='admin'"><div ng-repeat="
-    (key,data) in usr">{{key}} : {{data}}<br></div></pre> -->
-
-
-    <div ng-init='showID=false'> </div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th ng-show="showID">UserID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <!-- <th>Account Type</th> -->
-          <!-- <th>Amount</th> -->
-          <th>Deposit/Withdraw</th>
-          <th>Checking</th>
-          <th>Saving</th>
-          <th>Balance</th>
-          <th>Account Statement</th>
-          <th>Close Account</th></tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="user in users | orderBy:'email'" ng-hide="user.role=='admin'">
-            <td ng-show="showID">
-              <button class="btn btn-xs btn-info"
-              ng-model="singleModel" ng-init="singleModel='Show'" btn-checkbox
-              btn-checkbox-true="user._id"
-              btn-checkbox-false="'Show'">{{singleModel}}</button>
-            </td>
-            <td>{{user.name}}</td>
-            <td>{{user.email}}</td>
-            <!-- Account Type -->
-            <!-- <td>
-            <select class="form-control input-sm" ng-model="accSelected" ng-options="opt for opt in accOptions">
-            </select>
-            </td> -->
-
-
-            <!-- <td>
-            <input type="number" ng-model="actionAmount" ng-init="actionAmount=0" class="form-control input-sm">
-            </td> -->
-
-            <!-- Transaction Type select dropdown  BEGIN-->
-            <!-- <td ng-init="myData">
-            <button class="btn btn-xs btn-success" ng-click=" depositAmt(user, actionAmount,accSelected); actionAmount=0"><span class="glyphicon glyphicon-import"> Deposit</span></button>
-            <button class="btn btn-xs btn-success" ng-click=" withdrawAmt(user, actionAmount,accSelected); actionAmount=0"><span class="glyphicon glyphicon-export"> Withdraw</span></button>
-            </td> -->
-            <!-- Deposit or Withdraw Modal Button -->
-            <td>
-              <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target=".bs-withdrawDeposit-modal-sm" ng-click="updateCurrentUser(user)">
-                <span>Transaction</span>
-              </button>
-            </td>
-            <!-- Transaction Type select dropdown  END-->
-            <!-- Transcation History -->
-
-            <!-- Checking -->
-            <td>{{user.checking | currency:"" }}</td>
-            <!-- Saving -->
-            <td>{{user.saving | currency:""}}</td>
-            <!-- Balance -->
-            <td>{{user.saving + user.checking | currency:""}}</td>
-            <!-- Statement -->
-            <td>
-              <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target=".my-transaction-modal" ng-click="updateCurrentUser(user)">
-                <span class="glyphicon glyphicon-list"> Statement</span>
-              </button>
-            </td>
-            <!-- Close Account -->
-            <td>
-              <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="updateCurrentUser(user)">
-                <span class="glyphicon glyphicon-trash"> Close</span>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<!-- <div ng-init="transactions = [
+{no:'2',customer: 'user2',balance: '$1000594235'},
+{no:'1',customer: 'user1',balance: '$2324234234'}
+]">
+</div> -->
+<!-- <pre ng-repeat="usr in users" ng-hide="usr.role=='admin'"><div ng-repeat="
+  (key,data) in usr">{{key}} : {{data}}<br></div></pre> -->
+  <div ng-init='showID=false'> </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th ng-show="showID">UserID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <!-- <th>Account Type</th> -->
+        <!-- <th>Amount</th> -->
+        <th>Deposit/Withdraw</th>
+        <th>Checking</th>
+        <th>Saving</th>
+        <th>Balance</th>
+        <th>Account Statement</th>
+        <th>Close Account</th></tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in users | orderBy:'email'" ng-hide="user.role=='admin'">
+          <td ng-show="showID">
+            <button class="btn btn-xs btn-info"
+            ng-model="singleModel" ng-init="singleModel='Show'" btn-checkbox
+            btn-checkbox-true="user._id"
+            btn-checkbox-false="'Show'">{{singleModel}}</button>
+          </td>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <!-- Account Type -->
+<!-- <td>
+<select class="form-control input-sm" ng-model="accSelected" ng-options="opt for opt in accOptions">
+</select>
+</td> -->
+<!-- <td>
+<input type="number" ng-model="actionAmount" ng-init="actionAmount=0" class="form-control input-sm">
+</td> -->
+<!-- Transaction Type select dropdown BEGIN-->
+<!-- <td ng-init="myData">
+<button class="btn btn-xs btn-success" ng-click=" depositAmt(user, actionAmount,accSelected); actionAmount=0"><span class="glyphicon glyphicon-import"> Deposit</span></button>
+<button class="btn btn-xs btn-success" ng-click=" withdrawAmt(user, actionAmount,accSelected); actionAmount=0"><span class="glyphicon glyphicon-export"> Withdraw</span></button>
+</td> -->
+<!-- Deposit or Withdraw Modal Button -->
+<td>
+  <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target=".bs-withdrawDeposit-modal-sm" ng-click="updateCurrentUser(user)">
+    <span>Transaction</span>
+  </button>
+</td>
+<!-- Transaction Type select dropdown END-->
+<!-- Transcation History -->
+<!-- Checking -->
+<td>{{user.checking | currency:"" }}</td>
+<!-- Saving -->
+<td>{{user.saving | currency:""}}</td>
+<!-- Balance -->
+<td>{{user.saving + user.checking | currency:""}}</td>
+<!-- Statement -->
+<td>
+  <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target=".my-transaction-modal" ng-click="updateCurrentUser(user)">
+    <span class="glyphicon glyphicon-list"> Statement</span>
+  </button>
+</td>
+<!-- Close Account -->
+<td>
+  <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="updateCurrentUser(user)">
+    <span class="glyphicon glyphicon-trash"> Close</span>
+  </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <!-- Closing Account Modal-->
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
-
       <div class="modal-header">
         <h4 class="modal-title" id="mySmallModalLabel">What do you want to close?</h4>
       </div>
       <div class="modal-body">
-
         <div class="col-md-3"></div>
-
         <div class="btn-group">
           <label class="btn btn-info" ng-model="radioModel" btn-radio="'checking'" uncheckable>Checking</label>
           <label class="btn btn-info" ng-model="radioModel" btn-radio="'saving'" uncheckable>Saving</label>
           <label class="btn btn-info" ng-model="radioModel" btn-radio="'both'" uncheckable>Account</label>
         </div>
-
-
       </div>
       <div class="modal-footer">
         <button class="btn btn-danger" data-dismiss="modal" ng-click="closeAccount(radioModel)">Confirm</button>
         <button class="btn btn-default" type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">Cancel</button>
-        </div>
       </div>
     </div>
   </div>
-  <!-- Withdraw/Deposit Account Modal-->
-  <div class="modal fade bs-withdrawDeposit-modal-sm" tabindex="-1" role="dialog" aria-labelledby="withdrawDepositModal" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-
-        <div class="modal-header">
-          <h4 class="modal-title" id="withdrawDepositModal">Deposit or Withdraw</h4>
-        </div>
-        <div class="modal-body">
-
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
+</div>
+<!-- Withdraw/Deposit Account Modal-->
+<div class="modal fade bs-withdrawDeposit-modal-sm" tabindex="-1" role="dialog" aria-labelledby="withdrawDepositModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="withdrawDepositModal">Deposit or Withdraw</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
             <!-- Checking -->
             <div class="form-group">
               <label class="col-sm-4 control-label"><strong>Checking</strong></label>
@@ -136,7 +120,6 @@
                 <p >{{currentUser.checking | currency}}</p>
               </div>
             </div>
-
             <!-- Saving -->
             <div class="form-group">
               <label class="col-sm-4 control-label"><strong>Saving</strong></label>
@@ -144,7 +127,6 @@
                 <p>{{currentUser.saving | currency}}</p>
               </div>
             </div>
-
             <!-- Balance -->
             <div class="form-group">
               <label class="col-sm-4 control-label"><strong>Balance</strong></label>
@@ -153,47 +135,94 @@
               </div>
             </div>
             <hr>
-              <!-- Account Type -->
-              <label for="inputAccType" class="col-sm-4 control-label"><strong>Account Type</strong></label>
-              <div class="col-sm-8">
-                <select class="form-control input-sm" ng-model="accSelected" ng-options="opt for opt in accOptions"></select>
-              </div>
+            <!-- Account Type -->
+            <label for="inputAccType" class="col-sm-4 control-label"><strong>Account Type</strong></label>
+            <div class="col-sm-8">
+              <select class="form-control input-sm" ng-model="accSelected" ng-options="opt for opt in accOptions"></select>
             </div>
-
-            <!-- Amount  -->
-            <div class="form-group">
-              <label class="col-sm-4 control-label"><strong>Amount</strong></label>
-              <div class="col-sm-8">
-                <input type="number" ng-model="actionAmount" ng-init="actionAmount=0" class="form-control input-sm">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-4 control-label"><strong>Action</strong></label>
-                <div class="col-sm-8">
-                  <button class="btn btn-sm btn-success" ng-click=" depositAmt(currentUser, actionAmount, accSelected); actionAmount=0"><span class="glyphicon glyphicon-import"></span> Deposit</button>
-                  <button class="btn btn-sm btn-success" ng-click=" withdrawAmt(currentUser, actionAmount, accSelected); actionAmount=0"><span class="glyphicon glyphicon-export"></span> Withdraw</button>
-                </div>
-            </div>
-          </form>
-
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-info" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Done</button>
           </div>
-        </div>
+          <!-- Amount -->
+          <div class="form-group">
+            <label class="col-sm-4 control-label"><strong>Amount</strong></label>
+            <div class="col-sm-8">
+              <input type="number" ng-model="actionAmount" ng-init="actionAmount=0" class="form-control input-sm">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label"><strong>Action</strong></label>
+            <div class="col-sm-8">
+              <button class="btn btn-sm btn-success" ng-click=" depositAmt(currentUser, actionAmount, accSelected); actionAmount=0"><span class="glyphicon glyphicon-import"></span> Deposit</button>
+              <button class="btn btn-sm btn-success" ng-click=" withdrawAmt(currentUser, actionAmount, accSelected); actionAmount=0"><span class="glyphicon glyphicon-export"></span> Withdraw</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-info" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Done</button>
       </div>
     </div>
-    <!-- Transaction History Modal -->
+  </div>
+</div>
+<!-- Transaction History Modal -->
+<div class="modal fade my-transaction-modal" tabindex="-1" role="dialog" aria-labelledby="historyModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="historyModal">Statement</h4>
+      </div>
 
-    <div class="modal fade my-transaction-modal" tabindex="-1" role="dialog" aria-labelledby="historyModal" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <h4 class="modal-title" id="historyModal">Statement</h4>
+<!-- For checking and saving options -->
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-md-4 control-label" style = "color:#16A186"><strong>Account Type:</strong></label>
+          <div class="col-md-6">
+            <div class="btn-group">
+              <label class="btn btn-info" ng-model="radioModelType" btn-radio="'Checking'" uncheckable >Checking</label>
+              <label class="btn btn-info" ng-model="radioModelType" btn-radio="'Saving'" uncheckable>Saving</label>
+            </div>
           </div>
+        </div>
+      </form>
+<!-- end of options -->
+<!-- begining of checking statement modal -->
+      
+        <div class="col-md" ng-show="radioModelType=='Checking'">
+          <div class="modal-body" ng-model="currentCheck=currentUser.checkTransactions">
+            <!-- <div class="scrollbar" id="style-primary"> -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Debit</th>
+                    <th>Credit</th>
+                    <th>Bal</th>
+                  </tr>
+                </thead>
+              
+                <tbody>
+                  <tr ng-repeat="tact in currentCheck | orderBy:reverse">
+                    <th>{{tact.date | date:'MM/dd/yyyy'}}</th>
+                    <th>{{tact.description}}</th>
+                    <th>{{tact.debit}}</th>
+                    <th>{{tact.credit}}</th>
+                    <th>{{tact.balance}}</th>
+                  </tr>
+                <tbody>
+              </table>
+             <!--  <div class="force-overflow"></div> 
+             </div> -->
 
-          <div class="modal-body" ng-model="currentTrans=currentUser.transactions">
+          </div>
+        </div>
+       
+
+<!-- end of checking statement modal -->
+<!-- begin of saving statement modal -->
+      
+        <div class="col-md" ng-show="radioModelType=='Saving'">
+          <div class="modal-body" ng-model="currentSav=currentUser.savTransactions">
+            <!-- <div class="scrollbar" id="style-default"> -->
             <table class="table">
               <thead>
                 <tr>
@@ -205,28 +234,30 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="tact in currentTrans">
-                  <th>{{tact.date}}</th>
+                <tr ng-repeat="tact in currentSav | orderBy:reverse">
+                  <th>{{tact.date | date:'MM/dd/yyyy'}}</th>
                   <th>{{tact.description}}</th>
                   <th>{{tact.debit}}</th>
                   <th>{{tact.credit}}</th>
                   <th>{{tact.balance}}</th>
                 </tr>
                 <tbody>
-                </table>
-
-              </div>
-              <div class="modal-footer">
-                <!-- <button class="btn btn-success" ng-click="confirm()">Done</button> -->
-                <button class="btn btn-info" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Done</button>
-                </div>
-              </div>
-            </div>
+            </table>
+            <!-- <div class="force-overflow"></div> 
+            </div> -->
           </div>
+        </div>
 
-          <!-- Added content of teller view here End -->
-        </div><!--/row-->
-        <hr>
+<!-- end of saving statement modal -->
+          <div class="modal-footer">  
 
-      </div><!-- ng-controller div -->
-      <!--Teller View End-->
+            <button class="btn btn-info" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Added content of teller view here End -->
+  </div><!--/row-->
+  <hr>
+</div><!-- ng-controller div -->
+<!--Teller View End-->
