@@ -78,12 +78,12 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q,
         if('Checking' == from && 'Saving' == to) {
           sendDataFrom = { checking : fromNewAmt };
           int = 1;
-          console.log("I am here in from checking");
+          console.log("I am here in checking");
         }
         else if('Checking' == to && 'Saving' == from){
           sendDataFrom = { saving  : fromNewAmt };
           int = 0;
-          console.log("I am here in from saving");
+          console.log("I am here in saving");
         }
         // console.log("New Amount to withdraw: " + sendDataFrom + " | " + fromNewAmt);
         $http.put('/api/users/' + accID + '/update', sendDataFrom ).
@@ -262,6 +262,7 @@ myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q,
         // BEGIN put function
         $http.put('/api/users/' + toID + '/update',  { checking : toNewAmt } ).
         success(function(data, status, headers, config) {
+        //pushing transfer in database for statement
         var transaction = { credit : amount , balance : toNewAmt, description : "Transfered" };
         Transaction.push(data.email,transaction,1)
         .then( function(data) {

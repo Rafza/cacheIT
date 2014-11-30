@@ -145,7 +145,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label"><strong>Amount</strong></label>
             <div class="col-sm-8">
-              <input type="number" ng-model="actionAmount" ng-init="actionAmount=0" class="form-control input-sm">
+              <input type="number" ng-model="actionAmount" placeholder= "0.00"  class="form-control input-sm">
             </div>
           </div>
           <div class="form-group">
@@ -177,17 +177,18 @@
           <label class="col-md-4 control-label" style = "color:#16A186"><strong>Account Type:</strong></label>
           <div class="col-md-6">
             <div class="btn-group">
-              <label class="btn btn-info" ng-model="radioModelType" btn-radio="'Checking'" uncheckable >Checking</label>
-              <label class="btn btn-info" ng-model="radioModelType" btn-radio="'Saving'" uncheckable>Saving</label>
+              <label class="btn btn-xs btn-primary" ng-model="radioModelType" btn-radio="'Checking'" uncheckable >Checking</label>
+              <label class="btn btn-xs btn-primary" ng-model="radioModelType" btn-radio="'Saving'" uncheckable>Saving</label>
             </div>
           </div>
         </div>
       </form>
 <!-- end of options -->
 <!-- begining of checking statement modal -->
-      
+    
         <div class="col-md" ng-show="radioModelType=='Checking'">
-          <div class="modal-body" ng-model="currentCheck=currentUser.checkTransactions">
+          <div class="modal-body">
+            <!-- ng-model="currentCheck=currentUser.checkTransactions" -->
             <!-- <div class="scrollbar" id="style-primary"> -->
               <table class="table">
                 <thead>
@@ -201,7 +202,7 @@
                 </thead>
               
                 <tbody>
-                  <tr ng-repeat="tact in currentCheck | orderBy:reverse">
+                  <tr ng-repeat="tact in currentUser.checkTransactions | orderBy:reverse">
                     <th>{{tact.date | date:'MM/dd/yyyy'}}</th>
                     <th>{{tact.description}}</th>
                     <th>{{tact.debit}}</th>
@@ -221,7 +222,8 @@
 <!-- begin of saving statement modal -->
       
         <div class="col-md" ng-show="radioModelType=='Saving'">
-          <div class="modal-body" ng-model="currentSav=currentUser.savTransactions">
+          <div class="modal-body" >
+            <!-- ng-model="currentSav=currentUser.savTransactions" -->
             <!-- <div class="scrollbar" id="style-default"> -->
             <table class="table">
               <thead>
@@ -234,7 +236,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="tact in currentSav | orderBy:reverse">
+                <tr ng-repeat="tact in currentUser.savTransactions | orderBy:reverse">
                   <th>{{tact.date | date:'MM/dd/yyyy'}}</th>
                   <th>{{tact.description}}</th>
                   <th>{{tact.debit}}</th>
