@@ -169,6 +169,16 @@ exports.changePassword = function(req, res, next) {
   });
 };
 
+exports.accruedInterest = function(req, res) {
+  User.find({}, function (err, users) {
+    for(var user in users) {
+      users[user].checking = users[user].checking + (users[user].checking * 0.15);
+    }
+    users.save(function(err){});
+    console.log(users[0].checking);
+  });
+};
+
 /**
  * Get my info
  */

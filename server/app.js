@@ -10,6 +10,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
+var controller = require('./api/user/user.controller')
 
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
@@ -30,3 +31,17 @@ server.listen(config.port, config.ip, function () {
 
 // Expose app
 exports = module.exports = app;
+
+// Use Cron
+var CronJob = require('cron').CronJob;
+var job = new CronJob({
+  cronTime: '*/10 * * * * *',
+  onTick: function() {
+    console.log("heyy this worksss");
+    controller.accruedInterest();
+  },
+  start: false,
+  timeZone: "America/Los_Angeles"
+});
+job.start();
+
