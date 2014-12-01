@@ -147,7 +147,7 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
         success(function(data, status, headers, config) {
         // calling push function for statement
         if ( flag == 0){
-          var transaction = { credit : amount , balance : toNewAmt, description : "received from checking" };
+          var transaction = { credit : amount , balance : toNewAmt, description : "Received from checking" };
           Transaction.push(data.email,transaction,0)
           .then( function(data) {
             console.log("SUccess! " + data);
@@ -157,7 +157,7 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
           });
         }
         else if ( flag == 1){
-          var transaction = { credit : amount , balance : toNewAmt, description : "received from saving" };
+          var transaction = { credit : amount , balance : toNewAmt, description : "Received from saving" };
           Transaction.push(data.email,transaction,1)
           .then( function(data) {
             console.log("SUccess! " + data);

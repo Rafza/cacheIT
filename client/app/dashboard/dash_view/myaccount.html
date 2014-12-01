@@ -16,9 +16,12 @@
 
     <!--/tabs-->
 <!-- <div class="modal-body" ng-model="currentCheck=acc.getCurrentUser().checking.checkTransactions"> -->
-  <button class="btn btn-xs btn-primary" ng-click="toggle = !toggle"> Checking Statement</button>
+  <button class="btn btn-xs btn-primary" ng-click="toggle = !toggle">
+    <div ng-if="toggle">Show Statement</div>
+    <div ng-if="!toggle">Hide Statement</div>
+  </button>
       <hr>
-  <div collapse="!toggle">
+  <div collapse="toggle">
      <div class="well well-lg">
         <table class="table table-striped">
           <thead>
@@ -54,9 +57,11 @@
     </div>
 <!-- toggle collapse starts -->
 
-      <button class="btn btn-xs btn-primary" ng-click="isCollapsed = !isCollapsed"> Saving Statement</button>
+      <button class="btn btn-xs btn-primary" ng-click="isCollapsed = !isCollapsed"> 
+        <div ng-if="!isCollapsed">Show Statement</div>
+        <div ng-if="isCollapsed">Hide Statement</div></button>
       <hr>
-      <div collapse="isCollapsed">
+      <div collapse="!isCollapsed">
         <div class="well well-lg">
          <!--  Some content -->
             <table class="table table-striped">

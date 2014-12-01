@@ -60,11 +60,11 @@
 <!-- Transaction Type select dropdown END-->
 <!-- Transcation History -->
 <!-- Checking -->
-<td>{{user.checking | currency:"" }}</td>
+<td>${{user.checking | currency:"" }}</td>
 <!-- Saving -->
-<td>{{user.saving | currency:""}}</td>
+<td>${{user.saving | currency:""}}</td>
 <!-- Balance -->
-<td>{{user.saving + user.checking | currency:""}}</td>
+<td>${{user.saving + user.checking | currency:""}}</td>
 <!-- Statement -->
 <td>
   <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target=".my-transaction-modal" ng-click="updateCurrentUser(user)">
@@ -86,7 +86,7 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="mySmallModalLabel">What do you want to close?</h4>
+        <h4 class="modal-title" id="mySmallModalLabel">Choose An Account To Close</h4>
       </div>
       <div class="modal-body">
         <div class="col-md-3"></div>

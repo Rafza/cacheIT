@@ -10,7 +10,6 @@ function AccCtrl($location, Auth, Transaction) {
   this.isLoggedIn = Auth.isLoggedIn;
   this.isAdmin = Auth.isAdmin;
   this.getCurrentUser = Auth.getCurrentUser;
-  this.isCollapsed = false;
   // this.toggle = true;
 
 }
