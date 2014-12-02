@@ -67,10 +67,7 @@
              <a href="#" ng-click="selection=items[1]">Transfer <i class="glyphicon glyphicon-transfer"></i> </a>
             </li>
             <li>
-              <a href="#" ng-click="selection=items[2]">Setting <i class="glyphicon glyphicon-cog"></i></a>
-            </li>
-            <li>
-              <a href="#" ng-click="selection=items[3]">Teller <i class="glyphicon glyphicon-gift"></i></a>
+              <a href="#" ng-click="selection=items[2]">Settings <i class="glyphicon glyphicon-cog"></i></a>
             </li>
           </ul>
         </div>
@@ -87,9 +84,6 @@
 
   <div class="animate-switch-container"
   ng-switch on="selection">
-  <div class="animate-switch" ng-switch-when="teller">
-    <div ng-include="'app/dashboard/dash_view/teller.html'"></div>
-  </div>
   <div class="animate-switch" ng-switch-when="transfer">
     <div ng-include="'app/dashboard/dash_view/transfer.html'"></div>
   </div>
