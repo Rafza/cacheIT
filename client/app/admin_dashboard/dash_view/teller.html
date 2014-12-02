@@ -1,4 +1,6 @@
+
 <!--Teller View Begin-->
+<div class="center">
 <div ng-controller="TellerCtrl">
   <a href=""><strong><i class="glyphicon glyphicon-dashboard"></i> Teller Tool</strong></a>
   <hr>
@@ -185,7 +187,7 @@
       </form>
 <!-- end of options -->
 <!-- begining of checking statement modal -->
-    
+
         <div class="col-md" ng-show="radioModelType=='Checking'">
           <div class="modal-body">
             <!-- ng-model="currentCheck=currentUser.checkTransactions" -->
@@ -200,7 +202,7 @@
                     <th>Bal</th>
                   </tr>
                 </thead>
-              
+
                 <tbody>
                   <tr ng-repeat="tact in currentUser.checkTransactions | orderBy:reverse">
                     <th>{{tact.date | date:'MM/dd/yyyy'}}</th>
@@ -211,16 +213,16 @@
                   </tr>
                 <tbody>
               </table>
-             <!--  <div class="force-overflow"></div> 
+             <!--  <div class="force-overflow"></div>
              </div> -->
 
           </div>
         </div>
-       
+
 
 <!-- end of checking statement modal -->
 <!-- begin of saving statement modal -->
-      
+
         <div class="col-md" ng-show="radioModelType=='Saving'">
           <div class="modal-body" >
             <!-- ng-model="currentSav=currentUser.savTransactions" -->
@@ -245,13 +247,13 @@
                 </tr>
                 <tbody>
             </table>
-            <!-- <div class="force-overflow"></div> 
+            <!-- <div class="force-overflow"></div>
             </div> -->
           </div>
         </div>
 
 <!-- end of saving statement modal -->
-          <div class="modal-footer">  
+          <div class="modal-footer">
 
             <button class="btn btn-info" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Done</button>
           </div>
@@ -262,4 +264,5 @@
   </div><!--/row-->
   <hr>
 </div><!-- ng-controller div -->
+</div>
 <!--Teller View End-->
