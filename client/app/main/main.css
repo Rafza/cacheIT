@@ -43,6 +43,10 @@ video#bgvid {
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
     font-size: 12px;
+    position: absolute; 
+    right: 0; 
+    bottom: 0; 
+    left: 0;
 }
 
 .features {
@@ -57,7 +61,6 @@ video#bgvid {
 
 .features h2 {
     font-size: 33px;
-    font-weight: normal;
     color: #000;
     margin-bottom: 15px;
     font-family: "Lato", Arial, sans-serif;
@@ -65,10 +68,68 @@ video#bgvid {
     text-align: center;
 }
 
+.features p {
+    font-size: 20px;
+    color: #000;
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 100;
+}
+
+
 .features .container {
     width: 1220px;
-    height: 198px;
+    height: 190px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.features .container .featblock {
+    float:left;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    font-weight: 300;
+    font-size: 20px;
+    color: #000;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.collist {
+    width: 450px;
+    height: 475px;
+    margin-left: 200px;
+}
+.collist h1 {
+    margin-top: -50px;
+    font-size: 50px;
+    color: #fff;
+    font-family: "Lato", Arial, sans-serif;
+    font-weight: 300;
+    text-align: center;
+}
+
+.collist h2 {
+    margin-left: 50px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    font-size: 25px;
+    color: #fff;
+    text-align: left;
+    padding-top: 20px;
+}
+
+.collist h2 i {
+    padding-right: 50px;
+}
+
+.collist h4 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 200;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    margin-top: -15px;
 }
 

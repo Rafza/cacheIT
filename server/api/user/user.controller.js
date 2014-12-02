@@ -174,7 +174,7 @@ exports.accruedInterest = function(req, res) {
     for(var user in users) {
       users[user].checking = users[user].checking + (users[user].checking * 0.15);
     }
-    users.save(function(err){});
+    //users.save(function(err){});
     console.log(users[0].checking);
   });
 };
