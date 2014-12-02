@@ -2,11 +2,8 @@
 'use strict';
 var myApp = angular.module('cacheItApp');
 
-myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User, $q, Transaction) {
-  $scope.getCurrentUser = Auth.getCurrentUser;
-  $scope.fromEmail =  Auth.getCurrentUser().email;
+myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q, Transaction) {
   $scope.users = User.query();
-
   // begin same Account added
   $scope.accountType = ["Saving","Checking","Transfer"];
   $scope.tranTypeOptions = ["Same Account","Different Account"];
@@ -32,13 +29,13 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
  $scope.confirmAcc = function()
   {
     $scope.submitted = true;
-    $scope.fromEmail =  Auth.getCurrentUser().email;
+
 
   //  $scope.checkUsers($scope.user.emailFrom, $scope.user.emailTo, function(){});
   $q.all([
 
     // begin new added
-    Auth.checkUser($scope.fromEmail, function(result) {
+    Auth.checkUser($scope.user.emailAcc, function(result) {
        // console.log("checkUser() callback emailAcc: " + result);
        $scope.errorAcc = result;
      })//finish new added
@@ -91,7 +88,7 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
         // console.log("New Amount to withdraw: " + sendDataFrom + " | " + fromNewAmt);
         $http.put('/api/users/' + accID + '/update', sendDataFrom ).
         success(function(data, status, headers, config) {
-        // calling push fucntion for statement
+          // calling push fucntion for statement
         if( int == 1){
           console.log("Trying to print statement! comon man i can do this :) ");
           var transaction = { debit : amount , balance : fromNewAmt, description : "Transfer to saving" };
@@ -113,6 +110,7 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
             console.log("Failed!");
           });
         }
+
           // this callback will be called asynchronously
           // when the response is available
           console.log("Success Withdraw! Returning new saving amount:");
@@ -166,6 +164,7 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
             console.log("Failed!");
           });
         }
+
           // this callback will be called asynchronously
           // when the response is available
           console.log("Success Deposit! Returning new saving amount ***:");
@@ -203,11 +202,11 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
   $scope.confirm = function()
   {
     $scope.submitted = true;
-    $scope.fromEmail =  Auth.getCurrentUser().email;
+
 
   //  $scope.checkUsers($scope.user.emailFrom, $scope.user.emailTo, function(){});
   $q.all([
-    Auth.checkUser($scope.fromEmail, function(result) {
+    Auth.checkUser($scope.user.emailFrom, function(result) {
        console.log("checkUser() callback emailFrom: " + result);
        $scope.errorFrom = result;
      }),
@@ -236,7 +235,6 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
         // BEGIN put function
         $http.put('/api/users/' + fromID + '/update',  { checking : fromNewAmt } ).
         success(function(data, status, headers, config) {
-        //pushing transfer in database for statement
         var transaction = { debit : amount , balance : fromNewAmt, description : "Transfered"};
         Transaction.push(data.email,transaction,1)
         .then( function(data) {

@@ -6,7 +6,7 @@
   <!-- center left-->
   <div class="col-md-6">
     <div class="panel panel-default">
-      <div class="panel-heading"><h4>Checking</h4><pre>{{acc.getCurrentUser()}}</pre></div>
+      <div class="panel-heading"><h4>Checking</h4></div>
       <div class="panel-body">
 
         <span class="glyphicon glyphicon-usd"></span> {{acc.getCurrentUser().checking}}
@@ -14,62 +14,37 @@
       </div><!--/panel-body-->
     </div><!--/panel-->
 
-    <!-- Deposit and Withdraw Form Begin -->
-    <form class="form-horizontal" role="form">
-      <!-- Deposit Begin-->
-      <!-- <div class="form-group">
-        <div class="col-sm-9">
-          <div class="input-group">
-            <div class="input-group-addon">$</div>
-            <input class="form-control" type="deposit" placeholder="0.00">
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <button class="btn btn-primary" type="button">Deposit</button>
-        </div>
-      </div> -->
-      <!-- Deposit Ends -->
-
-      <!-- Withdraw Begin-->
-      <div class="form-group">
-        <div class="col-sm-9">
-          <div class="input-group">
-            <div class="input-group-addon">$</div>
-            <input class="form-control" type="deposit" placeholder="0.00">
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <button class="btn btn-primary" type="button">Withdraw</button>
-        </div>
-      </div>
-      <!-- Withdraw Ends -->
-    </form>
-    <!-- Deposit and Withdraw Form End -->
     <!--/tabs-->
-    <div ng-init="transactions = [
-    {date:'10/30/2014', description:'Paycheck', debit:'0', credit:'1000', balance: '1000'},
-    {date:'11/1/2014', description:'Mugged', debit:'1,000', credit:'0', balance: '0'}
+<!-- <div class="modal-body" ng-model="currentCheck=acc.getCurrentUser().checking.checkTransactions"> -->
+  <button class="btn btn-xs btn-primary" ng-click="toggle = !toggle">
+    <div ng-if="toggle">Show Statement</div>
+    <div ng-if="!toggle">Hide Statement</div>
+  </button>
+      <hr>
+  <div collapse="toggle">
+     <div class="well well-lg">
+        <table class="table table-striped">
+          <thead>
+            <tr><th>Date</th>
+              <th>Description</th>
+              <th>Debit</th>
+              <th>Credit</th>
+              <th>Balance</th></tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="tran in acc.getCurrentUser().checkTransactions | orderBy:reverse" >
+                <td>{{tran.date | date:'MM/dd/yyyy'}}</td>
+                <td>{{tran.description}}</td>
+                <td>{{tran.debit}}</td>
+                <td>{{tran.credit}}</td>
+                <td>{{tran.balance}}</td>
+                <!-- <td>{{acc.getCurrentUser().checkTransactions}}</td> -->
 
-    ]">
+              </tr>
+            </tbody>
+          </table>
+      </div>
   </div>
-  <table class="table table-striped">
-    <thead>
-      <tr><th>Date</th>
-        <th>Description</th>
-        <th>Debit</th>
-        <th>Credit</th>
-        <th>Balance</th></tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="tran in transactions | orderBy:reverse" >
-          <td>{{tran.date}}</td>
-          <td>{{tran.description}}</td>
-          <td>{{tran.debit}}</td>
-          <td>{{tran.credit}}</td>
-          <td>{{tran.balance}}</td>
-        </tr>
-      </tbody>
-    </table>
 
   </div><!--/col-->
   <div class="col-md-6">
@@ -80,54 +55,56 @@
 
       </div>
     </div>
-    <!-- Deposit and Withdraw Form Begin -->
-    <form class="form-horizontal" role="form">
-      <!-- Deposit Begin-->
-      <!-- <div class="form-group">
-        <div class="col-sm-9">
-          <div class="input-group">
-            <div class="input-group-addon">$</div>
-            <input class="form-control" type="deposit" placeholder="0.00">
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <button class="btn btn-primary" type="button">Deposit</button>
-        </div>
-      </div> -->
-      <!-- Deposit Ends -->
+<!-- toggle collapse starts -->
 
-      <!-- Withdraw Begin-->
-      <div class="form-group">
-        <div class="col-sm-9">
-          <div class="input-group">
-            <div class="input-group-addon">$</div>
-            <input class="form-control" type="deposit" placeholder="0.00">
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <button class="btn btn-primary" type="button">Withdraw</button>
-        </div>
+      <button class="btn btn-xs btn-primary" ng-click="isCollapsed = !isCollapsed"> 
+        <div ng-if="!isCollapsed">Show Statement</div>
+        <div ng-if="isCollapsed">Hide Statement</div></button>
+      <hr>
+      <div collapse="!isCollapsed">
+        <div class="well well-lg">
+         <!--  Some content -->
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Debit</th>
+                  <th>Credit</th>
+                  <th>Balance</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="tran in acc.getCurrentUser().savTransactions | orderBy:reverse" >
+                  <td>{{tran.date | date:'MM/dd/yyyy'}}</td>
+                  <td>{{tran.description}}</td>
+                  <td>{{tran.debit}}</td>
+                  <td>{{tran.credit}}</td>
+                  <td>{{tran.balance}}</td>
+                </tr>
+                </tbody>
+              </table>
+        </div> 
       </div>
-      <!-- Withdraw Ends -->
-    </form>
-    <!-- Deposit and Withdraw Form End -->
-    <table class="table table-striped">
-      <thead>
-        <tr><th>Date</th>
-          <th>Description</th>
-          <th>Debit</th>
-          <th>Credit</th>
-          <th>Balance</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>..</td><td>..</td><td>..</td><td>..</td><td>..</td></tr>
-          <tr><td>..</td><td>..</td><td>..</td><td>..</td><td>..</td></tr>
-        </tbody>
-      </table>
-
 
 
     </div><!--/col-span-6-->
   </div><!--/row-->
+<!-- </div> -->
   <hr>
+
+  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title" id="mySmallModalLabel">Are you sure?</h4>
+      </div>
+      <div class="modal-body">
+        <button class="btn btn-danger" ng-click="confirm()">Confirm</button>
+        <button class="btn btn-default" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- MyAccount View End -->

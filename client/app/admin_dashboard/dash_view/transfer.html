@@ -1,5 +1,5 @@
 <!--Teller View Begin-->
-<div ng-controller="UserTranCtrl">
+<div ng-controller="TranCtrl">
   <a href=""><strong><i class="glyphicon glyphicon-dashboard"></i> Transfer Tool</strong></a>
   <hr>
   <form class="form-horizontal" role="form">
@@ -15,6 +15,7 @@
     </div>
   </form>
   <div class="row">
+    
     <div class="col-md-3"> </div>
     <!-- beginnig of Same Account -->
     <div class="col-md-6" ng-show="radioModelType=='Internal'">
@@ -27,12 +28,11 @@
         <br>
         <br>
 
-        <!-- <div class="form-group" ng-class="{ 'has-success': !errorAcc  && submitted,
+        <div class="form-group" ng-class="{ 'has-success': !errorAcc  && submitted,
         'has-error': errorAcc && submitted }">
           <label style = "color:#16A186">Account Email</label>
-          <p>Something</p>
           <input class="form-control" ng-model="user.emailAcc" type="text" placeholder="Email">
-        </div> -->
+        </div>
 
         <div class="form-group" ng-class="{ 'has-success': !errorType  && submitted,
         'has-error': errorType && submitted }">
@@ -73,12 +73,12 @@
         <br>
         <label style = "color:#16A186"><strong>External Transfer</strong></label>
         <br>
-        <!-- <div class="form-group" ng-class="{ 'has-success': !errorFrom  && submitted,
+        <div class="form-group" ng-class="{ 'has-success': !errorFrom  && submitted,
         'has-error': errorFrom && submitted }">
         </br>
           <label style = "color:#16A186">From:</label>
           <input class="form-control" ng-model="user.emailFrom" type="text" placeholder="Email">
-        </div> -->
+        </div>
         <br>
         <!-- Amount: <input type="number" class="form-control" ng-model="fromAmount"> -->
         <div class="form-group" ng-class="{ 'has-success': !errorTo  && submitted,
@@ -140,7 +140,7 @@
 
             <div class="col-md-6">
               <hr>
-              <strong>Account Email:</strong> {{fromEmail}}
+              <strong>Account Email:</strong> {{user.emailAcc}}
               <br>
               <strong>From: </strong> {{accSelectedFrom}}
               <br>

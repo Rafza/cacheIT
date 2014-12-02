@@ -29,9 +29,25 @@ exports.index = function(req, res) {
   });
 };
 
+// Get a single player by name
+exports.showName = function(req, res) {
+  User.find({ email: req.params.name }, function (err, usr) {
+    if(err) { return handleError(res, err); }
+    if(!usr) { return res.send(404); }
+    console.log(usr);
+    return res.json(usr);
+  });
+};
+
+
 // Updates an existing thing in the DB.
 exports.update = function(req, res) {
   console.log("update() looping");
+  // if(req.body.checkTransactions) {
+  //   req.body.checkTransactions.forEach(function(transacts)}
+  // if(req.body.savTransactions) {
+  //   req.body.savTransactions.forEach(function(transacts);}
+
   if(req.body.transactions) {
     req.body.transactions.forEach(function(transacts) {
         console.log("Date: "+ transacts.date);
@@ -41,14 +57,14 @@ exports.update = function(req, res) {
         console.log("Bal: "+ transacts.balance);
 
     });
-  };
+  }
 
   if(req.body._id) { delete req.body._id; }
   User.findById(req.params.id, function (err, usr) {
     if (err) { return handleError(res, err); }
     if(!usr) { return res.send(404); }
       console.log("Usr: "+ usr);
-    var updated = _.merge(usr, req.body);
+    var updated = _.extend(usr, req.body);
     //http://stackoverflow.com/questions/26372523/document-sub-arrays-stored-as-duplicate-values-of-the-first-entry-in-mongo
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
@@ -57,14 +73,33 @@ exports.update = function(req, res) {
   });
 };
 
-// Push an existing thing in the DB.
-exports.push = function(req, res) {
+// Push an existing transaction in the DB.
+exports.pushCreate = function(req, res) {
+  var bodyData = req.body;
+  var myName = req.params.name;
+  // console.log("Pushing to " + myName + " Data: " + bodyData);
+  // var myData = {
+  //   riskyrisky: {
+  //     hold : 1,
+  //     pass : 2
+  //   },
+  //   safesafe: {
+  //     hold : 1,
+  //     pass : 2
+  //   }
+  // }
   if(req.body._id) { delete req.body._id; }
-    User.transactions.push(req.body, function (err,usr) {
+  User.findOneAndUpdate({email : myName },{$pushAll : bodyData}, {upsert:true},
+  function(err, data) {
+    if(!data) {
+      return res.send(404);
+    }
     if (err) { return handleError(res, err); }
-    if(!usr) { return res.send(404); }
+    console.log("Data returned: " + data);
+    return res.json(200, data);
   });
 };
+
 
 // exports.updateById =  function(req, res) {
 //     {$push: {items: item}},
@@ -131,6 +166,16 @@ exports.changePassword = function(req, res, next) {
     } else {
       res.send(403);
     }
+  });
+};
+
+exports.accruedInterest = function(req, res) {
+  User.find({}, function (err, users) {
+    for(var user in users) {
+      users[user].checking = users[user].checking + (users[user].checking * 0.15);
+    }
+    users.save(function(err){});
+    console.log(users[0].checking);
   });
 };
 

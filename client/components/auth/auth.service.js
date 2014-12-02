@@ -39,6 +39,33 @@ angular.module('cacheItApp')
         return deferred.promise;
       },
 
+      checkUser: function(userFrom, callback) {
+        var cb = callback || angular.noop;
+        var deferred = $q.defer();
+
+        $http.get('/api/users/' +  userFrom + '/name')
+        .success(function(users) {
+          var myError = false;
+          if(angular.isDefined(users[0])) {
+            console.log("From User exists!");
+            // console.log(angular.toJson(users[0].email));
+          myError = false;
+          } else {
+            console.log("From User is undefined!");
+          myError = true;
+          }
+
+          deferred.resolve(users);
+          return cb(myError);
+        }).
+        error(function(err) {
+          deferred.reject(err);
+          return cb(err);
+        }.bind(this));
+
+        return deferred.promise;
+      },
+
       /**
        * Delete access token and user info
        *
@@ -58,6 +85,8 @@ angular.module('cacheItApp')
        */
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
+        user.checking = 0;
+        user.saving = 0;
 
         return User.save(user,
           function(data) {
