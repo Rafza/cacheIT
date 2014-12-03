@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cacheItApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location) {
+  .controller('SignupCtrl', function ($scope, $location, $http ,Auth, User,Transaction) {
     $scope.user = {};
     $scope.errors = {};
 

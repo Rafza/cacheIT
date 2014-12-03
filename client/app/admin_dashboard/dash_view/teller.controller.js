@@ -22,7 +22,7 @@ myApp.directive('ngFocus', [function() {
 
 myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Transaction) {
   $scope.users = User.query();
-  $scope.accountType = ["Saving","Checking","Transfer"];
+  //$scope.accountType = ["Saving","Checking","Transfer"];
   $scope.accOptions=['Checking', 'Saving'];
   $scope.accSelected = $scope.accOptions[0];
   $scope.newChecking;
