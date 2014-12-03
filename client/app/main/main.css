@@ -86,9 +86,9 @@ video#bgvid {
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
     font-size: 12px;
-    position: absolute; 
-    right: 0; 
-    bottom: 0; 
+    position: absolute;
+    right: 0;
+    bottom: 0;
     left: 0;
 }
 
@@ -195,4 +195,3 @@ video#bgvid {
     text-align: center;
     margin-top: -15px;
 }
-

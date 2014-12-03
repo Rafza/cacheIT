@@ -852,7 +852,7 @@ section * {
 }
 /* header */
 /**
- * Header 11 stylesheet  
+ * Header 11 stylesheet
  * */
 .header-11-startup-antiflicker {
   border-bottom: 1px #bdc3c7 solid;
@@ -978,7 +978,7 @@ section * {
   margin-top: 36px;
 }
 .header-11-sub {
-  padding-top: 150px;
+  padding-top: 70px;
   padding-bottom: 80px;
   color: #bdc3c7;
   position: relative;
@@ -1187,7 +1187,7 @@ section * {
   top: 0;
 }
 /**
- * Price 1 stylesheet  
+ * Price 1 stylesheet
  * */
 .price-1 {
   padding-top: 110px;
@@ -1259,7 +1259,7 @@ section * {
 }
 /* content */
 /**
- * Content 13 stylesheet  
+ * Content 13 stylesheet
  * */
 .content-13 {
   position: relative;
@@ -1416,7 +1416,7 @@ section * {
 }
 /* footer */
 /**
- * Footer 2 stylesheet  
+ * Footer 2 stylesheet
  * */
 .footer-2 {
   padding-top: 20px;
@@ -1510,10 +1510,10 @@ section * {
   .footer-2 > .container > *:after {
     content: " ";
     /* 1 */
-  
+
     display: table;
     /* 2 */
-  
+
   }
   .footer-2 > .container > *:after {
     clear: both;
