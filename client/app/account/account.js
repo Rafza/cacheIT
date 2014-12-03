@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('econerinApp')
+angular.module('cacheItApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('login', {
         url: '/',
-        templateUrl: 'app/account/login/login.html',
+        templateUrl: 'app/main/main.html',
         controller: 'LoginCtrl'
       })
       .state('signup', {

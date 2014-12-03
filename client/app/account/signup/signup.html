@@ -1,22 +1,74 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">EveryoneRichBank</a>
+    </div>
+    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+            <a ng-href="{{item.link}}">{{item.title}}</a>
+        </li>
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
+        <!-- <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li> -->
+        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
-      <h1>Sign up</h1>
-    </div>
-    <div class="col-sm-12">
+
+
+  
+    <div class="col-xs-3">
       <form class="form" name="form" ng-submit="register(form)" novalidate>
+          <form name="myForm">
+    User name: <input type="text" name="userName" ng-model="user.name" required>
+    <span class="error" ng-show="myForm.userName.$error.required">
+      Required!</span><br>
+    Last name: <input type="text" name="lastName" ng-model="user.last"
+      ng-minlength="3" ng-maxlength="10">
+    <span class="error" ng-show="myForm.lastName.$error.minlength">
+      Too short!</span>
+    <span class="error" ng-show="myForm.lastName.$error.maxlength">
+      Too long!</span><br>
+  </form>
 
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
                                             'has-error': form.name.$invalid && submitted }">
-          <label>Name</label>
+
+          <label style="color:#16A085">Name</label>
+          <br>
+          <input id="iFirstName" name="iFirstName" maxlength="40" placeholder="First"  class="namepad smallinput" aria-labelledby="NameLabel" type="text">
+
+          <input id="iMiddleName" name="iMiddleName" maxlength="1" placeholder="M.I" class="smallput" aria-labelledby="NameLabel" type="text" size="2">
+
+          <input id="iLastName" name="iLastName" maxlength="40" placeholder="Last" class="smallinput" aria-labelledby="NameLabel" type="text">
+          <br>
+          <label style="color:#16A085"> User Name</label>
 
           <input type="text" name="name" class="form-control" ng-model="user.name"
                  required/>
           <p class="help-block" ng-show="form.name.$error.required && submitted">
-            A name is required
+            User Id is required
           </p>
+
         </div>
 
         <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
@@ -68,3 +120,267 @@
   </div>
   <hr>
 </div>
+
+
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+
+      <div id="m_wh"></div><div style="top: 0px;" id="c_base" class="c_base">
+              <div id="c_content" class="c_main">
+          
+          <div id="tempimgcontainer" style="display:none"><img src="https://view.atdmt.com/action/OWM_AllMarkets_AccountSignUp_Pageview" height="1" width="1"></div>
+          <!-- form as a signup control 
+          
+              <div id="maincontent" class="c_signup" spellcheck="false">
+                  
+
+      <form id="SignUpForm" method="post" action="" autocomplete="off" onsubmit="SignUp.DoPost();return false;" style="clear: both;">
+      <div id="iProfileModule" class="module">
+          <!-- Name 
+          <div class="helparea">
+              
+              <div class="row">
+                  <p id="iNameError" class="error first" style="display: none" aria-live="assertive" aria-relevant="text" aria-atomic="true" aria-channel="general"></p>
+                  <div id="namehelp_pop" class="helppop" style="display: none">
+                      <div id="namehelp" class="helpctr"></div>
+                  </div>
+                  
+                  <label for="iFirstName" class="first" id="NameLabel">Name</label>
+                  
+                  
+                  <input id="iFirstName" name="iFirstName" maxlength="40" placeholder="First" onfocus="SignUp.Fields[FT.NAME].evt_onfocus(event)" onblur="SignUp.Fields[FT.NAME].evt_onblur(event)" onchange="SignUp.Fields[FT.NAME].evt_onchange(event)" class="namepad smallinput" aria-labelledby="NameLabel" type="text"><input id="iLastName" name="iLastName" maxlength="40" placeholder="Last" onfocus="SignUp.Fields[FT.NAME].evt_onfocus(event)" onblur="SignUp.Fields[FT.NAME].evt_onblur(event)" onchange="SignUp.Fields[FT.NAME].evt_onchange(event)" class="smallinput" aria-labelledby="NameLabel" type="text">
+              </div>
+              
+          </div>
+
+          <!-- Membername 
+          <div id="iMemberModule">
+              <div class="helparea">
+                  
+                  <div id="cmembernamelive" class="row">
+                      <p id="iMembernameLiveError" class="error first" style="display: none" aria-live="assertive" aria-relevant="text" aria-atomic="true" aria-channel="general"></p>
+                      <p id="iLiveMessage" class="error message" style="display: none" aria-live="assertive" aria-relevant="text" aria-atomic="true" aria-channel="general"></p>
+                      <p id="iLiveMessageError" class="error" style="display: none" aria-live="assertive" aria-relevant="text" aria-atomic="true" aria-channel="general"></p>
+                      <div id="chkavailwkwld" class="cwork" style="display: none">
+                          <img alt="Working..." src="https://auth.gfx.ms/images/progressindicator.gif" align="absmiddle" height="20" vspace="5" width="20">
+                          Working...
+                      </div>
+                      <div id="membernamelivehelp_pop" class="helppop" style="display: none">
+                          <div id="membernamelivehelp" class="helpctr"></div>
+                      </div>
+                      <label for="imembernamelive" class="first">
+                          User name
+                      </label>
+                      <div id="memnamecont">
+                          <input id="imembernamelive" class="msftacct" name="imembernamelive" maxlength="64" value="" onfocus="SignUp.Fields[FT.MN].evt_Live_onfocus(event)" onchange="SignUp.Fields[FT.MN].evt_Live_onchange(event)" onblur="SignUp.Fields[FT.MN].evt_Live_onblur(event)" oninput="SignUp.Fields[FT.MN].evt_Live_oninput(event)" type="text">
+                          
+                              <div id="mnat">@</div>
+                              <select id="idomain" name="idomain" onchange="SignUp.Fields[FT.MN].evt_Domain_onchange(event)" onfocus="SignUp.Fields[FT.MN].evt_Domain_onfocus(event)"><option value="outlook.com">outlook.com</option><option value="hotmail.com">hotmail.com</option></select>
+                              <label for="idomain" style="display: none">Domains</label>
+                          
+                      </div>
+                      <div id="sugcont">
+                          <div id="sug">
+                              <a id="sugclose" href="#" aria-label="Close" onclick="SignUp.HideMNS();return false;">
+                                  <img src="https://auth.gfx.ms/images/CloseX.png" alt="Close">
+                              </a>
+                              <div id="sugwait">
+                                  <p>
+                                      <img alt="Working..." src="https://auth.gfx.ms/images/progressindicator.gif" align="absmiddle" height="20" vspace="5" width="20">Working...
+                                  </p>
+                              </div>
+                              <div id="sugerror"></div>
+                              <div id="sugavail">
+                                  <h4>Someone already has that email address. Try another or use one of these:</h4>
+                                  <div id="mysugs"></div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div id="chkavail">
+                      </div>
+                      
+                  </div>
+                  
+              </div>
+          </div>
+
+          <!-- Password 
+          <div class="helparea">
+              <div class="row">
+                  <p id="iPwdError" class="error" style="display: none" aria-live="assertive" aria-relevant="text" aria-atomic="true" aria-channel="general"></p>
+                  <div class="pwdlabel">
+                      <label for="iPwd">Create password</label>
+                  </div>
+                  <div class="capslock" id="dCapsLock" style="display:none" aria-hidden="true">Caps Lock is on</div>
+                  <div id="passwordhelp_pop" class="helppop" style="display: none">
+                      <div id="passwordhelp" class="helpctr"></div>
+                  </div>
+                  <div class="pwdContainer"><input id="iPwd" name="iPwd" onfocus="SignUp.Fields[FT.PWD].evt_onfocus(event)" onblur="SignUp.Fields[FT.PWD].evt_onblur(event)" onchange="SignUp.Fields[FT.PWD].evt_onchange(event)" onkeyup="SignUp.Fields[FT.PWD].evt_onkeyup(event)" onkeypress="SignUp.Fields[FT.PWD].evt_onkeypress(event)" type="password"></div>
+                  <p id="pwdHint" class="hint">
+                      8-character minimum; case sensitive</p>
+              </div>
+          </div>
+          <div class="row">
+              <p id="iRetypePwdError" class="error" style="display: none" aria-live="assertive" aria-relevant="text" aria-atomic="true" aria-channel="general"></p>
+              <div class="pwdlabel">
+                  <label for="iRetypePwd">Reenter password</label>
+              </div>
+              <div class="capslock" id="dReCapsLock" style="display:none" aria-hidden="true">Caps Lock is on</div>
+              <input id="iRetypePwd" name="iRetypePwd" onfocus="SignUp.Fields[FT.RPWD].evt_onfocus(event)" onblur="SignUp.Fields[FT.RPWD].evt_onblur(event)" onchange="SignUp.Fields[FT.RPWD].evt_onchange(event)" onkeyup="SignUp.Fields[FT.RPWD].evt_onkeyup(event)" onkeypress="SignUp.Fields[FT.RPWD].evt_onkeypress(event)" type="password">
+          </div>
+
+          <!-- Country & Region 
+          <div class="row">
+              <div class="helparea">
+                  <div id="CountryRegionContainer" class="row"><label for="iCountry">Country/region</label><div class="value"><select name="iCountry" id="iCountry"><option value="AF">Afghanistan</option><option value="AX">Åland Islands</option><option value="AL">Albania</option><option value="DZ">Algeria</option><option value="AS">American Samoa</option><option value="AD">Andorra</option><option value="AO">Angola</option><option value="AI">Anguilla</option><option value="AQ">Antarctica</option><option value="AG">Antigua and Barbuda</option><option value="AR">Argentina</option><option value="AM">Armenia</option><option value="AW">Aruba</option><option value="AU">Australia</option><option value="AT">Austria</option><option value="AZ">Azerbaijan</option><option value="BS">Bahamas</option><option value="BH">Bahrain</option><option value="BD">Bangladesh</option><option value="BB">Barbados</option><option value="BY">Belarus</option><option value="BE">Belgium</option><option value="BZ">Belize</option><option value="BJ">Benin</option><option value="BM">Bermuda</option><option value="BT">Bhutan</option><option value="BO">Bolivia</option><option value="BQ">Bonaire</option><option value="BA">Bosnia and Herzegovina</option><option value="BW">Botswana</option><option value="BV">Bouvet Island</option><option value="BR">Brazil</option><option value="IO">British Indian Ocean Territory</option><option value="BN">Brunei</option><option value="BG">Bulgaria</option><option value="BF">Burkina Faso</option><option value="BI">Burundi</option><option value="CV">Cabo Verde</option><option value="KH">Cambodia</option><option value="CM">Cameroon</option><option value="CA">Canada</option><option value="KY">Cayman Islands</option><option value="CF">Central African Republic</option><option value="TD">Chad</option><option value="CL">Chile</option><option value="CN">China</option><option value="CX">Christmas Island</option><option value="CC">Cocos (Keeling) Islands</option><option value="CO">Colombia</option><option value="KM">Comoros</option><option value="CG">Congo</option><option value="CD">Congo (DRC)</option><option value="CK">Cook Islands</option><option value="CR">Costa Rica</option><option value="HR">Croatia</option><option value="CU">Cuba</option><option value="CW">Curaçao</option><option value="CY">Cyprus</option><option value="CZ">Czech Republic</option><option value="DK">Denmark</option><option value="DJ">Djibouti</option><option value="DM">Dominica</option><option value="DO">Dominican Republic</option><option value="EC">Ecuador</option><option value="EG">Egypt</option><option value="SV">El Salvador</option><option value="GQ">Equatorial Guinea</option><option value="ER">Eritrea</option><option value="EE">Estonia</option><option value="ET">Ethiopia</option><option value="FK">Falkland Islands</option><option value="FO">Faroe Islands</option><option value="FJ">Fiji Islands</option><option value="FI">Finland</option><option value="FR">France</option><option value="GF">French Guiana</option><option value="PF">French Polynesia</option><option value="TF">French Southern and Antarctic Lands</option><option value="GA">Gabon</option><option value="GM">Gambia, The</option><option value="GE">Georgia</option><option value="DE">Germany</option><option value="GH">Ghana</option><option value="GI">Gibraltar</option><option value="GR">Greece</option><option value="GL">Greenland</option><option value="GD">Grenada</option><option value="GP">Guadeloupe</option><option value="GU">Guam</option><option value="GT">Guatemala</option><option value="GG">Guernsey</option><option value="GN">Guinea</option><option value="GW">Guinea-Bissau</option><option value="GY">Guyana</option><option value="HT">Haiti</option><option value="HM">Heard Island and McDonald Islands</option><option value="VA">Holy See (Vatican City)</option><option value="HN">Honduras</option><option value="HK">Hong Kong SAR</option><option value="HU">Hungary</option><option value="IS">Iceland</option><option value="IN">India</option><option value="ID">Indonesia</option><option value="IR">Iran</option><option value="IQ">Iraq</option><option value="IE">Ireland</option><option value="IM">Isle of Man</option><option value="IL">Israel</option><option value="IT">Italy</option><option value="JM">Jamaica</option><option value="SJ">Jan Mayen</option><option value="JP">Japan</option><option value="JE">Jersey</option><option value="JO">Jordan</option><option value="KZ">Kazakhstan</option><option value="KE">Kenya</option><option value="KI">Kiribati</option><option value="KR">Korea</option><option value="KW">Kuwait</option><option value="KG">Kyrgyzstan</option><option value="LA">Laos</option><option value="LV">Latvia</option><option value="LB">Lebanon</option><option value="LS">Lesotho</option><option value="LR">Liberia</option><option value="LY">Libya</option><option value="LI">Liechtenstein</option><option value="LT">Lithuania</option><option value="LU">Luxembourg</option><option value="MO">Macao SAR</option><option value="MK">Macedonia, Former Yugoslav Republic of</option><option value="MG">Madagascar</option><option value="MW">Malawi</option><option value="MY">Malaysia</option><option value="MV">Maldives</option><option value="ML">Mali</option><option value="MT">Malta</option><option value="MH">Marshall Islands</option><option value="MQ">Martinique</option><option value="MR">Mauritania</option><option value="MU">Mauritius</option><option value="YT">Mayotte</option><option value="MX">Mexico</option><option value="FM">Micronesia</option><option value="MD">Moldova</option><option value="MC">Monaco</option><option value="MN">Mongolia</option><option value="ME">Montenegro</option><option value="MS">Montserrat</option><option value="MA">Morocco</option><option value="MZ">Mozambique</option><option value="MM">Myanmar</option><option value="NA">Namibia</option><option value="NR">Nauru</option><option value="NP">Nepal</option><option value="NL">Netherlands</option><option value="NC">New Caledonia</option><option value="NZ">New Zealand</option><option value="NI">Nicaragua</option><option value="NE">Niger</option><option value="NG">Nigeria</option><option value="NU">Niue</option><option value="NF">Norfolk Island</option><option value="KP">North Korea</option><option value="MP">Northern Mariana Islands</option><option value="NO">Norway</option><option value="OM">Oman</option><option value="PK">Pakistan</option><option value="PW">Palau</option><option value="PS">Palestinian Authority</option><option value="PA">Panama</option><option value="PG">Papua New Guinea</option><option value="PY">Paraguay</option><option value="PE">Peru</option><option value="PH">Philippines</option><option value="PN">Pitcairn Islands</option><option value="PL">Poland</option><option value="PT">Portugal</option><option value="PR">Puerto Rico</option><option value="QA">Qatar</option><option value="CI">Republic of Côte d'Ivoire</option><option value="RE">Reunion</option><option value="RO">Romania</option><option value="RU">Russia</option><option value="RW">Rwanda</option><option value="XS">Saba</option><option value="SH">Saint Helena, Ascension and Tristan da Cunha</option><option value="WS">Samoa</option><option value="SM">San Marino</option><option value="ST">São Tomé and Príncipe</option><option value="SA">Saudi Arabia</option><option value="SN">Senegal</option><option value="RS">Serbia</option><option value="SC">Seychelles</option><option value="SL">Sierra Leone</option><option value="SG">Singapore</option><option value="XE">Sint Eustatius</option><option value="SX">Sint Maarten</option><option value="SK">Slovakia</option><option value="SI">Slovenia</option><option value="SB">Solomon Islands</option><option value="SO">Somalia</option><option value="ZA">South Africa</option><option value="GS">South Georgia and the South Sandwich Islands</option><option value="ES">Spain</option><option value="LK">Sri Lanka</option><option value="BL">St. Barthélemy</option><option value="KN">St. Kitts and Nevis</option><option value="LC">St. Lucia</option><option value="MF">St. Martin</option><option value="PM">St. Pierre and Miquelon</option><option value="VC">St. Vincent and the Grenadines</option><option value="SD">Sudan</option><option value="SR">Suriname</option><option value="SZ">Swaziland</option><option value="SE">Sweden</option><option value="CH">Switzerland</option><option value="SY">Syria</option><option value="TW">Taiwan</option><option value="TJ">Tajikistan</option><option value="TZ">Tanzania</option><option value="TH">Thailand</option><option value="TL">Timor-Leste</option><option value="TG">Togo</option><option value="TK">Tokelau</option><option value="TO">Tonga</option><option value="TT">Trinidad and Tobago</option><option value="TN">Tunisia</option><option value="TR">Turkey</option><option value="TM">Turkmenistan</option><option value="TC">Turks and Caicos Islands</option><option value="TV">Tuvalu</option><option value="UG">Uganda</option><option value="UA">Ukraine</option><option value="AE">United Arab Emirates</option><option value="UK">United Kingdom</option><option selected="" value="US">United States</option><option value="UM">United States Minor Outlying Islands</option><option value="UY">Uruguay</option><option value="UZ">Uzbekistan</option><option value="VU">Vanuatu</option><option value="VE">Venezuela</option><option value="VN">Vietnam</option><option value="VG">Virgin Islands, British</option><option value="VI">Virgin Islands, U.S.</option><option value="WF">Wallis and Futuna</option><option value="YE">Yemen</option><option value="ZM">Zambia</option><option value="ZW">Zimbabwe</option></select><br></div></div>
+                  <div id="ctryhelp_pop" class="helppop" style="display: none">
+                      <div id="ctryhelp" class="helpctr"></div>
+                  </div>
+              </div>
+              <div aria-hidden="false" style="display: block;" id="PostalContainer" class="row"><p aria-hidden="true" style="display: none;" aria-channel="general" aria-atomic="true" aria-relevant="text" aria-live="assertive" class="error" id="iZipCodeError"></p><label for="iZipCode">ZIP code</label><div class="value"><input class="" id="iZipCode" name="iZipCode" lang="en" type="text"></div></div>
+          </div>
+
+          <!-- Birthday -- 
+          <div class="row">
+              <p id="iBirthDateError" class="error" style="display: none" aria-live="assertive" aria-relevant="text" aria-atomic="true" aria-channel="general"></p>
+              <label for="iBirthMonth" id="BirthDateLabel">Birthdate</label>
+              <select id="iBirthMonth" name="iBirthMonth" onfocus="SignUp.Fields[FT.BD].evt_onfocus(event)" onchange="SignUp.Fields[FT.BD].evt_onchange(event)" class="datepart0" aria-label="Birth month"><option selected="selected" value="">Month</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select><select id="iBirthDay" name="iBirthDay" onfocus="SignUp.Fields[FT.BD].evt_onfocus(event)" onchange="SignUp.Fields[FT.BD].evt_onchange(event)" class="datepart1" aria-label="Birth day"><option selected="selected" value="">Day</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select><select id="iBirthYear" name="iBirthYear" onfocus="SignUp.Fields[FT.BD].evt_onfocus(event)" onchange="SignUp.Fields[FT.BD].evt_onchange(event)" class="datepart2" aria-label="Birth year"><option selected="selected" value="">Year</option><option value="2014">2014</option><option value="2013">2013</option><option value="2012">2012</option><option value="2011">2011</option><option value="2010">2010</option><option value="2009">2009</option><option value="2008">2008</option><option value="2007">2007</option><option value="2006">2006</option><option value="2005">2005</option><option value="2004">2004</option><option value="2003">2003</option><option value="2002">2002</option><option value="2001">2001</option><option value="2000">2000</option><option value="1999">1999</option><option value="1998">1998</option><option value="1997">1997</option><option value="1996">1996</option><option value="1995">1995</option><option value="1994">1994</option><option value="1993">1993</option><option value="1992">1992</option><option value="1991">1991</option><option value="1990">1990</option><option value="1989">1989</option><option value="1988">1988</option><option value="1987">1987</option><option value="1986">1986</option><option value="1985">1985</option><option value="1984">1984</option><option value="1983">1983</option><option value="1982">1982</option><option value="1981">1981</option><option value="1980">1980</option><option value="1979">1979</option><option value="1978">1978</option><option value="1977">1977</option><option value="1976">1976</option><option value="1975">1975</option><option value="1974">1974</option><option value="1973">1973</option><option value="1972">1972</option><option value="1971">1971</option><option value="1970">1970</option><option value="1969">1969</option><option value="1968">1968</option><option value="1967">1967</option><option value="1966">1966</option><option value="1965">1965</option><option value="1964">1964</option><option value="1963">1963</option><option value="1962">1962</option><option value="1961">1961</option><option value="1960">1960</option><option value="1959">1959</option><option value="1958">1958</option><option value="1957">1957</option><option value="1956">1956</option><option value="1955">1955</option><option value="1954">1954</option><option value="1953">1953</option><option value="1952">1952</option><option value="1951">1951</option><option value="1950">1950</option><option value="1949">1949</option><option value="1948">1948</option><option value="1947">1947</option><option value="1946">1946</option><option value="1945">1945</option><option value="1944">1944</option><option value="1943">1943</option><option value="1942">1942</option><option value="1941">1941</option><option value="1940">1940</option><option value="1939">1939</option><option value="1938">1938</option><option value="1937">1937</option><option value="1936">1936</option><option value="1935">1935</option><option value="1934">1934</option><option value="1933">1933</option><option value="1932">1932</option><option value="1931">1931</option><option value="1930">1930</option><option value="1929">1929</option><option value="1928">1928</option><option value="1927">1927</option><option value="1926">1926</option><option value="1925">1925</option><option value="1924">1924</option><option value="1923">1923</option><option value="1922">1922</option><option value="1921">1921</option><option value="1920">1920</option><option value="1919">1919</option><option value="1918">1918</option><option value="1917">1917</option><option value="1916">1916</option><option value="1915">1915</option><option value="1914">1914</option><option value="1913">1913</option><option value="1912">1912</option><option value="1911">1911</option><option value="1910">1910</option><option value="1909">1909</option><option value="1908">1908</option><option value="1907">1907</option><option value="1906">1906</option><option value="1905">1905</option></select>
+              <div id="birthDatehelp_pop" class="helppop" style="display: none">
+                  <div id="birthdatehelp" class="helpctr"></div>
+              </div>
+          </div>
+
+          <!-- Gender --
+          <div class="row">
+              <p id="profile_genderError" class="error" style="display: none" aria-live="assertive" aria-relevant="text" aria-atomic="true" aria-channel="general"></p>
+              <label id="iGenderLabel">Gender</label>
+              <select id="iGender" name="iGender" class="gender" onchange="SignUp.Fields[FT.GNDR].evt_onchange(event)" aria-labelledby="iGenderLabel">
+                  <option selected="selected" value="">Select...</option><option value="m">Male</option><option value="f">Female</option><option value="u">Not specified</option>
+              </select>
+          </div>
+      </div>
+
+      <!-- Proof --
+      <div id="iProofModule" class="module">
+          <h2 class="head">Help us protect your info</h2>
+          <div id="proofDesc">Your phone number helps us keep your account secure.</div>
+          <div class="row">
+              <p id="iProofValError" class="error first" style="display: none" aria-live="assertive" aria-relevant="text" aria-atomic="true" aria-channel="general"></p>
+          </div>
+          
+          <div id="phoneinput">
+              <div class="row">
+                  <div id="iSMSCountryDiv">
+                      <label id="iSMSCountryLabel" for="iSMSCountry" class="first">Country code</label>
+                      <select id="iSMSCountry" name="iSMSCountry"><option value="AF">Afghanistan ‏(‎+93)</option><option value="AL">Albania ‏(‎+355)</option><option value="DZ">Algeria ‏(‎+213)</option><option value="AD">Andorra ‏(‎+376)</option><option value="AO">Angola ‏(‎+244)</option><option value="AQ">Antarctica ‏(‎+672)</option><option value="AG">Antigua and Barbuda ‏(‎+1)</option><option value="AR">Argentina ‏(‎+54)</option><option value="AM">Armenia ‏(‎+374)</option><option value="AW">Aruba ‏(‎+297)</option><option value="AC">Ascension Island ‏(‎+247)</option><option value="AU">Australia ‏(‎+61)</option><option value="AT">Austria ‏(‎+43)</option><option value="AZ">Azerbaijan ‏(‎+994)</option><option value="BS">Bahamas ‏(‎+1)</option><option value="BH">Bahrain ‏(‎+973)</option><option value="BD">Bangladesh ‏(‎+880)</option><option value="BB">Barbados ‏(‎+1)</option><option value="BY">Belarus ‏(‎+375)</option><option value="BE">Belgium ‏(‎+32)</option><option value="BZ">Belize ‏(‎+501)</option><option value="BJ">Benin ‏(‎+229)</option><option value="BM">Bermuda ‏(‎+1)</option><option value="BT">Bhutan ‏(‎+975)</option><option value="BO">Bolivia ‏(‎+591)</option><option value="BA">Bosnia and Herzegovina ‏(‎+387)</option><option value="BW">Botswana ‏(‎+267)</option><option value="BV">Bouvet Island ‏(‎+47)</option><option value="BR">Brazil ‏(‎+55)</option><option value="IO">British Indian Ocean Territory ‏(‎+44)</option><option value="BN">Brunei ‏(‎+673)</option><option value="BG">Bulgaria ‏(‎+359)</option><option value="BF">Burkina Faso ‏(‎+226)</option><option value="BI">Burundi ‏(‎+257)</option><option value="CV">Cabo Verde ‏(‎+238)</option><option value="KH">Cambodia ‏(‎+855)</option><option value="CM">Cameroon ‏(‎+237)</option><option value="CA">Canada ‏(‎+1)</option><option value="KY">Cayman Islands ‏(‎+1)</option><option value="CF">Central African Republic ‏(‎+236)</option><option value="TD">Chad ‏(‎+235)</option><option value="CL">Chile ‏(‎+56)</option><option value="CN">China ‏(‎+86)</option><option value="CX">Christmas Island ‏(‎+61)</option><option value="CC">Cocos (Keeling) Islands ‏(‎+61)</option><option value="CO">Colombia ‏(‎+57)</option><option value="KM">Comoros ‏(‎+269)</option><option value="CG">Congo ‏(‎+242)</option><option value="CD">Congo (DRC) ‏(‎+243)</option><option value="CK">Cook Islands ‏(‎+682)</option><option value="CR">Costa Rica ‏(‎+506)</option><option value="HR">Croatia ‏(‎+385)</option><option value="CU">Cuba ‏(‎+53)</option><option value="CY">Cyprus ‏(‎+357)</option><option value="CZ">Czech Republic ‏(‎+420)</option><option value="DK">Denmark ‏(‎+45)</option><option value="DJ">Djibouti ‏(‎+253)</option><option value="DM">Dominica ‏(‎+1)</option><option value="DO">Dominican Republic ‏(‎+1)</option><option value="EC">Ecuador ‏(‎+593)</option><option value="EG">Egypt ‏(‎+20)</option><option value="SV">El Salvador ‏(‎+503)</option><option value="GQ">Equatorial Guinea ‏(‎+240)</option><option value="ER">Eritrea ‏(‎+291)</option><option value="EE">Estonia ‏(‎+372)</option><option value="ET">Ethiopia ‏(‎+251)</option><option value="FK">Falkland Islands ‏(‎+500)</option><option value="FO">Faroe Islands ‏(‎+298)</option><option value="FJ">Fiji Islands ‏(‎+679)</option><option value="FI">Finland ‏(‎+358)</option><option value="FR">France ‏(‎+33)</option><option value="GF">French Guiana ‏(‎+594)</option><option value="PF">French Polynesia ‏(‎+689)</option><option value="GA">Gabon ‏(‎+241)</option><option value="GM">Gambia, The ‏(‎+220)</option><option value="GE">Georgia ‏(‎+995)</option><option value="DE">Germany ‏(‎+49)</option><option value="GH">Ghana ‏(‎+233)</option><option value="GI">Gibraltar ‏(‎+350)</option><option value="GR">Greece ‏(‎+30)</option><option value="GL">Greenland ‏(‎+299)</option><option value="GD">Grenada ‏(‎+1)</option><option value="GP">Guadeloupe ‏(‎+590)</option><option value="GU">Guam ‏(‎+1)</option><option value="GT">Guatemala ‏(‎+502)</option><option value="GG">Guernsey ‏(‎+44)</option><option value="GN">Guinea ‏(‎+224)</option><option value="GW">Guinea-Bissau ‏(‎+245)</option><option value="GY">Guyana ‏(‎+592)</option><option value="HT">Haiti ‏(‎+509)</option><option value="VA">Holy See (Vatican City) ‏(‎+379)</option><option value="HN">Honduras ‏(‎+504)</option><option value="HK">Hong Kong SAR ‏(‎+852)</option><option value="HU">Hungary ‏(‎+36)</option><option value="IS">Iceland ‏(‎+354)</option><option value="IN">India ‏(‎+91)</option><option value="ID">Indonesia ‏(‎+62)</option><option value="IR">Iran ‏(‎+98)</option><option value="IQ">Iraq ‏(‎+964)</option><option value="IE">Ireland ‏(‎+353)</option><option value="IM">Isle of Man ‏(‎+44)</option><option value="IL">Israel ‏(‎+972)</option><option value="IT">Italy ‏(‎+39)</option><option value="JM">Jamaica ‏(‎+1)</option><option value="SJ">Jan Mayen ‏(‎+47)</option><option value="JP">Japan ‏(‎+81)</option><option value="JE">Jersey ‏(‎+44)</option><option value="JO">Jordan ‏(‎+962)</option><option value="KZ">Kazakhstan ‏(‎+7)</option><option value="KE">Kenya ‏(‎+254)</option><option value="KI">Kiribati ‏(‎+686)</option><option value="KR">Korea ‏(‎+82)</option><option value="KW">Kuwait ‏(‎+965)</option><option value="KG">Kyrgyzstan ‏(‎+996)</option><option value="LA">Laos ‏(‎+856)</option><option value="LV">Latvia ‏(‎+371)</option><option value="LB">Lebanon ‏(‎+961)</option><option value="LS">Lesotho ‏(‎+266)</option><option value="LR">Liberia ‏(‎+231)</option><option value="LY">Libya ‏(‎+218)</option><option value="LI">Liechtenstein ‏(‎+423)</option><option value="LT">Lithuania ‏(‎+370)</option><option value="LU">Luxembourg ‏(‎+352)</option><option value="MO">Macao SAR ‏(‎+853)</option><option value="MK">Macedonia, Former Yugoslav Republic of ‏(‎+389)</option><option value="MG">Madagascar ‏(‎+261)</option><option value="MW">Malawi ‏(‎+265)</option><option value="MY">Malaysia ‏(‎+60)</option><option value="MV">Maldives ‏(‎+960)</option><option value="ML">Mali ‏(‎+223)</option><option value="MT">Malta ‏(‎+356)</option><option value="MH">Marshall Islands ‏(‎+692)</option><option value="MQ">Martinique ‏(‎+596)</option><option value="MR">Mauritania ‏(‎+222)</option><option value="MU">Mauritius ‏(‎+230)</option><option value="YT">Mayotte ‏(‎+262)</option><option value="MX">Mexico ‏(‎+52)</option><option value="FM">Micronesia ‏(‎+691)</option><option value="MD">Moldova ‏(‎+373)</option><option value="MC">Monaco ‏(‎+377)</option><option value="MN">Mongolia ‏(‎+976)</option><option value="ME">Montenegro ‏(‎+382)</option><option value="MS">Montserrat ‏(‎+1)</option><option value="MA">Morocco ‏(‎+212)</option><option value="MZ">Mozambique ‏(‎+258)</option><option value="MM">Myanmar ‏(‎+95)</option><option value="NA">Namibia ‏(‎+264)</option><option value="NR">Nauru ‏(‎+674)</option><option value="NP">Nepal ‏(‎+977)</option><option value="NL">Netherlands ‏(‎+31)</option><option value="AN">Netherlands Antilles (Former) ‏(‎+599)</option><option value="NC">New Caledonia ‏(‎+687)</option><option value="NZ">New Zealand ‏(‎+64)</option><option value="NI">Nicaragua ‏(‎+505)</option><option value="NE">Niger ‏(‎+227)</option><option value="NG">Nigeria ‏(‎+234)</option><option value="NU">Niue ‏(‎+683)</option><option value="KP">North Korea ‏(‎+850)</option><option value="MP">Northern Mariana Islands ‏(‎+1)</option><option value="NO">Norway ‏(‎+47)</option><option value="OM">Oman ‏(‎+968)</option><option value="PK">Pakistan ‏(‎+92)</option><option value="PW">Palau ‏(‎+680)</option><option value="PS_0">Palestinian Authority ‏(‎+970)</option><option value="PS">Palestinian Authority ‏(‎+972)</option><option value="PA">Panama ‏(‎+507)</option><option value="PG">Papua New Guinea ‏(‎+675)</option><option value="PY">Paraguay ‏(‎+595)</option><option value="PE">Peru ‏(‎+51)</option><option value="PH">Philippines ‏(‎+63)</option><option value="PL">Poland ‏(‎+48)</option><option value="PT">Portugal ‏(‎+351)</option><option value="QA">Qatar ‏(‎+974)</option><option value="CI">Republic of Côte d'Ivoire ‏(‎+225)</option><option value="RE">Reunion ‏(‎+262)</option><option value="RO">Romania ‏(‎+40)</option><option value="RU">Russia ‏(‎+7)</option><option value="RW">Rwanda ‏(‎+250)</option><option value="SH">Saint Helena, Ascension and Tristan da Cunha ‏(‎+290)</option><option value="WS">Samoa ‏(‎+685)</option><option value="SM">San Marino ‏(‎+378)</option><option value="ST">São Tomé and Príncipe ‏(‎+239)</option><option value="SA">Saudi Arabia ‏(‎+966)</option><option value="SN">Senegal ‏(‎+221)</option><option value="RS">Serbia ‏(‎+381)</option><option value="SC">Seychelles ‏(‎+248)</option><option value="SL">Sierra Leone ‏(‎+232)</option><option value="SG">Singapore ‏(‎+65)</option><option value="SK">Slovakia ‏(‎+421)</option><option value="SI">Slovenia ‏(‎+386)</option><option value="SB">Solomon Islands ‏(‎+677)</option><option value="SO">Somalia ‏(‎+252)</option><option value="ZA">South Africa ‏(‎+27)</option><option value="ES">Spain ‏(‎+34)</option><option value="LK">Sri Lanka ‏(‎+94)</option><option value="KN">St. Kitts and Nevis ‏(‎+1)</option><option value="LC">St. Lucia ‏(‎+1)</option><option value="PM">St. Pierre and Miquelon ‏(‎+508)</option><option value="VC">St. Vincent and the Grenadines ‏(‎+1)</option><option value="SD">Sudan ‏(‎+249)</option><option value="SR">Suriname ‏(‎+597)</option><option value="SZ">Swaziland ‏(‎+268)</option><option value="SE">Sweden ‏(‎+46)</option><option value="CH">Switzerland ‏(‎+41)</option><option value="SY">Syria ‏(‎+963)</option><option value="TW">Taiwan ‏(‎+886)</option><option value="TJ">Tajikistan ‏(‎+992)</option><option value="TZ">Tanzania ‏(‎+255)</option><option value="TH">Thailand ‏(‎+66)</option><option value="TL">Timor-Leste ‏(‎+670)</option><option value="TG">Togo ‏(‎+228)</option><option value="TK">Tokelau ‏(‎+690)</option><option value="TO">Tonga ‏(‎+676)</option><option value="TT">Trinidad and Tobago ‏(‎+1)</option><option value="TA">Tristan da Cunha ‏(‎+290)</option><option value="TN">Tunisia ‏(‎+216)</option><option value="TR">Turkey ‏(‎+90)</option><option value="TM">Turkmenistan ‏(‎+993)</option><option value="TC">Turks and Caicos Islands ‏(‎+1)</option><option value="TV">Tuvalu ‏(‎+688)</option><option value="UG">Uganda ‏(‎+256)</option><option value="UA">Ukraine ‏(‎+380)</option><option value="AE">United Arab Emirates ‏(‎+971)</option><option value="UK">United Kingdom ‏(‎+44)</option><option selected="" value="US">United States ‏(‎+1)</option><option value="UM">United States Minor Outlying Islands ‏(‎+1)</option><option value="UY">Uruguay ‏(‎+598)</option><option value="UZ">Uzbekistan ‏(‎+998)</option><option value="VU">Vanuatu ‏(‎+678)</option><option value="VE">Venezuela ‏(‎+58)</option><option value="VN">Vietnam ‏(‎+84)</option><option value="VG">Virgin Islands, British ‏(‎+1)</option><option value="VI">Virgin Islands, U.S. ‏(‎+1)</option><option value="WF">Wallis and Futuna ‏(‎+681)</option><option value="YE">Yemen ‏(‎+967)</option><option value="ZM">Zambia ‏(‎+260)</option><option value="ZW">Zimbabwe ‏(‎+263)</option></select>
+                  </div>
+                  <div class="helparea">
+                      <p id="iPhoneError" class="error first" style="display: none" aria-live="assertive" aria-relevant="text" aria-atomic="true" aria-channel="general"></p>
+                      <label id="iPhoneLabel" for="iPhoneContainer" class="first">Phone number</label>
+                      <div id="phonehelp_pop" class="helppop" style="display: none">
+                          <div id="phonehelp" class="helpctr"></div>
+                      </div>
+                      <div id="iPhoneContainer"><input aria-labelledby="iPhoneLabel" class="ltr_override" maxlength="40" id="iPhone" name="iPhone" lang="en" type="tel"></div>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="helparea">
+              <div id="altinput" class="row pwdreset">
+                  <p id="iAltEmailError" class="error" style="display: none" aria-live="assertive" aria-relevant="text" aria-atomic="true" aria-channel="general"></p>
+                  <div>
+                      <div id="resethelp_pop" class="helppop" style="display: none">
+                          <div id="resethelp" class="helpctr"></div>
+                      </div>
+                      <label for="iAltEmail">
+                          Alternate email address</label>
+                      <input id="iAltEmail" name="iAltEmail" maxlength="113" value="" onfocus="SignUp.Fields[FT.ALT].evt_onfocus(event)" onchange="SignUp.Fields[FT.ALT].evt_onchange(event)" class="ltr_override" lang="en" type="email">
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+
+      <!-- HIP --
+
+     
+
+      <div>
+          <p aria-hidden="false" style="display: block;" id="iOptinEmailContainer" class="optin ">
+              <input id="iOptinEmail" checked="true" type="checkbox">
+              <label for="iOptinEmail">Send me promotional offers from Microsoft. You can unsubscribe at any time.</label>
+          </p>
+      </div>
+
+      <div>
+          
+          <div id="tou">
+              Click <strong>Create account</strong> to agree to the <a target="_blank" href="http://go.microsoft.com/fwlink/?LinkId=313222&amp;clcid=409">Microsoft Services Agreement</a> and <a target="_blank" href="http://go.microsoft.com/fwlink/?LinkId=313221&amp;clcid=409">privacy and cookies statement.</a>
+              <span aria-hidden="true" style="display: none;" id="iOptinEmailAgreement" class="hide">&nbsp;You also agree to receive promotional email from Microsoft. You can unsubscribe at any time.</span>
+          </div>
+          <div id="createbuttons">
+              <input class="default" title="I accept" onclick="SignUp.DoPost();return false;" value="Create account" type="submit">
+              
+          </div>
+          <div id="creatingacct" class="hide">
+              <p>
+                  <img alt="Working..." src="https://auth.gfx.ms/images/progressindicator.gif" align="absmiddle" height="20" vspace="5" width="20">
+                  Working...</p>
+          </div>
+          <input id="uaid" name="uaid" value="dc89a9153ab948c982cf58a9655f29c3" type="hidden">
+      </div>
+      </form>
+              </div>
+          <div id="m_wf" class="m_wfp">
+                      
+
+
+      <table id="uxp_ftr_control" class="t_fbgc" role="presentation" cellpadding="0" cellspacing="0">
+
+      <tbody><tr>
+          <td class="c_hright"><img id="uxp_ftr_link_msfticon" src="https://auth.gfx.ms/images/ms-logo-ms.png" alt="Microsoft account"></td>
+      </tr>
+
+      <tr>
+        <td id="uxp_ftr_left">
+        <ul>
+          <li><a id="uxp_ftr_link_language" href="#">English (United States)</a></li>
+                  <li><a id="uxp_ftr_link_legal" target="_top" href="http://go.microsoft.com/fwlink/?LinkId=313222">Terms of Use</a></li>
+                  <li><a id="uxp_ftr_link_privacy" target="_top" href="http://go.microsoft.com/fwlink/?LinkId=313221">Privacy &amp; Cookies</a></li>
+              <li><span id="uxp_ftr_link_trademark">© 2014 Microsoft</span></li>
+          
+
+      </ul>
+          </td>
+      </tr>
+      </tbody></table>
+
+      <!-- Burn the required strings to the page rather than fetching via an additional call to server --
+      <script type="text/javascript">function AleGetString(s){var rootObject = this, parts = s.toLowerCase( ).split('.'), iCount = parts.length;for (var i = 0; i < iCount; i++){var currentPart = parts[i];rootObject = rootObject[currentPart];if (rootObject == null){return '';}}return rootObject.toString( );}
+      registerNamespace("live.shared.strings.languagepicker.client");
+      live.shared.strings.languagepicker.client.close ="Close";
+      registerNamespace("live.shared.strings.languagepicker.client.error");
+      live.shared.strings.languagepicker.client.error.loading ="We're unable to display the list of languages at this time.";
+      live.shared.strings.languagepicker.client.error.saving ="We're unable to change your language settings at this time.  ";
+      live.shared.strings.languagepicker.client.loading ="Loading";
+      live.shared.strings.languagepicker.client.save ="Save";
+      live.shared.strings.languagepicker.client.saving ="Saving";
+      live.shared.strings.languagepicker.client.title ="Language";
+      registerNamespace("ale_wlive");
+      window.$Do && window.$Do.register("ale_wlive");
+      </script>
+
+                      
+                    </div>
+              </div>
+          </div>
+
+
+    </div>
+  </div>
+  <hr>
+</div> -->

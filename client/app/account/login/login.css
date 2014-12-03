@@ -1,8 +1,8 @@
-/* previously body instead of .loginbody */
+/*/* previously body instead of .loginbody 
 .loginbody {
   padding-top: 160px;
   padding-bottom: 40px;
-  /*background-color: #eee;*/
+  /*background-color: #eee;
 }
 
 .form-signin {
@@ -39,3 +39,4 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+*/

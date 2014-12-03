@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('econerinApp')
+angular.module('cacheItApp')
   .controller('SignupCtrl', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
