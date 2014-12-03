@@ -10,6 +10,9 @@ angular.module('cacheItApp')
 
       if(form.$valid) {
         Auth.createUser({
+          firstName: $scope.user.firstName,
+          middleName: $scope.user.middleName,
+          lastName: $scope.user.lastName,
           name: $scope.user.name,
           email: $scope.user.email,
           password: $scope.user.password

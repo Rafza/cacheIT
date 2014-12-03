@@ -33,92 +33,147 @@
 
 <div class="container">
   <div class="row">
+    <form class="form" name="form" ng-submit="register(form)" novalidate>
+      <div class="col-xs-4"></div>
+      <!--  First Name inputs -->
+      <div class="col-xs-5">
+        <div class="form-group" ng-class="{ 'has-success': form.firstName.$valid && submitted,
+        'has-error': form.firstName.$invalid && submitted }">
+        <label style="color:#16A085">Name</label>
+        <input class="form-control" name="firstName" maxlength="40" placeholder="First"   type="text" ng-model="user.firstName" required>
+        <p class="help-block" ng-show="form.firstName.$error.required && submitted">
+          First Name is Required
+        </p>   
+        </div>
+      </div>
+    <!--  Middle Name inputs -->
+
+    <div class="col-xs-4"></div>
+    <div class="col-xs-5">
+      <input class="form-control" name="middleName" maxlength="1" ng-model="user.middleName" placeholder="M.I" type="text" size="2" >
+    </div>
+    
+    <!--  last Name inputs -->
+    <div class="col-xs-4"></div>
+    <div class="col-xs-5">
+      <div class="form-group" ng-class="{ 'has-success': form.lastName.$valid && submitted,
+      'has-error': form.lastName.$invalid && submitted }">
+      <br>
+      <input class="form-control" name="lastName" ng-model="user.lastName" maxlength="40" placeholder="Last" type="text" required>
+      <p class="help-block" ng-show="form.lastName.$error.required && submitted">
+        Last Name is Required
+      </p>  
+      </div>
+    </div>
 
 
-  
-    <div class="col-xs-3">
-      <form class="form" name="form" ng-submit="register(form)" novalidate>
-          <form name="myForm">
-    User name: <input type="text" name="userName" ng-model="user.name" required>
-    <span class="error" ng-show="myForm.userName.$error.required">
-      Required!</span><br>
-    Last name: <input type="text" name="lastName" ng-model="user.last"
-      ng-minlength="3" ng-maxlength="10">
-    <span class="error" ng-show="myForm.lastName.$error.minlength">
-      Too short!</span>
-    <span class="error" ng-show="myForm.lastName.$error.maxlength">
-      Too long!</span><br>
-  </form>
 
+
+  <!--  User ID inputs -->
+    <div class="col-xs-4"></div>
+      <div class="col-xs-5">  
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
-                                            'has-error': form.name.$invalid && submitted }">
+        'has-error': form.name.$invalid && submitted }">
 
-          <label style="color:#16A085">Name</label>
-          <br>
-          <input id="iFirstName" name="iFirstName" maxlength="40" placeholder="First"  class="namepad smallinput" aria-labelledby="NameLabel" type="text">
+        <label style="color:#16A085"> User Name</label>
 
-          <input id="iMiddleName" name="iMiddleName" maxlength="1" placeholder="M.I" class="smallput" aria-labelledby="NameLabel" type="text" size="2">
-
-          <input id="iLastName" name="iLastName" maxlength="40" placeholder="Last" class="smallinput" aria-labelledby="NameLabel" type="text">
-          <br>
-          <label style="color:#16A085"> User Name</label>
-
-          <input type="text" name="name" class="form-control" ng-model="user.name"
-                 required/>
-          <p class="help-block" ng-show="form.name.$error.required && submitted">
-            User Id is required
-          </p>
-
+        <input type="text" name="name" class="form-control" ng-model="user.name"
+        required/>
+        <p class="help-block" ng-show="form.name.$error.required && submitted">
+          A User Id is required
+        </p>
         </div>
 
+
+  <!--  Email inputs -->
         <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
-                                            'has-error': form.email.$invalid && submitted }">
-          <label>Email</label>
+        'has-error': form.email.$invalid && submitted }">
+        <label style="color:#16A085">Email</label>
 
-          <input type="email" name="email" class="form-control" ng-model="user.email"
-                 required
-                 mongoose-error/>
-          <p class="help-block" ng-show="form.email.$error.email && submitted">
-            Doesn't look like a valid email.
-          </p>
-          <p class="help-block" ng-show="form.email.$error.required && submitted">
-            What's your email address?
-          </p>
-          <p class="help-block" ng-show="form.email.$error.mongoose">
-            {{ errors.email }}
-          </p>
-        </div>
+        <input type="email" name="email" class="form-control" ng-model="user.email"
+        required
+        mongoose-error/>
+        <p class="help-block" ng-show="form.email.$error.email && submitted">
+          Doesn't look like a valid email.
+        </p>
+        <p class="help-block" ng-show="form.email.$error.required && submitted">
+          What's your email address?
+        </p>
+        <p class="help-block" ng-show="form.email.$error.mongoose">
+          {{ errors.email }}
+        </p>
+      </div>
+
+<!--  Password -->
 
         <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
-                                            'has-error': form.password.$invalid && submitted }">
-          <label>Password</label>
+        'has-error': form.password.$invalid && submitted }">
+        <label style="color:#16A085">Password</label>
 
-          <input type="password" name="password" class="form-control" ng-model="user.password"
-                 ng-minlength="3"
-                 required
-                 mongoose-error/>
-          <p class="help-block"
-             ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
-            Password must be at least 3 characters.
-          </p>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-            {{ errors.password }}
-          </p>
+        <input type="password" name="password" class="form-control" ng-model="user.password"
+        ng-minlength="3"
+        required
+        mongoose-error/>
+        <p class="help-block"
+        ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
+        Password must be at least 3 characters.
+        </p>
+        <p class="help-block" ng-show="form.password.$error.mongoose">
+          {{ errors.password }}
+        </p>
         </div>
 
+        <!-- address -->
+        <div class="form-group" ng-class="{ 'has-success': form.address.$valid && submitted,
+                                            'has-error': form.address.$invalid && submitted }">
+        <label style="color:#16A085">Address</label>
+        <input class="form-control" name="address" ng-model="user.address" maxlength="40" placeholder="Street Name/City/Zipcode/State/country" type="text" required>
+        <p class="help-block" ng-show="form.address.$error.required && submitted">
+          Address feild is required
+        </p>  
+      </div>
+
+        <!-- BirthDate -->
+        <div class="form-group" ng-class="{ 'has-success': form.birthDate.$valid && submitted,
+                                            'has-error': form.birthDate.$invalid && submitted }">
+        <label style="color:#16A085">Birth Date</label>
+        <input class="form-control" name="birthDate" ng-model="user.birthDate" maxlength="40" placeholder="mm/dd/yyyy" type="text" required>
+        <p class="help-block" ng-show="form.birthDate.$error.required && submitted">
+          Birth Date is required
+        </p>  
+      </div>
+
+        <!-- Gender -->
+        <div class="form-group" ng-class="{ 'has-success': form.gender.$valid && submitted,
+                                            'has-error': form.gender.$invalid && submitted }">
+        <label style="color:#16A085">Gender</label>
+        <input class="form-control" name="gender" ng-model="user.gender" maxlength="40" type="text" required>
+        <p class="help-block" ng-show="form.gender.$error.required && submitted">
+          Gender feild is required
+        </p>  
+      </div>
+
+        <!-- Phone number -->
+        <label style="color:#16A085">Phone Number</label>
+        <input class="form-control" name="phoneNumber" ng-model="user.phoneNumber" maxlength="11" type="text" required>
+        <br>
+        <br>
+
+
+<!-- submit and login button -->
         <div>
-          <button class="btn btn-inverse btn-lg btn-login" type="submit">
+          <button class="btn btn-inverse btn-sm btn-primary" type="submit">
             Sign up
           </button>
-          <a class="btn btn-default btn-lg btn-register" href="/login">
+          <a class="btn btn-default btn-sm btn-register" href="/login">
             Login
           </a>
-        </div>
+        </div>    
+      </div>
+    </form>
 
-      </form>
-    </div>
   </div>
-  <hr>
+ <hr>
 </div>
 
 
