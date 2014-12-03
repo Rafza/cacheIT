@@ -35,13 +35,12 @@ exports = module.exports = app;
 // Use Cron
 var CronJob = require('cron').CronJob;
 var job = new CronJob({
-  cronTime: '*/10 * * * * *',
+  cronTime: '*/1 * * * * *',
   onTick: function() {
-    console.log("heyy this worksss");
-    controller.accruedInterest();
+    console.log("Updating Interest...");
+    controller.incrementDays();
   },
   start: false,
   timeZone: "America/Los_Angeles"
 });
 job.start();
-

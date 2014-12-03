@@ -61,7 +61,28 @@ video#bgvid {
 }
 
 .bgcinema .container .minibox hr {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    text-align:left;
+    position: relative;
+    border-color: rgba(255, 255, 255, 0.5);
+    width: 25vw;
+}
 
+.bgcinema .container .minibox h3 {
+    font-family: "Open Sans", sans-serf;
+    font-weight: 300;
+    font-size: 18px;
+    color: #ededed;
+    float: left;
+}
+
+.bgcinema .container .minibox i {
+    font-size: 45px;
+    color: #ededed;
+    margin-right: 2vw;
+    margin-top: 0;
+    float: left;
 }
 
 .hero-unit {
@@ -86,9 +107,9 @@ video#bgvid {
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
     font-size: 12px;
-    position: absolute; 
-    right: 0; 
-    bottom: 0; 
+    position: absolute;
+    right: 0;
+    bottom: 0;
     left: 0;
 }
 
@@ -195,4 +216,3 @@ video#bgvid {
     text-align: center;
     margin-top: -15px;
 }
-

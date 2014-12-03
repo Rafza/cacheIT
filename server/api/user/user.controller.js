@@ -100,6 +100,23 @@ exports.pushCreate = function(req, res) {
   });
 };
 
+// exports.addTransaction = function(myEmail, data) {
+//   var chkJson = {
+//     savTransactions :
+//     [{
+//       description : data.description,
+//       debit : data.debit,
+//       credit : data.credit,
+//       balance : data.balance
+//     }]
+//   };
+//   User.findOneAndUpdate({email : myEmail },{$pushAll : chkJson}, {upsert:true},
+//   function(err, data) {
+//     if(!data) { console.log("No Data!"); }
+//     if (err) { console.log("Error!");  }
+//     // console.log("Data returned: " + data);
+//   });
+// }
 
 // exports.updateById =  function(req, res) {
 //     {$push: {items: item}},
@@ -169,17 +186,63 @@ exports.changePassword = function(req, res, next) {
   });
 };
 
-exports.accruedInterest = function(req, res) {
-  User.find({}, function (err, users) {
-    for(var user in users) {
-      users[user].checking = users[user].checking + (users[user].checking * 0.15);
-    }
-    // users.save(function(err){});
-    // console.log(users[0].checking);
+/**
+ * Increment Days
+ */
+exports.incrementDays = function() {
+  User.find({},'checking accountDays', function (err, users) {
+    // console.log(users.length);
+    // console.log(users);
+    users.forEach( function(element, index, array) {
+      // console.log("Day: " + element.accountDays + " Checking: " + element.checking);
+      var newDays = ((element.accountDays+1) % 30);
+      // console.log("Apply Interest and Penalty.");
+      //exports.accruedInterest();
+      User.update({ _id : element._id },{ accountDays : newDays},function(err){});
+    });
+    exports.accruedPenalty();
   });
 };
 
 /**
+ * Apply Penalty
+ */
+exports.accruedPenalty = function() {
+  User.find({checking: { $lt : 100 }, accountDays : 29 },'checking saving accountDays checkTransactions', function (err, users) {
+    console.log("Accounts to penalize: ");
+    // console.log(users);
+    users.forEach( function(element, index, array) {
+      console.log("Day: " + element.accountDays);
+      var newChecking = element.checking-25;
+
+      var chkJson = {
+        checkTransactions :
+        [{
+          description : 'Penalty for account balance less than 100',
+          debit : 25,
+          credit : 0,
+          balance : newChecking
+        }]
+      };
+      User.update({ _id : element._id },{ checking : newChecking, $pushAll : chkJson},function(err){});
+    });
+  });
+};
+
+/**
+ * Apply Interest
+ */
+exports.accruedInterest = function() {
+  User.find({saving: { $gte : 1000 }},'saving', function (err, users) {
+    console.log(users.length);
+    console.log(users);
+    users.forEach( function(element, index, array) {
+      var newChecking = element.checking-25;
+      if( newChecking < 0 ) { newChecking = 0; }
+      User.update({ _id : element._id },{ checking : newChecking},function(err){});
+    });
+  });
+};/**
  * Get my info
  */
 exports.me = function(req, res, next) {

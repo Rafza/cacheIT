@@ -6,7 +6,7 @@ var crypto = require('crypto');
 
 
 
-var transSchema = new Schema({  
+var transSchema = new Schema({
   description : String,
   debit : Number,
   credit : Number,
@@ -29,7 +29,9 @@ var UserSchema = new Schema({
   saving: Number,
   checking: Number,
   checkTransactions :  [transSchema],
-  savTransactions : [transSchema]
+  savTransactions : [transSchema],
+  accountDays : { type : Number, default : 0 },
+  dateOpened : { type : Date, default : Date.now }
 });
 
 /**

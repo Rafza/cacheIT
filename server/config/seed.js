@@ -95,7 +95,7 @@ User.find({}).remove(function() {
     name: 'Test User1',
     email: 'test1@test.com',
     password: 'test',
-    checking: 78,
+    checking: 50,
     saving: 934
   },{
     provider: 'local',
@@ -109,7 +109,7 @@ User.find({}).remove(function() {
     name: 'Test User3',
     email: 'test3@test.com',
     password: 'test',
-    checking: 778,
+    checking: 99,
     saving: 356
   },{
     provider: 'local',
