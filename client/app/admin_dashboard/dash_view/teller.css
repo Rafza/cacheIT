@@ -13,3 +13,8 @@
 	min-height: 13px;
 }
 
+div.center {
+	margin-left:20px;
+		margin-right:20px;
+		width:800px;
+}
