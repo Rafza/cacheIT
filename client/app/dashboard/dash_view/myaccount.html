@@ -32,7 +32,7 @@
               <th>Balance</th></tr>
             </thead>
             <tbody>
-              <tr ng-repeat="tran in acc.getCurrentUser().checkTransactions | orderBy:reverse" >
+              <tr ng-repeat="tran in acc.getCurrentUser().checkTransactions | orderBy : date : reverse" >
                 <td>{{tran.date | date:'MM/dd/yyyy'}}</td>
                 <td>{{tran.description}}</td>
                 <td>{{tran.debit}}</td>
@@ -57,7 +57,7 @@
     </div>
 <!-- toggle collapse starts -->
 
-      <button class="btn btn-xs btn-primary" ng-click="isCollapsed = !isCollapsed"> 
+      <button class="btn btn-xs btn-primary" ng-click="isCollapsed = !isCollapsed">
         <div ng-if="!isCollapsed">Show Statement</div>
         <div ng-if="isCollapsed">Hide Statement</div></button>
       <hr>
@@ -75,7 +75,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="tran in acc.getCurrentUser().savTransactions | orderBy:reverse" >
+                  <tr ng-repeat="tran in acc.getCurrentUser().savTransactions | orderBy : date : reverse" >
                   <td>{{tran.date | date:'MM/dd/yyyy'}}</td>
                   <td>{{tran.description}}</td>
                   <td>{{tran.debit}}</td>
@@ -84,7 +84,7 @@
                 </tr>
                 </tbody>
               </table>
-        </div> 
+        </div>
       </div>
 
 
