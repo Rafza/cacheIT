@@ -204,7 +204,7 @@
                 </thead>
 
                 <tbody>
-                  <tr ng-repeat="tact in currentUser.checkTransactions | orderBy:reverse">
+                  <tr ng-repeat="tact in currentUser.checkTransactions | orderBy : date : reverse">
                     <th>{{tact.date | date:'MM/dd/yyyy'}}</th>
                     <th>{{tact.description}}</th>
                     <th>{{tact.debit}}</th>

@@ -209,10 +209,10 @@ exports.incrementDays = function() {
  */
 exports.accruedPenalty = function() {
   User.find({checking: { $lt : 100 }, accountDays : 29 },'checking saving accountDays checkTransactions', function (err, users) {
-    console.log("Accounts to penalize: ");
+    // console.log("Accounts to penalize: ");
     // console.log(users);
     users.forEach( function(element, index, array) {
-      console.log("Day: " + element.accountDays);
+      // console.log("Day: " + element.accountDays);
       var newChecking = element.checking-25;
 
       var chkJson = {
