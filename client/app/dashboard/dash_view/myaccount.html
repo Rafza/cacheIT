@@ -6,12 +6,22 @@
   <!-- center left-->
   <div class="col-md-6">
     <div class="panel panel-default">
-      <div class="panel-heading"><h4>Checking</h4></div>
-      <div class="panel-body">
-
-        <span class="glyphicon glyphicon-usd"></span> {{acc.getCurrentUser().checking}}
-
-      </div><!--/panel-body-->
+      <div class="panel-heading">
+        <div ng-if="acc.getCurrentUser().checking < 0">
+          <h6>Checking Balance:
+            <font color="red">
+              <span class="glyphicon glyphicon-usd" style="font-size:75%"></span> {{acc.getCurrentUser().checking}}
+            </font>
+          </h6>
+        </div>
+        <div ng-if="acc.getCurrentUser().checking >= 0">
+          <h6>Checking Balance:
+            <font color="#339999">
+              <span class="glyphicon glyphicon-usd" style="font-size:75%"></span> {{acc.getCurrentUser().checking}}
+            </font>
+          </h6>
+        </div>
+      </div>
     </div><!--/panel-->
 
     <!--/tabs-->
@@ -49,15 +59,26 @@
   </div><!--/col-->
   <div class="col-md-6">
     <div class="panel panel-default">
-      <div class="panel-heading"><h4>Saving</h4></div>
-      <div class="panel-body">
-        <span class="glyphicon glyphicon-usd"></span> {{acc.getCurrentUser().saving}}
-
+      <div class="panel-heading">
+        <div ng-if="acc.getCurrentUser().saving < 0">
+          <h6>Savings Balance:
+            <font color="red">
+              <span class="glyphicon glyphicon-usd" style="font-size:75%"></span> {{acc.getCurrentUser().saving}}
+            </font>
+          </h6>
+        </div>
+        <div ng-if="acc.getCurrentUser().saving >= 0">
+          <h6>Savings Balance:
+            <font color="#339999">
+              <span class="glyphicon glyphicon-usd" style="font-size:75%"></span> {{acc.getCurrentUser().saving}}
+            </font>
+          </h6>
+        </div>
       </div>
     </div>
 <!-- toggle collapse starts -->
 
-      <button class="btn btn-xs btn-primary" ng-click="isCollapsed = !isCollapsed"> 
+      <button class="btn btn-xs btn-primary" ng-click="isCollapsed = !isCollapsed">
         <div ng-if="!isCollapsed">Show Statement</div>
         <div ng-if="isCollapsed">Hide Statement</div></button>
       <hr>
@@ -84,7 +105,7 @@
                 </tr>
                 </tbody>
               </table>
-        </div> 
+        </div>
       </div>
 
 
