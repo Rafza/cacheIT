@@ -22,7 +22,7 @@ Thing.find({}).remove(function() {
       date : '11/1/2014',
       description : 'Another Transaction',
       debit : 580 ,
-      credit : 50 ,
+      credit : 200 ,
       balance : 501},
     {
       date : '11/2/2014',
@@ -95,7 +95,7 @@ User.find({}).remove(function() {
     name: 'Test User1',
     email: 'test1@test.com',
     password: 'test',
-    checking: 50,
+    checking: 1100,
     saving: 934
   },{
     provider: 'local',
@@ -103,13 +103,13 @@ User.find({}).remove(function() {
     email: 'test2@test.com',
     password: 'test',
     checking: 4936,
-    saving: 45
+    saving: 1111
   },{
     provider: 'local',
     name: 'Test User3',
     email: 'test3@test.com',
     password: 'test',
-    checking: 99,
+    checking: 1223,
     saving: 356
   },{
     provider: 'local',

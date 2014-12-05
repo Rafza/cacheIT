@@ -5,21 +5,26 @@ angular.module('cacheItApp')
     $scope.user = {};
     $scope.errors = {};
 
+
     $scope.register = function(form) {
       $scope.submitted = true;
-
+      console.log("register(): " + form.$valid);
       if(form.$valid) {
         Auth.createUser({
-          firstName: $scope.user.firstName,
-          middleName: $scope.user.middleName,
-          lastName: $scope.user.lastName,
           name: $scope.user.name,
+          lastName: $scope.user.lastName,
           email: $scope.user.email,
-          password: $scope.user.password
+          password: $scope.user.password,
+          address: $scope.user.address,
+          phoneNumber: $scope.user.phoneNumber,
+          questionOne: $scope.user.questionOne,
+          questionTwo: $scope.user.questionTwo
+
         })
+        
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          $location.path('/dash');
         })
         .catch( function(err) {
           err = err.data;

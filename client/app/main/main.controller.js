@@ -41,28 +41,29 @@ myModule.controller('SignupCtrl', function ($scope, Auth, $location) {
 
     $scope.register = function(signupForm) {
       $scope.submitted = true;
+      $location.path('/signup');
 
-      if(signupForm.$valid) {
-        Auth.createUser({
-          name: $scope.signup.name,
-          email: $scope.signup.email,
-          password: $scope.signup.password
-        })
-        .then( function() {
-          // Account created, redirect to home
-          $location.path('/dash');
-        })
-        .catch( function(err) {
-          err = err.data;
-          $scope.errors = {};
+      // if(signupForm.$valid) {
+      //   Auth.createUser({
+      //     name: $scope.signup.name,
+      //     email: $scope.signup.email,
+      //     password: $scope.signup.password
+      //   })
+      //   .then( function() {
+      //     // Account created, redirect to home
+          
+      //   })
+      //   .catch( function(err) {
+      //     err = err.data;
+      //     $scope.errors = {};
 
-          // Update validity of form fields that match the mongoose errors
-          angular.forEach(err.errors, function(error, field) {
-            signupForm[field].$setValidity('mongoose', false);
-            $scope.errors[field] = error.message;
-          });
-        });
-      }
+      //     // Update validity of form fields that match the mongoose errors
+      //     angular.forEach(err.errors, function(error, field) {
+      //       signupForm[field].$setValidity('mongoose', false);
+      //       $scope.errors[field] = error.message;
+      //     });
+      //   });
+      // }
     };
 
   });
