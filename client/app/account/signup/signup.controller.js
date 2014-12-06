@@ -7,8 +7,9 @@ angular.module('cacheItApp')
 
 
     $scope.register = function(form) {
-      $scope.submitted = true;
       console.log("register(): " + form.$valid);
+      console.log("Err: " + form.$valid);
+      $scope.submitted = true;
       if(form.$valid) {
         Auth.createUser({
           name: $scope.user.name,
@@ -28,6 +29,7 @@ angular.module('cacheItApp')
         })
         .catch( function(err) {
           err = err.data;
+          console.log("Err: " + err);
           $scope.errors = {};
 
           // Update validity of form fields that match the mongoose errors

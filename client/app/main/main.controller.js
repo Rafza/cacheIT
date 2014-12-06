@@ -35,7 +35,7 @@ myModule.controller('LoginCtrl', function ($scope, Auth, $location) {
   });
 
 // Signup Handling
-myModule.controller('SignupCtrl', function ($scope, Auth, $location) {
+myModule.controller('SignCtrl', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
 
