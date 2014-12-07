@@ -51,7 +51,7 @@ footer {
         position: relative;
         top: -30px;
         left: -36px;
-        width: 93.5%;
+        width: 250px;
         height: 100vh;
         margin-left: 0px;
         margin-bottom: -50px;
@@ -81,8 +81,8 @@ footer {
     }
 
     .side-nav>li>a>i {
-        float: right;
-        margin-right: 10px;
+        float: left;
+        margin-right: 30px;
         margin-top: 5px;
     }
 
@@ -134,6 +134,11 @@ footer {
 .navbar-collapse.in {
   overflow-y: auto;
 }
+
+.navbar-ex1-collapse {
+  width: 10px
+}
+
 @media (min-width: 768px) {
   .navbar-nav{
     margin-top: 10px;
