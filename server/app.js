@@ -38,7 +38,7 @@ var CronJob = require('cron').CronJob;
 var job = new CronJob({
   cronTime: '*/1 * * * * *',
   onTick: function() {
-    console.log("Day " + (1+(++counter)%30) +" Updating Penalty/Interest...");
+    // console.log("Day " + (1+(++counter)%30) +" Updating Penalty/Interest...");
     controller.incrementDays();
   },
   start: false,

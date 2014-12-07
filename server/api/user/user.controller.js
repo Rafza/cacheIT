@@ -209,13 +209,13 @@ exports.incrementDays = function() {
  * Apply Penalty
  */
 exports.accruedPenalty = function() {
-  User.find({checking: { $lt : 100 }, accountDays : 29 },'checking saving accountDays checkTransactions', function (err, users) {
+  User.find({checking: { $lt : 100 }, accountDays : 29 },'email checking saving accountDays checkTransactions', function (err, users) {
     // console.log("Accounts to penalize: ");
     // console.log(users);
     users.forEach( function(element, index, array) {
+      console.log("Penalizing " + element.email);
       // console.log("Day: " + element.accountDays);
       var newChecking = element.checking-25;
-
       var chkJson = {
         checkTransactions :
         [{
@@ -234,22 +234,22 @@ exports.accruedPenalty = function() {
  * Apply Interest
  */
 exports.accruedInterest = function() {
-  User.find({saving: { $gte : 1000 }, accountDays : 29 },'saving', function (err, users) {
+  User.find({saving: { $gte : 1000 }, accountDays : 29 },'email saving', function (err, users) {
     // console.log(users.length);
-    console.log(users);
+    // console.log(users);
     var interestRate = 0;
 
     //Determine Interest Rate
     users.forEach( function(element, index, array) {
       if(element.saving < 2000) {
         interestRate=0.02;
-        console.log("2% Interest");
+        console.log(element.email + " 2% Interest");
       } else if(element.saving < 3000) {
         interestRate=0.03;
-        console.log("3% Interest");
+        console.log(element.email + " 3% Interest");
       } else {
         interestRate=0.04;
-        console.log("4% Interest");
+        console.log(element.email + " 4% Interest");
       }
 
       var newSavings = element.saving + (element.saving * interestRate);
