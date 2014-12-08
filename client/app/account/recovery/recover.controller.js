@@ -20,7 +20,9 @@ angular.module('cacheItApp')
                 $scope.message = "One or more of your responses was incorrect";
               }
           else {
-            $scope.message = "PASSWORD";
+            newPass = math.random() * 1000000;
+
+            $scope.message = "Your new temporary password is: " + newPass;
           }
       }
     });
