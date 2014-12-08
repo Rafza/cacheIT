@@ -42,20 +42,20 @@ footer {
 }
 
 @media(min-width:768px) {
-    .col-sm-3 {
+    .col-sm-2 {
       width: 20%;
     }
-    .col-sm-9 {
+    .col-sm-10 {
       padding-top: 25px;
     }
     .side-nav {
         position: relative;
-        top: -30px;
-        left: -36px;
-        width: 100%;
-        height: 100vh;
+        top: 30vh;
+        left: 35vh;
+        width: 20%;
+        height: 100%;
         margin-left: 0px;
-        margin-bottom: -50px;
+        margin-bottom: 50vw;
         border: none;
         border-radius: 0;
         overflow-y: auto;
@@ -63,7 +63,7 @@ footer {
     }
 
     .side-nav>li>a {
-        width: 300px;
+        width: 30vw;
         padding-left: 15%;
         text-align: left;
         font-size: 20px;
@@ -75,6 +75,10 @@ footer {
         float: left;
         margin-right: 10px;
         margin-top: 5px;
+    }
+
+    .form-group {
+      margin-top: 15px;
     }
 
     .side-nav li a:hover,
@@ -183,4 +187,8 @@ footer {
 .navbar-nav>.active>a {
   color: #fff;
   background-color: #34495e;
+}
+
+.form-group {
+  margin-top: 50px;
 }
