@@ -29,31 +29,16 @@
   <h5>Please respond to the securiy questions below:</h5>
   <div class="row centered-form">
     <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-      <div class="signup-form" ng-controller="SignupCtrl">
-        <!--         <div
-        ng-init="tranData={
-        name: SignipCtrl.myService.getField(),
-        email: myService.getEmail(),
-        password: myService.getPassword()
-      }">
-    </div>
-  -->
-  <form class="form" name="form" ng-submit="register(form)" novalidate>
+      <div class="recovery-form" ng-controller="RecoveryCtrl">
+
+  <form class="form" name="form" ng-submit="recoverUser(form)" novalidate>
 
     <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
     'has-error': form.email.$invalid && submitted }">
     <label style="color:#16A085">Email</label>
-    <input type="email" name="email" class="form-control" ng-model="user.email"
-      required Placeholder="Email"
-      mongoose-error/>
-        <p class="help-block" ng-show="form.email.$error.email && submitted">
-          Doesn't look like a valid email.
-        </p>
+    <input class="form-control" name="email" ng-model="user.email" maxlength="40" type="text" required>
         <p class="help-block" ng-show="form.email.$error.required && submitted">
           What's your email address?
-        </p>
-        <p class="help-block" ng-show="form.email.$error.mongoose">
-          {{ errors.email }}
         </p>
     </div>
 
@@ -63,7 +48,7 @@
     <label style="color:#16A085">What is your mother maiden Name.</label>
     <input class="form-control" name="questionOne" ng-model="user.questionOne" maxlength="40" type="text" required>
       <p class="help-block" ng-show="form.questionOne.$error.required && submitted">
-        Security question feild is required
+        Security question field is required
       </p>
   </div>
 
@@ -72,13 +57,14 @@
     <label style="color:#16A085">What is the model of your first car</label>
     <input class="form-control" name="questionTwo" ng-model="user.questionTwo" maxlength="40" type="text" required>
       <p class="help-block" ng-show="form.questionTwo.$error.required && submitted">
-        Security question feild is required
+        Security question field is required
       </p>
   </div>
 
+  <p>{{message}}</p>
   <!-- submit and login button -->
   <div>
-    <button class="btn  btn-info" type="submit">Sign up</button>
+    <button class="btn  btn-info" type="submit">Recover Password</button>
     <!-- <a class="btn btn-default btn-sm btn-register" href="/login">
     Login
   </a> -->
