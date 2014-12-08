@@ -2,7 +2,7 @@
 'use strict';
 var myApp = angular.module('cacheItApp');
 
-myApp.controller('TranCtrl', function ($scope, $location, $http ,Auth, User, $q, Transaction) {
+myApp.controller('TranCtrl', function ($scope, $location, $http, Auth, User, $q, Transaction) {
   $scope.users = User.query();
   // begin same Account added
   $scope.accountType = ["Saving","Checking","Transfer"];

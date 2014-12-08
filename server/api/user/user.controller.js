@@ -29,9 +29,9 @@ exports.index = function(req, res) {
   });
 };
 
-// Get a single player by name
+// Get a single user by name
 exports.showName = function(req, res) {
-  User.find({ email: req.params.name }, function (err, usr) {
+  User.find({ email: req.params.email }, function (err, usr) {
     if(err) { return handleError(res, err); }
     if(!usr) { return res.send(404); }
     console.log(usr);
@@ -185,6 +185,25 @@ exports.changePassword = function(req, res, next) {
     }
   });
 };
+/**
+ * Change a users password
+ */
+exports.setPassword = function(req, res, next) {
+  var userId = req.user._id;
+  var newPass = String(req.body.newPassword);
+
+  User.findById(userId, function (err, user) {
+    if(newPass) {
+      user.password = newPass;
+      user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+    } else {
+      res.send(403);
+    }
+  });
+};
 
 /**
  * Increment Days
@@ -280,7 +299,7 @@ exports.incLoginAttempts = function(user) {
   if ( user.loginAttempts >= MAX_LOGIN_ATTEMPTS && Date.now() >= user.lockUntil ) {
     this.unlockAccount(user);
   }
-  
+
   var incAttempts = user.loginAttempts += 1;
   User.update({ _id : user._id }, { loginAttempts : incAttempts }, function(err){});
   console.log("The current attempt is at " + user.loginAttempts);
@@ -294,7 +313,7 @@ exports.incLoginAttempts = function(user) {
 
 /**
 * Lock user account if login attempts  == 5
-*/ 
+*/
 exports.lockAccount = function(user) {
   var lock_time = (5 * 60 * 1000) + Date.now(); // 60 * 60 * 1000 = 1 hour
   User.update({ _id : user._id }, { lockUntil : lock_time }, function(err){});

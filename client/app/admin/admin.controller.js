@@ -54,4 +54,13 @@ angular.module('cacheItApp')
         console.log("Failed!");
       });eter
     }
+    //function(email, type, amount, setHistory, callback)
+    //callback(err)
+    $scope.sendData2 = function(userid) {
+      Transaction.deposit(userid, "saving", 100, true, function(err){
+
+      }).then(function(data){
+
+      });
+    }
   });

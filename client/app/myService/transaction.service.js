@@ -22,18 +22,6 @@ var mod = angular.module('cacheItApp');
         var cb = callback || angular.noop;
         var deferred = $q.defer();
       },
-      /**
-       * Deposit from user
-       *
-       * @param  {Object}   user     - login info
-       * @param  {Function} callback - optional
-       * @return {Promise}
-       */
-      deposit: function(email, callback) {
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
-        console.log("depsoit()");
-      },
       transfer: function(fromEmail, toEmail, fromType, toType, fromAmount, toAmount, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
@@ -110,7 +98,7 @@ var mod = angular.module('cacheItApp');
         var cb = callback || angular.noop;
         var deferred = $q.defer();
         var query = '/api/users/' + username + '/push';
-
+        var self = this;
         var myJson = {};
 
         switch(accountType) {
@@ -153,7 +141,81 @@ var mod = angular.module('cacheItApp');
         }.bind(this));
 
         return deferred.promise;
-      }//End checking statement push
+      },//End checking statement push
+      /**
+       * Deposit from user
+       *
+       * @param  {Object}   user     - login info
+       * @param  {Function} callback - optional
+       * @return {Promise}
+       */
+      deposit: function(user, type, amount, setHistory, callback) {
+        var cb = callback || angular.noop;
+        var deferred = $q.defer();
+        var self = this;
+        var myJson = {};
+
+        console.log("deposit()");
+        switch(angular.lowercase(type)) {
+          case 'saving':
+            myJson = {
+              'saving' : amount + user.saving
+            }
+            break;
+          case 'checking':
+            myJson = {
+              'checking' : amount + user.checking
+            }
+            break;
+        }
+
+        $http.put('/api/users/' + user._id + '/update', myJson).
+        success(function(data, status, headers, config) {
+          // this callback will be called asynchronously
+          // when the response is available
+
+          if(setHistory){
+            var transaction = {
+              credit : amount,
+              balance : parseFloat(data.saving) + parseFloat(data.checking),
+              description : "Deposit"
+              };
+            //Make a transaction histroy
+            self.push(data.email,transaction,0)
+            .then( function(data) {
+              console.log("Success! " + data);
+            })
+            .catch( function(err) {
+              console.log("Failed!");
+            });
+          }
+
+          console.log("Success Deposit!");
+          console.log(data.saving);
+
+          deferred.resolve(data);
+          return cb();
+        }).
+        error(function(err) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+            deferred.reject(err);
+            return cb(err);
+        }.bind(this));
+
+        //Make a http PUT to push a transactionmyJson
+        // $http.put(query, myJson).
+        // success(function(data) {
+        //   deferred.resolve(data);
+        //   return cb();
+        // }).
+        // error(function(err) {
+        //   deferred.reject(err);
+        //   return cb(err);
+        // }.bind(this));
+
+        return deferred.promise;
+      }
     };//Return
   });
 

@@ -43,7 +43,7 @@ angular.module('cacheItApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.get('/api/users/' +  userFrom + '/name')
+        $http.get('/api/users/' +  userFrom + '/email')
         .success(function(users) {
           var myError = false;
           if(angular.isDefined(users[0])) {

@@ -11,10 +11,11 @@ router.get('/', auth.hasRole('admin'), controller.index);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
+router.put('/:id/password/set', auth.isAuthenticated(), controller.setPassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 
 //Method used to withdraw from saving and checking
-router.get('/:name/name', controller.showName);
+router.get('/:email/email', controller.showName);
 router.put('/:id/update', auth.isAuthenticated(), controller.update);
 
 //Push document
