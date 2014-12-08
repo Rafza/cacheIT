@@ -1,0 +1,94 @@
+<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">EveryoneRichBank</a>
+    </div>
+    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+          <a ng-href="{{item.link}}">{{item.title}}</a>
+        </li>
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <h5>Please respond to the securiy questions below:</h5>
+  <div class="row centered-form">
+    <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+      <div class="signup-form" ng-controller="SignupCtrl">
+        <!--         <div
+        ng-init="tranData={
+        name: SignipCtrl.myService.getField(),
+        email: myService.getEmail(),
+        password: myService.getPassword()
+      }">
+    </div>
+  -->
+  <form class="form" name="form" ng-submit="register(form)" novalidate>
+
+    <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
+    'has-error': form.email.$invalid && submitted }">
+    <label style="color:#16A085">Email</label>
+    <input type="email" name="email" class="form-control" ng-model="user.email"
+      required Placeholder="Email"
+      mongoose-error/>
+        <p class="help-block" ng-show="form.email.$error.email && submitted">
+          Doesn't look like a valid email.
+        </p>
+        <p class="help-block" ng-show="form.email.$error.required && submitted">
+          What's your email address?
+        </p>
+        <p class="help-block" ng-show="form.email.$error.mongoose">
+          {{ errors.email }}
+        </p>
+    </div>
+
+  <!-- security Questions -->
+  <div class="form-group" ng-class="{ 'has-success': form.questionOne.$valid && submitted,
+    'has-error': form.questionOne.$invalid && submitted }">
+    <label style="color:#16A085">What is your mother maiden Name.</label>
+    <input class="form-control" name="questionOne" ng-model="user.questionOne" maxlength="40" type="text" required>
+      <p class="help-block" ng-show="form.questionOne.$error.required && submitted">
+        Security question feild is required
+      </p>
+  </div>
+
+  <div class="form-group" ng-class="{ 'has-success': form.questionTwo.$valid && submitted,
+    'has-error': form.questionTwo.$invalid && submitted }">
+    <label style="color:#16A085">What is the model of your first car</label>
+    <input class="form-control" name="questionTwo" ng-model="user.questionTwo" maxlength="40" type="text" required>
+      <p class="help-block" ng-show="form.questionTwo.$error.required && submitted">
+        Security question feild is required
+      </p>
+  </div>
+
+  <!-- submit and login button -->
+  <div>
+    <button class="btn  btn-info" type="submit">Sign up</button>
+    <!-- <a class="btn btn-default btn-sm btn-register" href="/login">
+    Login
+  </a> -->
+  <br>
+  <br>
+  <br>
+  </div>
+  </form>
+  </div>
+  </div><!-- end of col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4 -->
+  </hr>
+  </div>
+  </div><!-- end of container -->

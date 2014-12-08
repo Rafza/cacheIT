@@ -32,6 +32,10 @@ myModule.controller('LoginCtrl', function ($scope, Auth, $location) {
       }
     };
 
+    $scope.recover = function() {
+      $location.path('/recovery');
+    };
+
   });
 
 // Signup Handling
@@ -44,6 +48,7 @@ myModule.controller('SignCtrl', function ($scope, Auth, $location, myService) {
       myService.saveField($scope.signup.name);
       myService.setEmail($scope.signup.email);
       myService.setPassword($scope.signup.password);
+      myService.setlastName($scope.signup.lastName);
       // myService.savePassword($scope.signup.password);
       // myService.setEmail($scope.signup.email);
       // myService.setPassword($scope.signup.password);
@@ -61,7 +66,7 @@ myModule.controller('SignCtrl', function ($scope, Auth, $location, myService) {
       //   })
       //   .then( function() {
       //     // Account created, redirect to home
-          
+
       //   })
       //   .catch( function(err) {
       //     err = err.data;

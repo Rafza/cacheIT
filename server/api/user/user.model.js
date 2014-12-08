@@ -37,7 +37,9 @@ var UserSchema = new Schema({
   checkTransactions :  [transSchema],
   savTransactions : [transSchema],
   accountDays : { type : Number, default : 0 },
-  dateOpened : { type : Date, default : Date.now }
+  dateOpened : { type : Date, default : Date.now },
+  loginAttempts: { default : 0, type : Number },
+  lockUntil: { type : Number, default: 0 }
 });
 
 /**
