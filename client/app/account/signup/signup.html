@@ -119,9 +119,23 @@
             </div>
 
             <!-- Phone number -->
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-success': form.phoneNumber.$valid && submitted,
+                                                'has-erro': form.phoneNumber.$invalid && submitted}">
               <label style="color:#16A085">Phone Number</label>
-              <input class="form-control" name="phoneNumber" ng-model="user.phoneNumber" maxlength="11" type="text" required>
+
+              <input class="form-control" name="phoneNumber" ng-model="user.phoneNumber"
+               ng-minlength="10"
+               ng-maxlength="11"
+              required
+              mongoose-error/>
+
+              <p class="help-block"
+              ng-show="(form.phoneNumber.$error.minlength || form.password.$error.required || form.phoneNumber.$error.maxlength) && submitted">
+                Phone number is not valid.
+              </p>
+              <p class="help-block" ng-show="form.phoneNumber.$error.mongoose">
+                {{ errors.password }}
+              </p>
             </div>
 
               <!-- security Questions -->
