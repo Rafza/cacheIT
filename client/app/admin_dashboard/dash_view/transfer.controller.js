@@ -227,7 +227,7 @@ $scope.confirmInternal = function() {
       $scope.errorAmt = true;
     }
 
-    if ( parseFloat(amt) < 0 || $scope.errorAmt) {
+    if ( parseFloat(amt) < 0 || $scope.errorAmt || parseFloat(amt) > 10000) {
         negativeError = true;
     } else {
       Transaction.modifyAccount(data[0],'withdraw', angular.lowercase(from), amt, true,
