@@ -201,6 +201,7 @@ exports.incrementDays = function() {
       User.update({ _id : element._id },{ accountDays : newDays},function(err){});
     });
     exports.accruedPenalty();
+    exports.accruedInterest();
   });
 };
 
@@ -208,13 +209,13 @@ exports.incrementDays = function() {
  * Apply Penalty
  */
 exports.accruedPenalty = function() {
-  User.find({checking: { $lt : 100 }, accountDays : 29 },'checking saving accountDays checkTransactions', function (err, users) {
+  User.find({checking: { $lt : 100 }, accountDays : 29 },'email checking saving accountDays checkTransactions', function (err, users) {
     // console.log("Accounts to penalize: ");
     // console.log(users);
     users.forEach( function(element, index, array) {
+      console.log("Penalizing " + element.email);
       // console.log("Day: " + element.accountDays);
       var newChecking = element.checking-25;
-
       var chkJson = {
         checkTransactions :
         [{
@@ -233,13 +234,26 @@ exports.accruedPenalty = function() {
  * Apply Interest
  */
 exports.accruedInterest = function() {
-  User.find({saving: { $gte : 1000 }},'saving', function (err, users) {
-    console.log(users.length);
-    console.log(users);
+  User.find({saving: { $gte : 1000 }, accountDays : 29 },'email saving', function (err, users) {
+    // console.log(users.length);
+    // console.log(users);
+    var interestRate = 0;
+
+    //Determine Interest Rate
     users.forEach( function(element, index, array) {
-      var newChecking = element.checking-25;
-      if( newChecking < 0 ) { newChecking = 0; }
-      User.update({ _id : element._id },{ checking : newChecking},function(err){});
+      if(element.saving < 2000) {
+        interestRate=0.02;
+        console.log(element.email + " 2% Interest");
+      } else if(element.saving < 3000) {
+        interestRate=0.03;
+        console.log(element.email + " 3% Interest");
+      } else {
+        interestRate=0.04;
+        console.log(element.email + " 4% Interest");
+      }
+
+      var newSavings = element.saving + (element.saving * interestRate);
+      User.update({ _id : element._id },{ saving : newSavings},function(err){});
     });
   });
 };/**
