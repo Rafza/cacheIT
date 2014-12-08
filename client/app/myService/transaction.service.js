@@ -1,11 +1,14 @@
 'use strict';
 
-angular.module('cacheItApp')
-  .factory('Transaction', function ($q, $http) {
+var mod = angular.module('cacheItApp');
+ mod.factory('Transaction', function ($q, $http) {
     // var currentUser = {};
     // if($cookieStore.get('token')) {
     //   currentUser = User.get();
+
     // }
+
+
 
     return {
       /**
@@ -89,3 +92,45 @@ angular.module('cacheItApp')
       }//End checking statement push
     };//Return
   });
+
+
+mod.service('myService', function() {
+  var saveName;
+  var saveEmail;
+  var savePassword;
+
+  var saveField = function(name) {
+      //savedData.push(newObj);
+      saveName = name;
+      // savedData[1] = email;
+      // savedData[2] = password;
+  }
+  var getField = function(){
+    return saveName;
+  }
+
+  var setEmail = function(email) {
+    saveEmail = email;
+  }
+  var getEmail = function(){
+    return saveEmail;
+  }
+
+  var setPassword = function(password) {
+    savePassword = password;
+  }
+  var getPassword = function(){
+    return savePassword;
+  }
+
+
+  return {
+    saveField: saveField,
+    getField: getField,
+    setEmail: setEmail,
+    getEmail: getEmail,
+    setPassword: setPassword,
+    getPassword: getPassword
+  };
+
+});

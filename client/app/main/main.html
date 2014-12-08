@@ -7,7 +7,7 @@
           <div class="navbar col-sm-12" role="navigation">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle"></button>
-              <a class="brand" href="#"><img src="assets/template_assets/img/logo.png" width="50" height="50" alt=""> EveryoneRichBank</a>
+              <a class="brand" href="#"><img src="assets/template_assets/img/logo.png" alt=""> EveryoneRichBank</a>
             </div>
             <div class="collapse navbar-collapse pull-right" ng-controller="LoginCtrl">
               <form class="navbar-form pull-left form" name="form" ng-submit="login(form)" novalidate>
@@ -51,7 +51,10 @@
           Your money, your future. Use our technology created by really smart people.
         </p>
         <div class="signup-form" ng-controller="SignCtrl">
-          <form class="form" name="signupForm" ng-submit="register(signupForm)" novalidate>
+          <form class="form" name="signupForm"  ng-submit="register(signupForm)" novalidate>
+
+            
+
             <div class="form-group" ng-class="{ 'has-success': signupForm.name.$valid && submitted,
             'has-error': signupForm.name.$invalid && submitted }">
 
@@ -59,6 +62,8 @@
             <p class="help-block" ng-show="signupForm.name.$error.required && submitted">
               A name is required</p>
             </div>
+
+
 
             <div class="form-group" ng-class="{ 'has-success': signupForm.email.$valid && submitted,
             'has-error': signupForm.email.$invalid && submitted }">
@@ -76,10 +81,10 @@
                 <div class="form-group" ng-class="{ 'has-success': signupForm.password.$valid && submitted, 'has-error': signupForm.password.$invalid && submitted }">
 
                   <input type="password" name="password" class="form-control" ng-model="signup.password"
-                  ng-minlength="3" placeholder="Password" required mongoose-error/>
+                  ng-minlength="6" placeholder="Password" required mongoose-error/>
                   <p class="help-block"
                   ng-show="(signupForm.password.$error.minlength || signupForm.password.$error.required) && submitted">
-                  Password must be at least 3 characters.
+                  Password must be at least 6 characters.
                 </p>
                 <p class="help-block" ng-show="signupForm.password.$error.mongoose">
                   {{ errors.password }}
@@ -171,12 +176,12 @@
         </ul>
       </nav>
       <div class="social-btns pull-right">
-        <a href="#"><div class="fui-vimeo"></div><div class="fui-vimeo"></div></a>
+        <a href="https://www.youtube.com/watch?v=sXEi2PY91pc&list=UU95SqKzT82L1Z8MnYiybiyg"><div class="fui-youtube"></div><div class="fui-youtube"></div></a>
         <a href="https://www.facebook.com/groups/305340899654100/"><div class="fui-facebook"></div><div class="fui-facebook"></div></a>
         <a href="https://twitter.com/UCSD_cacheit"><div class="fui-twitter"></div><div class="fui-twitter"></div></a>
       </div>
       <div class="additional-links">
-        <font size="5">Powered by CacheIT</font>
+        Powered by CacheIT
       </div>
     </div>
   </footer>
