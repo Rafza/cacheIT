@@ -14,5 +14,7 @@
 }
 
 div.center {
-	width: 100%;
+	margin-left: 0px;
+	margin-right: 20px;
+	width: 1100px;
 }
