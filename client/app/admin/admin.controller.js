@@ -56,11 +56,11 @@ angular.module('cacheItApp')
     }
     //function(email, type, amount, setHistory, callback)
     //callback(err)
-    $scope.sendData2 = function(userid) {
-      Transaction.deposit(userid, "saving", 100, true, function(err){
+    $scope.sendData2 = function(user) {
+      Transaction.deposit(user, "saving", 100, true, function(err){
 
       }).then(function(data){
-
+        
       });
     }
   });
