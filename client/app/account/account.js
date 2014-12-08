@@ -18,5 +18,11 @@ angular.module('cacheItApp')
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsCtrl',
         authenticate: true
+      })
+      .state('recovery', {
+        url: '/recovery',
+        templateUrl: 'app/account/recovery/recovery.html',
+        controller: 'RecoveryCtrl',
       });
+
   });

@@ -9,8 +9,8 @@
               <button type="button" class="navbar-toggle"></button>
               <a class="brand" href="#"><img src="assets/template_assets/img/logo.png" width="50" height="50" alt=""> EveryoneRichBank</a>
             </div>
-            <div class="collapse navbar-collapse pull-right" ng-controller="LoginCtrl">
-              <form class="navbar-form pull-left form" name="form" ng-submit="login(form)" novalidate>
+            <div class="collapse navbar-collapse pull-right">
+              <form class="navbar-form pull-left form" name="form" ng-controller="LoginCtrl" ng-submit="login(form)" novalidate>
                 <div class="form-group">
                   <input class="form-control" ng-model="user.email" type="text" placeholder="E-mail">
                 </div>
@@ -27,7 +27,7 @@
                   <p class="help-block">{{ errors.other }}</p>
                 </div>
                 <button class="btn btn-primary" type="submit">Login</button>
-                <a class="btn btn-danger" href="#">Forgot Login?</a>
+                <button class="btn btn-danger" ng-click="recover(recoveryForm)">Forgot Login?</button>
               </form>
             </div>
           </div>

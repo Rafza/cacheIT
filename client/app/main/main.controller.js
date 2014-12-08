@@ -32,6 +32,10 @@ myModule.controller('LoginCtrl', function ($scope, Auth, $location) {
       }
     };
 
+    $scope.recover = function() {
+      $location.path('/recovery');
+    };
+
   });
 
 // Signup Handling
@@ -61,7 +65,7 @@ myModule.controller('SignCtrl', function ($scope, Auth, $location, myService) {
       //   })
       //   .then( function() {
       //     // Account created, redirect to home
-          
+
       //   })
       //   .catch( function(err) {
       //     err = err.data;
