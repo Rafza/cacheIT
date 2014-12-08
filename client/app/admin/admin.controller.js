@@ -48,19 +48,21 @@ angular.module('cacheItApp')
     $scope.sendData = function(user, transaction) {
       Transaction.push(user, transaction)
       .then( function(data) {
-        console.log("SUccess! " + data);
+        console.log("Success! Sav: " + data.saving + "Chk: " + data.checking);
       })
       .catch( function(err) {
         console.log("Failed!");
       });eter
     }
     //function(email, type, amount, setHistory, callback)
+    //modifyAccount: function(user, action, type, amount, setHistory, callback)
     //callback(err)
     $scope.sendData2 = function(user) {
-      Transaction.deposit(user, "saving", 100, true, function(err){
+      Transaction.modifyAccount(user,'withdraw', 'saving', 100, true, function(err){
 
       }).then(function(data){
-        
+          user.checking = data.checking;
+          user.saving = data.saving;
       });
     }
   });

@@ -26,6 +26,7 @@ var mod = angular.module('cacheItApp');
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
+        var self = this;
         //JSON variables to store transfer amounts
         var fromJson = {};
         var toJson = {};
@@ -50,39 +51,7 @@ var mod = angular.module('cacheItApp');
             break;
         }
         this.deposit("hi");
-        // //User to transfer FROM
-        // $http.put('/api/users/' + accID + '/update', fromJson ).
-        // success(function(data, status, headers, config) {
-        //   // this callback will be called asynchronously
-        //   // when the response is available
-        //   console.log("Success Withdraw! Returning new saving amount:");
-        //   console.log("NEW amount ON FROM C " + data.checking);
-        //   console.log("NEW amount ON FROM S " + data.saving);
-        //   //$scope.newChecking = data.checking;
-        //   // usr.saving = data.saving;
-        //   // TODO: return json to update only one row to reduce refreshing effect
-        // }).
-        // error(function(data, status, headers, config) {
-        //   // called asynchronously if an error occurs
-        //   // or server returns response with an error status.
-        // });
-        //
-        // //User to transfer TO
-        // $http.put('/api/users/' + accID + '/update', toJson ).
-        // success(function(data, status, headers, config) {
-        //   // this callback will be called asynchronously
-        //   // when the response is available
-        //   console.log("Success Withdraw! Returning new saving amount:");
-        //   console.log("NEW amount ON FROM C " + data.checking);
-        //   console.log("NEW amount ON FROM S " + data.saving);
-        //   //$scope.newChecking = data.checking;
-        //   // usr.saving = data.saving;
-        //   // TODO: return json to update only one row to reduce refreshing effect
-        // }).
-        // error(function(data, status, headers, config) {
-        //   // called asynchronously if an error occurs
-        //   // or server returns response with an error status.
-        // });
+
 
       },
 
@@ -149,23 +118,38 @@ var mod = angular.module('cacheItApp');
        * @param  {Function} callback - optional
        * @return {Promise}
        */
-      deposit: function(user, type, amount, setHistory, callback) {
+      modifyAccount: function(user, action, type, amount, isTransfer, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
         var self = this;
         var myJson = {};
+        var tranMsg = "";
+        var typeNum;
 
-        console.log("deposit()");
+        if(angular.lowercase(action) === 'deposit') {
+          console.log("Deposit");
+          tranMsg = "Deposit ";
+        } else if (angular.lowercase(action) === 'withdraw') {
+          amount = -amount;
+          tranMsg = "Withdraw ";
+        }
+
+        if (isTransfer) {
+          tranMsg = 'Transfer';
+        }
+
         switch(angular.lowercase(type)) {
           case 'saving':
             myJson = {
-              'saving' : amount + user.saving
+              'saving' : user.saving + amount
             }
+            typeNum = 0;
             break;
           case 'checking':
             myJson = {
-              'checking' : amount + user.checking
+              'checking' : user.checking + amount
             }
+            typeNum = 1;
             break;
         }
 
@@ -173,25 +157,40 @@ var mod = angular.module('cacheItApp');
         success(function(data, status, headers, config) {
           // this callback will be called asynchronously
           // when the response is available
-
-          if(setHistory){
-            var transaction = {
-              credit : amount,
-              balance : parseFloat(data.saving) + parseFloat(data.checking),
-              description : "Deposit"
+          console.log("Success! " + action + "  Sav: " + data.saving + " Chk: " + data.checking);
+          var transaction = {};
+          switch(angular.lowercase(action)) {
+            case 'deposit':
+              console.log("dep");
+              transaction = {
+                credit : amount,
+                balance : parseFloat(data.saving) + parseFloat(data.checking),
+                description : tranMsg
               };
-            //Make a transaction histroy
-            self.push(data.email,transaction,0)
-            .then( function(data) {
-              console.log("Success! " + data);
-            })
-            .catch( function(err) {
-              console.log("Failed!");
-            });
+              break;
+            case 'withdraw':
+              console.log("with");
+              transaction = {
+                debit : -amount,
+                balance : parseFloat(data.saving) + parseFloat(data.checking),
+                description : tranMsg
+              };
+              break;
           }
+          console.log("Transaction: " + angular.toJson(transaction));
 
-          console.log("Success Deposit!");
-          console.log(data.saving);
+          //Make a transaction histroy
+          self.push(data.email,transaction,typeNum)
+          .then( function(tranData) {
+            // console.log("Transaction History: " + angular.toJson(tranData));
+          })
+          .catch( function(err) {
+            console.log("Failed!");
+          });
+
+
+
+
 
           deferred.resolve(data);
           return cb();
