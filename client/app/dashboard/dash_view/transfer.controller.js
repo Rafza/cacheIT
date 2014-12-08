@@ -211,7 +211,7 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
        console.log("checkUser() callback emailFrom: " + result);
        $scope.errorFrom = result;
      }),
-    Auth.checkUser($scope.user.emailTo, function(result) {
+    Auth.checkUser($scope.user.emailTo.toLowerCase(), function(result) {
        console.log("checkUser() callback emailTo: " + result);
        $scope.errorTo = result;
      })

@@ -26,7 +26,9 @@
 
 
 <div class="container">
-  <h5>Please respond to the securiy questions below:</h5>
+  <div class="col-md-4"></div>
+  <center><h5 style="color:#16A085" >Please respond to the securiy questions below:</h5></center>
+  <br>
   <div class="row centered-form">
     <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
       <div class="recovery-form" ng-controller="RecoveryCtrl">
@@ -45,7 +47,7 @@
   <!-- security Questions -->
   <div class="form-group" ng-class="{ 'has-success': form.questionOne.$valid && submitted,
     'has-error': form.questionOne.$invalid && submitted }">
-    <label style="color:#16A085">What is your mother maiden Name.</label>
+    <label style="color:#16A085">What is your mother maiden name.</label>
     <input class="form-control" name="questionOne" ng-model="user.questionOne" maxlength="40" type="text" required>
       <p class="help-block" ng-show="form.questionOne.$error.required && submitted">
         Security question field is required
