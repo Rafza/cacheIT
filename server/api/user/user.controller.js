@@ -271,8 +271,20 @@ exports.accruedInterest = function() {
         console.log(element.email + " 4% Interest");
       }
 
+
       var newSavings = element.saving + (element.saving * interestRate);
-      User.update({ _id : element._id },{ saving : newSavings},function(err){});
+
+      var savJson = {
+        savTransactions :
+        [{
+          description : 'Interest Rate of ' + (interestRate*100) +'% applied',
+          debit : 0,
+          credit : (element.saving * interestRate),
+          balance : newSavings
+        }]
+      };
+
+      User.update({ _id : element._id },{ saving : newSavings, $pushAll : savJson},function(err){});
     });
   });
 };/**
