@@ -98,6 +98,7 @@ mod.service('myService', function() {
   var saveName;
   var saveEmail;
   var savePassword;
+  var savelastName;
 
   var saveField = function(name) {
       //savedData.push(newObj);
@@ -123,6 +124,13 @@ mod.service('myService', function() {
     return savePassword;
   }
 
+  var setlastName = function(lastName) {
+    savelastName = lastName;
+  }
+  var getlastName = function(){
+    return savelastName;
+  }
+
 
   return {
     saveField: saveField,
@@ -130,7 +138,9 @@ mod.service('myService', function() {
     setEmail: setEmail,
     getEmail: getEmail,
     setPassword: setPassword,
-    getPassword: getPassword
+    getPassword: getPassword,
+    setlastName: setlastName,
+    getlastName: getlastName
   };
 
 });
