@@ -1074,7 +1074,7 @@ label {
   font-size: 15px;
   line-height: 1.467;
   padding: 8px 12px;
-  height: 42px;
+  height: 5.2vh;
   -webkit-appearance: none;
   border-radius: 6px;
   -webkit-box-shadow: none;
@@ -1959,9 +1959,9 @@ textarea.navbar-input {
 .navbar-form .form-control,
 .navbar-form .input-group-addon,
 .navbar-form .btn {
-  height: 35px;
-  padding: 5px 10px;
-  font-size: 13px;
+  height: 4.55vh;
+  padding: 0.75vw 1.3vh;
+  font-size: 1.69vh;
   line-height: 1.4;
   border-radius: 6px;
 }
@@ -1993,12 +1993,12 @@ textarea.navbar-form .btn {
   border-top-left-radius: 0;
 }
 .navbar-form .form-control {
-  font-size: 15px;
+  font-size: 1.95vh;
   border-radius: 5px;
   display: table-cell;
 }
 .navbar-form .form-group + .btn {
-  font-size: 15px;
+  font-size: 1.95vh;
   border-radius: 5px;
   margin-left: 4px;
 }

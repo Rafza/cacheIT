@@ -7,17 +7,9 @@ angular.module('cacheItApp')
     $scope.user.name = myService.getField();
     $scope.user.email = myService.getEmail();
     $scope.user.password = myService.getPassword();
+    $scope.user.lastName = myService.getlastName();
 
 
-    // $scope.init = function(){
-    //   // $scope.name = myService.getFeild();
-    //   // $scope.email = myService.getFeild();
-    //   // $scope.password = myService.getFeild();
-    //   console.log("Name"+myService.getName());
-    //   console.log("Email"+myService.getEmail());
-    //   console.log("password"+myService.getPassword());
-  
-    // }
     $scope.register = function(form) {
       console.log("register(): " + form.$valid);
       console.log("Err: " + form.$valid);

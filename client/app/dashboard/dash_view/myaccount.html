@@ -10,14 +10,14 @@
         <div ng-if="acc.getCurrentUser().checking < 0">
           <h6>Checking Balance:
             <font color="red">
-              <span class="glyphicon glyphicon-usd" style="font-size:75%"></span> {{acc.getCurrentUser().checking}}
+              {{acc.getCurrentUser().checking | currency}}
             </font>
           </h6>
         </div>
         <div ng-if="acc.getCurrentUser().checking >= 0">
           <h6>Checking Balance:
             <font color="#339999">
-              <span class="glyphicon glyphicon-usd" style="font-size:75%"></span> {{acc.getCurrentUser().checking}}
+              {{acc.getCurrentUser().checking | currency}}
             </font>
           </h6>
         </div>
@@ -63,14 +63,14 @@
         <div ng-if="acc.getCurrentUser().saving < 0">
           <h6>Savings Balance:
             <font color="red">
-              <span class="glyphicon glyphicon-usd" style="font-size:75%"></span> {{acc.getCurrentUser().saving}}
+              {{acc.getCurrentUser().saving | currency}}
             </font>
           </h6>
         </div>
         <div ng-if="acc.getCurrentUser().saving >= 0">
           <h6>Savings Balance:
             <font color="#339999">
-              <span class="glyphicon glyphicon-usd" style="font-size:75%"></span> {{acc.getCurrentUser().saving}}
+              {{acc.getCurrentUser().saving | currency}}
             </font>
           </h6>
         </div>

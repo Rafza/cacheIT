@@ -350,7 +350,7 @@ li {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  line-height: 22px;
+  line-height: 75%;
   -webkit-transition: 0.25s;
   -moz-transition: 0.25s;
   -o-transition: 0.25s;
@@ -542,7 +542,7 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 2.08vh;
   font-weight: normal;
   color: #7f8c8d;
 }
@@ -574,6 +574,7 @@ button:active {
 .navbar .navbar-collapse {
   padding-left: 0;
   padding-right: 0;
+  margin-top: -1vh;
 }
 .navbar .nav > li {
   float: left;
@@ -599,9 +600,9 @@ button:active {
 }
 .navbar .navbar-form .btn {
   height: auto;
-  line-height: 22px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  line-height: 2.86vh;
+  padding-top: 1.3vh;
+  padding-bottom: 1.3vh;
 }
 .navbar .nav > li > a > [class*="fui-"] {
   font-size: 24px;
@@ -862,11 +863,11 @@ section * {
   width: 100%;
   padding-top: 0;
   padding-bottom: 0;
-  height: 90px;
+  height: 11.7vh;
 }
 .header-11 .transbox {
   background-color: rgba(0,0,0,0.5);
-  height: 90px;
+  height: 11.7vh;
   width: 100%;
   z-index: 1;
 }
@@ -902,8 +903,8 @@ section * {
   color: rgba(255, 255, 255, 0.75);
 }
 .header-11 .navbar .btn {
-  padding-left: 18px;
-  padding-right: 18px;
+  padding-left: 1.3vw;
+  padding-right: 1.3vw;
 }
 .header-11 .navbar .btn.btn-primary {
   background-color: rgba(22, 160, 133, 0.3);
@@ -932,14 +933,16 @@ section * {
 }
 
 .header-11 .navbar .brand {
-  padding-top: 30px;
-  font-size: 25px;
+  padding-top: 3.3vh;
+  font-size: 3.3vh;
   color: #fff;
   font-weight: 300;
 }
 .header-11 .navbar .brand img:first-child {
   float: left;
   margin: -10px 15px 0 0;
+  width: 6.8vh;
+  height: 6.8vh;
 }
 .header-11 .navbar .nav > li {
   margin-left: 25px;
@@ -984,19 +987,19 @@ section * {
   position: relative;
 }
 .header-11-sub .collist {
-  float: left;
+  
 }
 .header-11-sub h3 {
-  font-size: 33px;
+  font-size: 4.3vh;
   font-weight: normal;
   color: #ffffff;
-  margin-bottom: 15px;
+  margin-bottom: 1.95vh;
   font-family: "Lato", Arial, sans-serif;
   font-weight: 300;
   text-align: center;
 }
 .header-11-sub p {
-  font-size: 20px;
+  font-size: 2.6vh;
   font-weight: 300;
   color: #fff;
   font-family: "Open Sans", sans-serif;
@@ -1008,7 +1011,7 @@ section * {
   opacity: 0.75;
   filter: alpha(opacity=50);
   font-family: "Open Sans", sans-serif;
-  font-size: 12px;
+  font-size: 1.5vh;
   font-weight: 400;
   color: #ccc;
 }
@@ -1048,8 +1051,8 @@ section * {
 }
 .header-11-sub .signup-form form {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin-top: 40px;
-  margin-bottom: 20px;
+  margin-top: 5.2vh;
+  margin-bottom: 2.6vh;
 }
 .header-11-sub .signup-form form .form-group:first-child + .form-group {
   display: table;
@@ -1151,11 +1154,12 @@ section * {
 }
 .header-11-sub .transparent_overlay_box {
   background-color: rgba(0,0,0,0.5);
-  border-radius: 2px;
-  padding: 20px;
-  width: 400px;
+  border-radius: 0.16vh;
+  padding: 2.6vh;
+  width: 28vw;
   color: #ccc;
   float: left;
+  margin-left: 10vw;
 }
 
 /* price */
@@ -1437,7 +1441,7 @@ section * {
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 1.56vh;
   font-weight: normal;
   color: #bdc3c7;
 }

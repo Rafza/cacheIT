@@ -77,6 +77,7 @@ footer {
         margin-top: 5px;
     }
 
+    
     .side-nav li a:hover,
     .side-nav li a:focus {
         outline: none;
@@ -126,9 +127,7 @@ footer {
   overflow-y: auto;
 }
 
-.navbar-ex1-collapse {
-  width: 10px
-}
+
 
 @media (min-width: 768px) {
   .navbar-nav{
@@ -184,3 +183,4 @@ footer {
   color: #fff;
   background-color: #34495e;
 }
+
