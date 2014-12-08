@@ -1,6 +1,56 @@
 <!--Teller View Begin-->
 <div ng-controller="UserTranCtrl">
-  <a href=""><strong><i class="glyphicon glyphicon-dashboard"></i> Transfer Tool</strong></a>
+  <div class="row" ng-controller="AccountCtrl as acc">
+    <a href=""><strong><i class="glyphicon glyphicon-dashboard"></i> Transfer Tool</strong></a>
+    <hr>
+    <!-- center left-->
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div ng-if="acc.getCurrentUser().checking < 0">
+            <h6>Checking Balance:
+              <font color="red">
+                {{acc.getCurrentUser().checking | currency}}
+              </font>
+            </h6>
+          </div>
+          <div ng-if="acc.getCurrentUser().checking >= 0">
+            <h6>Checking Balance:
+              <font color="#339999">
+                {{acc.getCurrentUser().checking | currency}}
+              </font>
+            </h6>
+          </div>
+        </div>
+      </div><!--/panel-->
+
+
+    </div><!--/col-->
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div ng-if="acc.getCurrentUser().saving < 0">
+            <h6>Savings Balance:
+              <font color="red">
+                {{acc.getCurrentUser().saving | currency}}
+              </font>
+            </h6>
+          </div>
+          <div ng-if="acc.getCurrentUser().saving >= 0">
+            <h6>Savings Balance:
+              <font color="#339999">
+                {{acc.getCurrentUser().saving | currency}}
+              </font>
+            </h6>
+          </div>
+        </div>
+      </div>
+
+
+
+      </div><!--/col-span-6-->
+    </div><!--/row-->
+
   <hr>
   <form class="form-horizontal" role="form">
 
@@ -37,7 +87,7 @@
         <div class="form-group" ng-class="{ 'has-success': !errorType  && submitted,
         'has-error': errorType && submitted }">
           <label style = "color:#16A186">From:</label>
-          <select class="form-control input-sm"  ng-model="accSelectedFrom" ng-options="   opt for opt in accOptionsFrom">
+          <select class="form-control"  ng-model="accSelectedFrom" ng-options="   opt for opt in accOptionsFrom">
           </select>
         </div>
         <!-- Amount: <input type="number" class="form-control" ng-model="fromAmount"> -->
@@ -46,7 +96,7 @@
         'has-error': errorType && submitted }">
         <label style = "color:#16A186">To:</label>
 
-            <select class="form-control input-sm" ng-model="accSelectedTo" ng-options="   opt for opt in accOptionsTo">
+            <select class="form-control" ng-model="accSelectedTo" ng-options="   opt for opt in accOptionsTo">
             </select>
         </div>
 

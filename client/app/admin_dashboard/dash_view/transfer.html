@@ -15,7 +15,7 @@
     </div>
   </form>
   <div class="row">
-    
+
     <div class="col-md-3"> </div>
     <!-- beginnig of Same Account -->
     <div class="col-md-6" ng-show="radioModelType=='Internal'">
@@ -37,7 +37,7 @@
         <div class="form-group" ng-class="{ 'has-success': !errorType  && submitted,
         'has-error': errorType && submitted }">
           <label style = "color:#16A186">From:</label>
-          <select class="form-control input-sm"  ng-model="accSelectedFrom" ng-options="   opt for opt in accOptionsFrom">
+          <select class="form-control"  ng-model="accSelectedFrom" ng-options="   opt for opt in accOptionsFrom">
           </select>
         </div>
         <!-- Amount: <input type="number" class="form-control" ng-model="fromAmount"> -->
@@ -46,7 +46,7 @@
         'has-error': errorType && submitted }">
         <label style = "color:#16A186">To:</label>
 
-            <select class="form-control input-sm" ng-model="accSelectedTo" ng-options="   opt for opt in accOptionsTo">
+            <select class="form-control" ng-model="accSelectedTo" ng-options="   opt for opt in accOptionsTo">
             </select>
         </div>
 
@@ -71,12 +71,12 @@
       <form name="myForm">
         <!-- Added content of transfer view here BEGIN -->
         <br>
-        <label style = "color:#16A186"><strong>External Transfer</strong></label>
+        <label style="color:#16A186"><strong>External Transfer</strong></label>
         <br>
         <div class="form-group" ng-class="{ 'has-success': !errorFrom  && submitted,
         'has-error': errorFrom && submitted }">
         </br>
-          <label style = "color:#16A186">From:</label>
+          <label style="color:#16A186">From:</label>
           <input class="form-control" ng-model="user.emailFrom" type="text" placeholder="Email">
         </div>
         <br>
