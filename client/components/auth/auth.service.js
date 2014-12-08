@@ -120,7 +120,25 @@ angular.module('cacheItApp')
           return cb(err);
         }).$promise;
       },
+      /**
+       * Change password
+       *
+       * @param  {String}   oldPassword
+       * @param  {String}   newPassword
+       * @param  {Function} callback    - optional
+       * @return {Promise}
+       */
+      setPassword: function(newPassword, callback) {
+        var cb = callback || angular.noop;
 
+        return User.setPassword({ id: currentUser._id }, {
+          newPassword: newPassword
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
       /**
        * Gets all available info on authenticated user
        *
