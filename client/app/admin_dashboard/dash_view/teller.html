@@ -129,35 +129,28 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label"><strong>Checking</strong></label>
                 <div class="col-sm-8" >
-                  <p ng-hide="currentUser.accountType=='saving'">{{currentUser.checking | currency}}</p>
-                  <p ng-show="currentUser.accountType=='saving'">CLOSED</p>
+                  <p>{{currentUser.checking | currency}}</p>                
                 </div>
               </div>
               <!-- Saving -->
               <div class="form-group">
                 <label class="col-sm-4 control-label"><strong>Saving</strong></label>
                 <div class="col-sm-8">
-                  <p ng-hide="currentUser.accountType=='checking'">{{currentUser.saving | currency}}</p>
-                  <p ng-show="currentUser.accountType=='checking'">CLOSED</p>
+                  <p>{{currentUser.saving | currency}}</p>                
                 </div>
               </div>
               <!-- Balance -->
               <div class="form-group">
                 <label class="col-sm-4 control-label"><strong>Balance</strong></label>
                 <div class="col-sm-8">
-                  <p ng-show="currentUser.accountType=='both'">{{currentUser.saving + currentUser.checking | currency}}</p>
-                  <p ng-hide="currentUser.accountType=='saving'||currentUser.accountType=='both'">{{currentUser.checking | currency}}</p>
-                  <p ng-hide="currentUser.accountType=='checking'||currentUser.accountType=='both'">{{currentUser.saving  | currency}}</p>
+                  <p>{{currentUser.saving + currentUser.checking | currency}}</p>                
                 </div>
               </div>
               <hr>
               <!-- Account Type -->
-
                 <label for="inputAccType" class="col-sm-4 control-label"><strong>Account Type</strong></label>
                 <div class="col-sm-8">
-                  <select ng-if="currentUser.accountType=='both'" class="form-control" ng-model="accSelected" ng-options="opt for opt in accOptions"></select>
-                  <p ng-if="currentUser.accountType=='checking'">{{accOptions[0]}}</p>
-                  <p ng-if="currentUser.accountType=='saving'"> {{accOptions[1]}}</p>
+                  <select class="form-control" ng-model="accSelected" ng-options="opt for opt in accOptions"></select>                  
                 </div>
 
             </div>
@@ -170,25 +163,13 @@
             </div>
             <div class="form-group">
               <label class="col-sm-4 control-label"><strong>Action</strong></label>
-              <div class="col-sm-8" ng-if="currentUser.accountType=='both'">
+              <div class="col-sm-8">
                 <!-- <pre>{{modelForm.$invalid}}</pre>
                 <pre>{{modelForm.amount.$dirty}}</pre> -->
                 <button class="btn btn-sm btn-success" ng-disabled="modelForm.$invalid" ng-click="depositAmt(currentUser, actionAmount, accSelected); actionAmount=0"><span class="glyphicon glyphicon-import"></span> Deposit</button>
                 <button class="btn btn-sm btn-success" ng-disabled="modelForm.$invalid" ng-click="withdrawAmt(currentUser, actionAmount, accSelected); actionAmount=0"><span class="glyphicon glyphicon-export"></span> Withdraw</button>
               </div>
-              <div class="col-sm-8" ng-if="currentUser.accountType=='checking'">
-                <!-- <pre>{{modelForm.$invalid}}</pre>
-                <pre>{{modelForm.amount.$dirty}}</pre> -->
-                <button class="btn btn-sm btn-success" ng-disabled="modelForm.$invalid" ng-click="depositAmt(currentUser, actionAmount, accOptions[0]); actionAmount=0"><span class="glyphicon glyphicon-import"></span> Deposit</button>
-                <button class="btn btn-sm btn-success" ng-disabled="modelForm.$invalid" ng-click="withdrawAmt(currentUser, actionAmount, accOptions[0]); actionAmount=0"><span class="glyphicon glyphicon-export"></span> Withdraw</button>
               </div>
-              <div class="col-sm-8" ng-if="currentUser.accountType=='saving'">
-                <!-- <pre>{{modelForm.$invalid}}</pre>
-                <pre>{{modelForm.amount.$dirty}}</pre> -->
-                <button class="btn btn-sm btn-success" ng-disabled="modelForm.$invalid" ng-click="depositAmt(currentUser, actionAmount, accOptions[1]); actionAmount=0"><span class="glyphicon glyphicon-import"></span> Deposit</button>
-                <button class="btn btn-sm btn-success" ng-disabled="modelForm.$invalid" ng-click="withdrawAmt(currentUser, actionAmount, accOptions[1]); actionAmount=0"><span class="glyphicon glyphicon-export"></span> Withdraw</button>
-              </div>
-            </div>
             <div class="alert alert-danger" role="alert" ng-show="withdrawError.overdraw">Cannot overdraw from account!</div>
 
           </form>

@@ -130,13 +130,13 @@ var mod = angular.module('cacheItApp');
         switch(angular.lowercase(type)) {
           case 'saving':
             myJson = {
-              'saving' : user.saving + amount
+              'saving' : parseFloat(user.saving) + parseFloat(amount)
             }
             typeNum = 0;
             break;
           case 'checking':
             myJson = {
-              'checking' : user.checking + amount
+              'checking' : parseFloat(user.checking) + parseFloat(amount)
             }
             typeNum = 1;
             break;
