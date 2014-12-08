@@ -123,7 +123,6 @@ angular.module('cacheItApp')
       /**
        * Change password
        *
-       * @param  {String}   oldPassword
        * @param  {String}   newPassword
        * @param  {Function} callback    - optional
        * @return {Promise}
