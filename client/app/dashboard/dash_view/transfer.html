@@ -69,7 +69,7 @@
     <!-- beginnig of Same Account -->
     <div class="col-md-6" ng-show="radioModelType=='Internal'">
 
-      <form name="myForm">
+      <form name="myFormInt">
         <!-- Added content of transfer view here BEGIN -->
 
         <br>
@@ -103,10 +103,10 @@
         <div class="form-group" ng-class="{ 'has-success': !errorAmt  && submitted,
         'has-error': errorAmt && submitted }">
         <label style = "color:#16A186">Amount:</label>
-        <input type="text" ng-model="user.amountAcc" placeholder="0.00" class="form-control" />
+        <input type="number" min=0 ng-model="user.amountAcc" placeholder="0.00" class="form-control" required>
         </div>
         <br>
-        <button type="button" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".sameTransfer-modal-sm">Submit</button>
+        <button type="button" ng-disabled="myFormInt.$invalid" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".sameTransfer-modal-sm">Submit</button>
         <br>
       </form>
     </div>
@@ -118,16 +118,16 @@
 
     <!-- Left Column BEGIN-->
     <div class="col-md-6" ng-show="radioModelType=='External'"><!-- col-md-12 BEGIN -->
-      <form name="myForm">
+      <form name="myFormExt">
         <!-- Added content of transfer view here BEGIN -->
         <br>
-        <label style = "color:#16A186"><strong>External Transfer</strong></label>
+        <label style="color:#16A186"><strong>External Transfer</strong></label>
         <br>
-        <!-- <div class="form-group" ng-class="{ 'has-success': !errorFrom  && submitted,
+ <!--        <div class="form-group" ng-class="{ 'has-success': !errorFrom  && submitted,
         'has-error': errorFrom && submitted }">
-        </br>
-          <label style = "color:#16A186">From:</label>
-          <input class="form-control" ng-model="user.emailFrom" type="text" placeholder="Email">
+        <br>
+          <label style="color:#16A186">From:</label>
+          <input class="form-control" ng-disabled='true' ng-model="user.emailFrom" type="email" placeholder="Email" required>
         </div> -->
         <br>
         <!-- Amount: <input type="number" class="form-control" ng-model="fromAmount"> -->
@@ -137,16 +137,33 @@
         <input class="form-control"  type='email' ng-model="user.emailTo"  placeholder="Email" required>
         </div>
 
+        <div class="form-group" ng-class="{ 'has-success': !errorType  && submitted,
+        'has-error': errorType && submitted }">
+          <label style = "color:#16A186">From:</label>
+          <select class="form-control"  ng-model="accSelectedFrom" ng-options="   opt for opt in accOptionsFrom">
+          </select>
+        </div>
+        <!-- Amount: <input type="number" class="form-control" ng-model="fromAmount"> -->
+
+        <div class="form-group" ng-class="{ 'has-success': !errorType  && submitted,
+        'has-error': errorType && submitted }">
+        <label style = "color:#16A186">To:</label>
+
+            <select class="form-control" ng-model="accSelectedTo" ng-options="   opt for opt in accOptionsTo">
+            </select>
+        </div>
         </br>
         <div class="form-group" ng-class="{ 'has-success': !errorAmount  && submitted,
-        'has-error': errorAmount && submitted }">
+        'has-error': errorAmount && submitted || myFormExt.amount.$invalid}">
         <label style = "color:#16A186">Amount:</label>
-        <input type="text" ng-model="user.amount" placeholder="0.00" class="form-control" />
+        <input type="number" name="amount" min=0 ng-model="user.amount" placeholder="0.00" class="form-control" required>
         </div>
         <br>
-        <button type="button" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".transfer-modal-sm">Submit</button>
+        <button type="button" ng-disabled="myFormExt.$invalid" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".transfer-modal-sm">Submit</button>
         <br>
-      </form>
+<!--         <pre>{{myFormExt.amount.$invalid}}</pre>
+        <pre>{{myFormExt.$invalid}}</pre>
+ -->      </form>
       <!-- <pre>FROM: {{user.emailFrom}} <br>{{!!myForm.$error.email}} <br>{{!!myForm.$error.required}} <br>AMT: {{user.amount}}</pre> -->
     </div>
     <!-- Beginning of Different Account  -->
@@ -215,11 +232,7 @@
 
   <!-- Different Account Transfer Modal-->
   <div class="modal fade transfer-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <br>
-    <br>
-    <br><br>
-    <br>
-    <br><br>
+
 
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -234,9 +247,13 @@
 
             <div class="col-md-6">
               <hr>
-              <strong>From Account </strong> {{user.emailFrom}}
+              <strong>From Account </strong> {{fromEmail}}
               <br>
               <strong>To Account: </strong> {{user.emailTo}}
+              <br>
+              <strong>From: </strong> {{accSelectedFrom}}
+              <br>
+              <strong>To: </strong> {{accSelectedTo}}
               <br>
               <strong>Amount: </strong>  {{user.amount | currency}}
               <br>
@@ -263,7 +280,7 @@
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-danger" data-dismiss="modal" ng-click="confirm()">Confirm</button>
+          <button class="btn btn-danger" data-dismiss="modal" ng-click="confirmExternal()">Confirm</button>
           <button class="btn btn-default pull-right" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Cancel</button>
           </div>
         </div>

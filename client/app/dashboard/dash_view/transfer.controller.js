@@ -29,6 +29,54 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
 //
 // Begin Same Account
 //
+// Transfer to Different Account
+// $scope.confirmInternal = function() {
+//   var transactionError = false;
+//   var fromEmail =  Auth.getCurrentUser().email;
+
+
+//   Auth.checkUser(fromEmail, function(result) {
+//   // console.log("checkUser() callback emailAcc: " + result);
+//   $scope.errorAcc = result;
+//   $scope.submitted = true;
+
+//   }).then(function(data) {
+//     if(angular.isUndefined( data[0]._id)){
+//       return false;
+//     } 
+//     var accID = data[0]._id;
+
+//     var from = $scope.accSelectedFrom;
+//     var to = $scope.accSelectedTo;
+    
+//     var amt = $scope.user.amountAcc;
+//     var oldAmtSav = data[0].saving;
+//     var oldAmtChk = data[0].checking;
+    
+//     if(from=='saving') {
+ 
+//     } else if (from=='checking') {
+
+//     }
+
+
+//     if ( parseFloat(amt) < 0 ) {
+//         negativeError = true;
+//     } else {
+//       Transaction.modifyAccount(data[0],'withdraw', angular.lowercase(from), amt, true,
+//       function(err){
+//           transactionError = err;
+//       }).then(function(myData){   
+//         Transaction.modifyAccount(data[0],'deposit', angular.lowercase(to), amt, true, function(err) {
+//           transactionError = err;
+//         }).then(function() {          
+
+//         });
+//       });
+
+//     }
+//   })
+// }
  $scope.confirmAcc = function()
   {
     $scope.submitted = true;
@@ -200,109 +248,162 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
 //
 // End same Account
 //
-  $scope.confirm = function()
-  {
-    $scope.submitted = true;
-    $scope.fromEmail =  Auth.getCurrentUser().email;
+  // $scope.confirm = function()
+  // {    
+  //   $scope.submitted = true;
+  //   $scope.fromEmail =  Auth.getCurrentUser().email;
 
-  //  $scope.checkUsers($scope.user.emailFrom, $scope.user.emailTo, function(){});
-  $q.all([
-    Auth.checkUser($scope.fromEmail, function(result) {
+  // //  $scope.checkUsers($scope.user.emailFrom, $scope.user.emailTo, function(){});
+  // $q.all([
+  //   Auth.checkUser($scope.fromEmail, function(result) {
+  //      console.log("checkUser() callback emailFrom: " + result);
+  //      $scope.errorFrom = result;
+  //    }),
+  //   Auth.checkUser($scope.user.emailTo.toLowerCase(), function(result) {
+  //      console.log("checkUser() callback emailTo: " + result);
+  //      $scope.errorTo = result;
+  //    })
+
+  // ]).then(function(data) {
+
+  //   if(!$scope.errorFrom && !$scope.errorTo)
+  //   {
+  //     var fromID = data[0][0]._id;
+  //     var fromOldAmt = data[0][0].checking;
+
+  //     var toID = data[1][0]._id;
+  //     var toOldAmt = data[1][0].checking;
+  //     var amount = $scope.user.amount;
+  //     // var overdraw = false;
+
+  //     if(amount <= fromOldAmt)
+  //     {
+  //       console.log("data[0] :" + angular.toJson(fromID) );
+  //       var fromNewAmt = parseFloat(fromOldAmt)-parseFloat(amount);
+
+  //       // BEGIN put function
+  //       $http.put('/api/users/' + fromID + '/update',  { checking : fromNewAmt } ).
+  //       success(function(data, status, headers, config) {
+  //       //pushing transfer in database for statement
+  //       var transaction = { debit : amount , balance : fromNewAmt, description : "Transfered"};
+  //       Transaction.push(data.email,transaction,1)
+  //       .then( function(data) {
+  //         console.log("SUccess! " + data);
+  //       })
+  //       .catch( function(err) {
+  //         console.log("Failed!");
+  //       });
+  //         // this callback will be called asynchronously
+  //         // when the response is available
+  //         console.log("Success Withdraw! Returning new saving amount:");
+  //         console.log(data.checking);
+  //         //$scope.newChecking = data.checking;
+  //         // usr.saving = data.saving;
+  //         // TODO: return json to update only one row to reduce refreshing effect
+  //       }).
+  //       error(function(data, status, headers, config) {
+  //         // called asynchronously if an error occurs
+  //         // or server returns response with an error status.
+  //       });
+  //       // END put function
+  //       console.log("data[1] :" + angular.toJson(toID) );
+  //       var toNewAmt = parseFloat(toOldAmt)+parseFloat(amount);
+
+  //       // BEGIN put function
+  //       $http.put('/api/users/' + toID + '/update',  { checking : toNewAmt } ).
+  //       success(function(data, status, headers, config) {
+  //       //pushing transfer in database for statement
+  //       var transaction = { credit : amount , balance : toNewAmt, description : "Transfered" };
+  //       Transaction.push(data.email,transaction,1)
+  //       .then( function(data) {
+  //         console.log("SUccess! " + data);
+  //       })
+  //       .catch( function(err) {
+  //         console.log("Failed!");
+  //       });
+  //         // this callback will be called asynchronously
+  //         // when the response is available
+  //         console.log("Success Deposit! Returning new saving amount:");
+  //         console.log(data.checking);
+  //         //$scope.newChecking = data.checking;
+  //         // usr.saving = data.saving;
+  //         // TODO: return json to update only one row to reduce refreshing effect
+  //       }).
+  //       error(function(data, status, headers, config) {
+  //         console.log("Failed Withdraw!: ");
+  //         // console.log(data.checking);
+  //         // called asynchronously if an error occurs
+  //         // or server returns response with an error status.
+  //       });
+  //       // END put function
+
+  //       $scope.errorAmount = false;
+  //     }
+  //     else
+  //     {
+  //       console.log("Overdrawing fromUser");
+  //       $scope.errorAmount = true;
+  //     }
+
+  //   }
+  //   console.log("after checking both users: " + $scope.errorFrom + " | " + $scope.errorTo);
+  // });
+
+  // };
+
+ $scope.confirmExternal = function() {
+   $scope.fromEmail =  Auth.getCurrentUser().email;
+   $scope.errorAmount = false;
+   $scope.submitted = true;
+   var negativeError;
+
+    $q.all([
+    Auth.checkUser(angular.lowercase($scope.fromEmail), function(result) {
        console.log("checkUser() callback emailFrom: " + result);
        $scope.errorFrom = result;
      }),
-    Auth.checkUser($scope.user.emailTo.toLowerCase(), function(result) {
+    Auth.checkUser(angular.lowercase($scope.user.emailTo), function(result) {
        console.log("checkUser() callback emailTo: " + result);
        $scope.errorTo = result;
      })
-
-  ]).then(function(data) {
-
+  ]).then(function(data) { 
     if(!$scope.errorFrom && !$scope.errorTo)
     {
       var fromID = data[0][0]._id;
-      var fromOldAmt = data[0][0].checking;
-
       var toID = data[1][0]._id;
-      var toOldAmt = data[1][0].checking;
-      var amount = $scope.user.amount;
-      // var overdraw = false;
 
-      if(amount <= fromOldAmt)
-      {
-        console.log("data[0] :" + angular.toJson(fromID) );
-        var fromNewAmt = parseFloat(fromOldAmt)-parseFloat(amount);
+      var fromExt = $scope.accSelectedFrom;
+      var toExt = $scope.accSelectedTo;
+    
+      console.log('From ' + fromExt + ' hi to ' + toExt);   
+      var amt = $scope.user.amount;
 
-        // BEGIN put function
-        $http.put('/api/users/' + fromID + '/update',  { checking : fromNewAmt } ).
-        success(function(data, status, headers, config) {
-        //pushing transfer in database for statement
-        var transaction = { debit : amount , balance : fromNewAmt, description : "Transfered"};
-        Transaction.push(data.email,transaction,1)
-        .then( function(data) {
-          console.log("SUccess! " + data);
-        })
-        .catch( function(err) {
-          console.log("Failed!");
-        });
-          // this callback will be called asynchronously
-          // when the response is available
-          console.log("Success Withdraw! Returning new saving amount:");
-          console.log(data.checking);
-          //$scope.newChecking = data.checking;
-          // usr.saving = data.saving;
-          // TODO: return json to update only one row to reduce refreshing effect
-        }).
-        error(function(data, status, headers, config) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
-        // END put function
-        console.log("data[1] :" + angular.toJson(toID) );
-        var toNewAmt = parseFloat(toOldAmt)+parseFloat(amount);
-
-        // BEGIN put function
-        $http.put('/api/users/' + toID + '/update',  { checking : toNewAmt } ).
-        success(function(data, status, headers, config) {
-        //pushing transfer in database for statement
-        var transaction = { credit : amount , balance : toNewAmt, description : "Transfered" };
-        Transaction.push(data.email,transaction,1)
-        .then( function(data) {
-          console.log("SUccess! " + data);
-        })
-        .catch( function(err) {
-          console.log("Failed!");
-        });
-          // this callback will be called asynchronously
-          // when the response is available
-          console.log("Success Deposit! Returning new saving amount:");
-          console.log(data.checking);
-          //$scope.newChecking = data.checking;
-          // usr.saving = data.saving;
-          // TODO: return json to update only one row to reduce refreshing effect
-        }).
-        error(function(data, status, headers, config) {
-          console.log("Failed Withdraw!: ");
-          // console.log(data.checking);
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
-        // END put function
-
-        $scope.errorAmount = false;
-      }
-      else
-      {
-        console.log("Overdrawing fromUser");
+      if(angular.lowercase(fromExt) === 'saving' &&  data[0][0].saving < amt) {
+        $scope.errorAmount = true;
+      } else if (angular.lowercase(fromExt) === 'checking' &&  data[0][0].checking < amt) {
         $scope.errorAmount = true;
       }
+ 
+      if ( parseFloat(amt) < 0 || $scope.errorAmount ) {
+          negativeError = true;
+      } else {
+        Transaction.modifyAccount(data[0][0],'withdraw', angular.lowercase(fromExt), amt, true,
+        function(err){
+           //Something
+        }).then(function(myData){   
+          Transaction.modifyAccount(data[1][0],'deposit', angular.lowercase(toExt), amt, true, function(err) {
+           //Something
+          }).then(function() {
+
+          });
+        });
+
+      }
+     
 
     }
-    console.log("after checking both users: " + $scope.errorFrom + " | " + $scope.errorTo);
   });
-
-
-  };
+ }
 
   $scope.getTime = function() {
 

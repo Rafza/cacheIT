@@ -117,14 +117,14 @@ var mod = angular.module('cacheItApp');
 
         if(angular.lowercase(action) === 'deposit') {
           console.log("Deposit");
-          tranMsg = "Deposit ";
+          tranMsg = "Deposited ";
         } else if (angular.lowercase(action) === 'withdraw') {
           amount = -amount;
-          tranMsg = "Withdraw ";
+          tranMsg = "Withdrawed";
         }
 
         if (isTransfer) {
-          tranMsg = 'Transfer';
+          tranMsg = 'Transfered';
         }
 
         switch(angular.lowercase(type)) {

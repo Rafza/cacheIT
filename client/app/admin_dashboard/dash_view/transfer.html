@@ -51,15 +51,15 @@
         </div>
 
         <div class="form-group" ng-class="{ 'has-success': !errorAmt  && submitted,
-        'has-error': myFormInt.amount.$invalid }">
+        'has-error': errorAmt && submitted || myFormInt.amount.$invalid }">
         <label style = "color:#16A186">Amount:</label>
         <input name="amount" ng-model="user.amountAcc" type="number" min=0  placeholder="0.00" class="form-control" required>
         </div>
         <br>
         <button type="button" ng-disabled="myFormInt.$invalid" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".sameTransfer-modal-sm">Submit</button>
         <br>
-        <pre>{{myFormInt.$invalid}}</pre>
-        <pre>TE {{transactionError}}</pre>
+<!--         <pre>{{myFormInt.$invalid}}</pre>
+        <pre>TE {{transactionError}}</pre> -->
       </form>
     </div>
 
@@ -113,9 +113,9 @@
         <br>
         <button type="button" ng-disabled="myFormExt.$invalid" class="btn btn btn-success pull-right" data-toggle="modal" data-target=".transfer-modal-sm">Submit</button>
         <br>
-        <pre>{{myFormExt.amount.$invalid}}</pre>
+<!--         <pre>{{myFormExt.amount.$invalid}}</pre>
         <pre>{{myFormExt.$invalid}}</pre>
-      </form>
+ -->      </form>
       <!-- <pre>FROM: {{user.emailFrom}} <br>{{!!myForm.$error.email}} <br>{{!!myForm.$error.required}} <br>AMT: {{user.amount}}</pre> -->
     </div>
     <!-- Beginning of Different Account  -->

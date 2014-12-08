@@ -45,9 +45,9 @@
               <tr ng-repeat="tran in acc.getCurrentUser().checkTransactions | orderBy : date : reverse" >
                 <td>{{tran.date | date:'MM/dd/yyyy'}}</td>
                 <td>{{tran.description}}</td>
-                <td>{{tran.debit}}</td>
-                <td>{{tran.credit}}</td>
-                <td>{{tran.balance}}</td>
+                <td>{{tran.debit | currency}}</td>
+                <td>{{tran.credit | currency}}</td>
+                <td>{{tran.balance | currency}}</td>
                 <!-- <td>{{acc.getCurrentUser().checkTransactions}}</td> -->
 
               </tr>
@@ -99,9 +99,9 @@
                   <tr ng-repeat="tran in acc.getCurrentUser().savTransactions | orderBy : date : reverse" >
                   <td>{{tran.date | date:'MM/dd/yyyy'}}</td>
                   <td>{{tran.description}}</td>
-                  <td>{{tran.debit}}</td>
-                  <td>{{tran.credit}}</td>
-                  <td>{{tran.balance}}</td>
+                  <td>{{tran.debit | currency}}</td>
+                  <td>{{tran.credit | currency}}</td>
+                  <td>{{tran.balance | currency}}</td>
                 </tr>
                 </tbody>
               </table>
