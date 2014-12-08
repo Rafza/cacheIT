@@ -12,34 +12,27 @@ var mod = angular.module('cacheItApp');
 
     return {
       /**
-       * Authenticate user and save token
+       * Withdraw from user
        *
        * @param  {Object}   user     - login info
        * @param  {Function} callback - optional
        * @return {Promise}
        */
-      // login: function(user, callback) {
-      //   var cb = callback || angular.noop;
-      //   var deferred = $q.defer();
-      //
-      //   $http.post('/auth/local', {
-      //     email: user.email,
-      //     password: user.password
-      //   }).
-      //   success(function(data) {
-      //     $cookieStore.put('token', data.token);
-      //     currentUser = User.get();
-      //     deferred.resolve(data);
-      //     return cb();
-      //   }).
-      //   error(function(err) {
-      //     this.logout();
-      //     deferred.reject(err);
-      //     return cb(err);
-      //   }.bind(this));
-      //
-      //   return deferred.promise;
-      // }
+      withdraw: function(email, callback) {
+        var cb = callback || angular.noop;
+        var deferred = $q.defer();
+      },
+      /**
+       * Deposit from user
+       *
+       * @param  {Object}   user     - login info
+       * @param  {Function} callback - optional
+       * @return {Promise}
+       */
+      deposit: function(email, callback) {
+        var cb = callback || angular.noop;
+        var deferred = $q.defer();
+      },
 
       /**
        * Push transaction for a specific user
@@ -49,23 +42,43 @@ var mod = angular.module('cacheItApp');
        * @return {Promise}
        */
        // for checking satatement push
-      push: function(username, data , int, callback) {
+      push: function(username, data , accountType, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
         var query = '/api/users/' + username + '/push';
 
-        //var newBalance = parseFloat(data.debit) + parseFloat(data.credit);
-        if (int == 1) {
-          var checkJson = {
-            checkTransactions :
-            [{
-              description : data.description,
-              debit : data.debit,
-              credit : data.credit,
-              balance : data.balance
-            }]
-          };
-        $http.put(query, checkJson).
+        var myJson = {};
+
+        switch(accountType) {
+          case 1:
+            myJson = {
+              checkTransactions :
+              [{
+                description : data.description,
+                debit : data.debit,
+                credit : data.credit,
+                balance : data.balance
+              }]
+            };
+            break;
+          case 0:
+             myJson = {
+              savTransactions :
+              [{
+                description : data.description,
+                debit : data.debit,
+                credit : data.credit,
+                balance : data.balance
+              }]
+            };
+            break;
+          default:
+            myJson = {};
+            break;
+        }
+
+        //Make a http PUT to push a transactionmyJson
+        $http.put(query, myJson).
         success(function(data) {
           deferred.resolve(data);
           return cb();
@@ -76,29 +89,6 @@ var mod = angular.module('cacheItApp');
         }.bind(this));
 
         return deferred.promise;
-        }
-        else if(int ==0){
-          var savJson = {
-            savTransactions :
-            [{
-              description : data.description,
-              debit : data.debit,
-              credit : data.credit,
-              balance : data.balance
-            }]
-          };
-        $http.put(query, savJson).
-        success(function(data) {
-          deferred.resolve(data);
-          return cb();
-        }).
-        error(function(err) {
-          deferred.reject(err);
-          return cb(err);
-        }.bind(this));
-
-        return deferred.promise;
-        }
       }//End checking statement push
     };//Return
   });
