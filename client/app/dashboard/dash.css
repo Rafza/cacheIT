@@ -41,10 +41,10 @@ footer {
 }
 
 @media(min-width:768px) {
-    .col-sm-3 {
+    .col-sm-2 {
       width: 20%;
     }
-    .col-sm-9 {
+    .col-sm-10{
       padding-top: 25px;
     }
     .side-nav {
@@ -62,7 +62,7 @@ footer {
     }
 
     .side-nav>li>a {
-        width: 300px;
+        width: 30vw;
         padding-left: 15%;
         text-align: left;
         font-size: 20px;
@@ -72,7 +72,7 @@ footer {
 
     /* Formatting for side-nav title */
     .side-nav>li>h1 {
-        width: 300px;
+        width: 50%;
         padding-left: 15%;
         text-align: center;
         font-size: 20px;
