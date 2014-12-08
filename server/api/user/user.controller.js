@@ -189,7 +189,7 @@ exports.changePassword = function(req, res, next) {
  * Change a users password
  */
 exports.setPassword = function(req, res, next) {
-  var userId = req.user._id;
+  var userId = req.params.id;
   var newPass = String(req.body.newPassword);
 
   User.findById(userId, function (err, user) {

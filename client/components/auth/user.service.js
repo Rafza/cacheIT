@@ -12,12 +12,12 @@ angular.module('cacheItApp')
           controller:'password'
         }
       },
-      setPassword: {
-        method: 'PUT',
-        params: {
-          controller:'setPassword'
-        }
-      },
+      // setPassword: {
+      //   method: 'PUT',
+      //   params: {
+      //     controller:'setPassword'
+      //   }
+      // },
       get: {
         method: 'GET',
         params: {

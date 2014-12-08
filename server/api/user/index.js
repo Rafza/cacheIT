@@ -11,7 +11,7 @@ router.get('/', auth.hasRole('admin'), controller.index);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
-router.put('/:id/setPassword', auth.isAuthenticated(), controller.setPassword);
+router.put('/:id/setPassword', controller.setPassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 
 //Method used to withdraw from saving and checking

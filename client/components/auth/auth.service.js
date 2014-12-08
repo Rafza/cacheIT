@@ -128,16 +128,30 @@ angular.module('cacheItApp')
        * @param  {Function} callback    - optional
        * @return {Promise}
        */
-      setPassword: function(newPassword, callback) {
+      setPassword: function(userID, newPassword, callback) {
         var cb = callback || angular.noop;
+        var deferred = $q.defer();
 
-        return User.setPassword({ id: currentUser._id }, {
-          newPassword: newPassword
-        }, function(user) {
-          return cb(user);
-        }, function(err) {
+        $http.put('/api/users/' + userID + '/setPassword',
+                  { newPassword : newPassword })
+        .success(function(users) {
+          var myError = false;
+          if(angular.isDefined(users[0])) {
+            console.log("From User exists!");
+            // console.log(angular.toJson(users[0].email));
+            myError = false;
+          } else {
+            console.log("From User is undefined!");
+            myError = true;
+          }
+          deferred.resolve(users);
+          return cb(myError);
+        }).
+        error(function(err) {
+          deferred.reject(err);
           return cb(err);
-        }).$promise;
+        }.bind(this));
+
       },
       /**
        * Gets all available info on authenticated user
