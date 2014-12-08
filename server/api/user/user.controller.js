@@ -270,6 +270,45 @@ exports.me = function(req, res, next) {
   });
 };
 
+/**
+* Increments incorrent login attempts
+*/
+exports.incLoginAttempts = function(user) {
+  var MAX_LOGIN_ATTEMPTS = 5;
+
+  // if user has waited, then reset their attempts to 0
+  if ( user.loginAttempts >= MAX_LOGIN_ATTEMPTS && Date.now() >= user.lockUntil ) {
+    this.unlockAccount(user);
+  }
+  
+  var incAttempts = user.loginAttempts += 1;
+  User.update({ _id : user._id }, { loginAttempts : incAttempts }, function(err){});
+  console.log("The current attempt is at " + user.loginAttempts);
+
+  // if the max attempts have been reached, lock the user
+  if ( user.loginAttempts == MAX_LOGIN_ATTEMPTS ) {
+    this.lockAccount(user);
+  }
+
+};
+
+/**
+* Lock user account if login attempts  == 5
+*/ 
+exports.lockAccount = function(user) {
+  var lock_time = (5 * 60 * 1000) + Date.now(); // 60 * 60 * 1000 = 1 hour
+  User.update({ _id : user._id }, { lockUntil : lock_time }, function(err){});
+  console.log ("user has been locked");
+};
+
+/**
+* Unlock user account
+*/
+exports.unlockAccount = function(user) {
+  User.update({ _id : user._id }, { loginAttempts : 0, lockUntil: 0 }, function(err){});
+  console.log("user has been unlocked");
+};
+
 // Handles Error
 function handleError(res, err) {
   return res.send(500, err);
