@@ -65,10 +65,10 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Tr
       switch(accType) {
         case 'checking':
           if(user.accountType === 'checking') {
-            myData = { checking : null, accountType : 'none' };
+            myData = { checking : null, accountType : 'none'};
             console.log("None");
           } else {
-            myData = { checking : null, accountType : 'saving' };
+            myData = {checking : null, accountType : 'saving' };
             console.log("removing saving");
           }
           break;
@@ -99,6 +99,7 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Tr
       });
       // END put function
     }
+    alert("Money will be sent to your address!!");
 
 
   }
