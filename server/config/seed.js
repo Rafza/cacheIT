@@ -16,6 +16,8 @@ User.find({}).remove(function() {
     password: 'test',
     checking: 4487,
     saving: 7898,
+    questionOne: "Bob",
+    questionTwo: "Nissan GTR",
     transactions :
     [{
       date : '10/30/2014',
