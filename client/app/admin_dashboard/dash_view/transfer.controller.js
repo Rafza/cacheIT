@@ -206,11 +206,11 @@ myApp.controller('TranCtrl', function ($scope, $location, $http, Auth, User, $q,
 
   //  $scope.checkUsers($scope.user.emailFrom, $scope.user.emailTo, function(){});
   $q.all([
-    Auth.checkUser($scope.user.emailFrom, function(result) {
+    Auth.checkUser($scope.user.emailFrom.toLowerCase(), function(result) {
        console.log("checkUser() callback emailFrom: " + result);
        $scope.errorFrom = result;
      }),
-    Auth.checkUser($scope.user.emailTo, function(result) {
+    Auth.checkUser($scope.user.emailTo.toLowerCase(), function(result) {
        console.log("checkUser() callback emailTo: " + result);
        $scope.errorTo = result;
      })
