@@ -221,6 +221,7 @@ exports.incrementDays = function() {
     });
     exports.accruedPenalty();
     exports.accruedInterest();
+    exports.accruedInterestChecking();
   });
 };
 
@@ -287,7 +288,47 @@ exports.accruedInterest = function() {
       User.update({ _id : element._id },{ saving : newSavings, $pushAll : savJson},function(err){});
     });
   });
-};/**
+};
+/**
+ * Get my info
+ */
+exports.accruedInterestChecking = function() {
+  User.find({checking: { $gte : 1000 }, accountDays : 29 },'email checking', function (err, users) {
+    // console.log(users.length);
+    // console.log(users);
+    var interestRate = 0;
+
+    //Determine Interest Rate
+    users.forEach( function(element, index, array) {
+      if(element.checking < 2000) {
+        interestRate=0.01;
+        console.log(element.email + " 1% Interest Chk");
+      } else if(element.checking < 3000) {
+        interestRate=0.02;
+        console.log(element.email + " 2% Interest Chk");
+      } else {
+        interestRate=0.03;
+        console.log(element.email + " 3% Interest Chk");
+      }
+
+
+      var newChecking = element.checking + (element.checking * interestRate);
+
+      var chkJson = {
+        checkTransactions :
+        [{
+          description : 'Interest Rate of ' + (interestRate*100) +'% applied',
+          debit : 0,
+          credit : (element.checking * interestRate),
+          balance : newChecking
+        }]
+      };
+
+      User.update({ _id : element._id },{ checking : newChecking, $pushAll : chkJson},function(err){});
+    });
+  });
+};
+/**
  * Get my info
  */
 exports.me = function(req, res, next) {
