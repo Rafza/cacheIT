@@ -148,24 +148,47 @@ var mod = angular.module('cacheItApp');
           // when the response is available
           console.log("Success! " + action + "  Sav: " + data.saving + " Chk: " + data.checking);
           var transaction = {};
-          switch(angular.lowercase(action)) {
-            case 'deposit':
-              console.log("dep");
-              transaction = {
-                credit : amount,
-                balance : parseFloat(data.saving) + parseFloat(data.checking),
-                description : tranMsg
-              };
-              break;
-            case 'withdraw':
-              console.log("with");
-              transaction = {
-                debit : -amount,
-                balance : parseFloat(data.saving) + parseFloat(data.checking),
-                description : tranMsg
-              };
-              break;
+          if(angular.lowercase(type)=='saving') {
+            switch(angular.lowercase(action)) {
+              case 'deposit':
+                console.log("dep");
+                transaction = {
+                  credit : amount,
+                  balance : parseFloat(data.saving),
+                  description : tranMsg
+                };
+                break;
+              case 'withdraw':
+                console.log("with");
+                transaction = {
+                  debit : -amount,
+                  balance : parseFloat(data.saving),
+                  description : tranMsg
+                };
+                break;
+            }
+
+          } else if (angular.lowercase(type)=='checking') {
+            switch(angular.lowercase(action)) {
+              case 'deposit':
+                console.log("dep");
+                transaction = {
+                  credit : amount,
+                  balance : parseFloat(data.checking),
+                  description : tranMsg
+                };
+                break;
+              case 'withdraw':
+                console.log("with");
+                transaction = {
+                  debit : -amount,
+                  balance : parseFloat(data.checking),
+                  description : tranMsg
+                };
+                break;
+            }
           }
+          
           console.log("Transaction: " + angular.toJson(transaction));
 
           //Make a transaction histroy
