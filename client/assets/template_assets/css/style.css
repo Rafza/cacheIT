@@ -626,7 +626,6 @@ button:active {
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .navbar-collapse.collapse {
-    display: none !important;
   }
   .navbar-toggle {
     display: block;
@@ -1097,12 +1096,7 @@ section * {
 .header-11-sub .signup-form form input[type="password"] {
   border-color: white!important;
 }
-@media (max-width: 767px) {
-  .header-11-sub .signup-form form input[type="text"],
-  .header-11-sub .signup-form form input[type="password"] {
-    height: 41px;
-  }
-}
+
 @media (max-width: 480px) {
   .header-11-sub .signup-form form {
     margin-top: 25px;
@@ -1160,6 +1154,64 @@ section * {
   color: #ccc;
   float: left;
   margin-left: 10vw;
+}
+
+@media (orientation: portrait) {
+  .header-11 .transbox {
+    height: 13vh;
+  }
+  .header-11 .navbar .brand {
+    margin-top: -2vh;
+    padding-top: 3.3vh;
+    padding-bottom: 0;
+    font-size: 3vh;
+    text-align: center;
+    z-index: 5;
+    position: absolute;
+    top: 0;
+  }
+  .header-11 .navbar .brand img:first-child {
+    margin-left: 25vw;
+    margin-top: -0.5vh;
+    width: 5vh;
+    height: 5vh;
+    text-align: center;
+  }
+  .header-11-sub {
+    padding-bottom: 0;
+  }
+  .header-11-sub .transparent_overlay_box {
+    width: 80vw;
+    height: 45vh;
+    float: center;
+  }
+
+  .header-11-sub h3 {
+    font-size: 4vh;
+  }
+
+  .header-11-sub p {
+    font-size: 2vh;
+    margin-bottom: 0;
+  }
+
+  .header-11-sub .additional-links {
+    font-size: 2.5vw;
+    margin-top: -2vh;
+  }
+
+  .header-11-sub .signup-form form {
+    margin-top: 3vh;
+  }
+
+  .header-11 .navbar .navbar-form {
+      margin-top: 7vh;
+      width: 90vw;
+      padding-top: 0;
+      padding-left: 5vw;
+      position: absolute;
+  }
+
 }
 
 /* price */

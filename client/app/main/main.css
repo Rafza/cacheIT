@@ -225,3 +225,162 @@ video#bgvid {
   color: #bdc3c7;
   position: relative;
 }
+
+@media (orientation: portrait) {
+    .collist {
+        width: 0;
+        height: 0;
+    }
+
+    .collist h1 {
+        font-size: 0;
+        margin: 0;
+    }
+
+    .collist h2 {
+        font-size: 0;
+        margin: 0;
+    }
+
+    .collist h4 {
+        font-size: 0;
+        margin: 0;
+    }
+
+    .collist h2 i {
+        font-size: 0;
+        margin: 0;
+    }
+    .header-11-sub .transparent_overlay_box {
+        width: 60vw;
+        height: 70vh;
+    }
+
+    .features {
+        padding-bottom: 0;
+    }
+
+    .features h2 {
+        font-size: 4vw;
+    }
+
+    .features p {
+        font-size: 2.5vw;
+    }
+
+    .features .container .featblock {
+        height: 20vh;
+        width: 25vw;
+        margin-left:1vw;
+        margin-right:1vw;
+    }
+
+    .featblock h1 {
+        font-size: 2.6vw;
+    }
+
+    .featblock h2 {
+        font-size: 2.1vw;
+    }
+
+    .featblock i {
+        font-size: 5vw;
+    }
+
+    .bgcinema {
+        min-height: auto;
+    }
+
+    .bgcinema .container .minibox {
+        height: auto;
+        width: 75vw;
+        float: left;
+        margin-top: -8vh;
+    }
+    .bgcinema .container .minibox h1 {
+        font-size: 4.2vh;
+        margin-bottom: 0;
+    }
+
+    .bgcinema .container .minibox h2 {
+        font-size: 2.5vh;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .bgcinema .container .minibox hr {
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+        text-align:left;
+        position: relative;
+        width: 75vw;
+    }
+
+    .bgcinema .container .minibox h3 {
+        font-size: 2vh;
+        float: left;
+    }
+
+    .bgcinema .container .minibox i {
+        font-size: 4vh;
+        margin-right: 2vw;
+        margin-top: 0;
+        float: left;
+    }
+
+    .navbar .navbar-header {
+        width: 80vw;
+        height: 2.5vh;
+    }
+
+    .navbar .pull-right {
+        float:left !important;
+        top: 0;
+        margin-top: -3vh;
+    }
+
+    .header-11 .navbar .navbar-form {
+        margin-top: -3vh;
+        width: 90vw;
+        padding-top: 0;
+        padding-left: 5vw;
+    }
+
+    .header-11 .navbar .navbar-form .form-group {
+        margin-bottom: 1px;
+    }
+
+    .header-11 .navbar .navbar-form .form-control {
+        height: 2.5vh;
+        font-size: 2vw;
+        width: 50vw;
+    }
+
+    .header-11 .navbar .navbar-form .btn-primary {
+        float: left;
+        margin-top: -5vh;
+        margin-left: 53vw;
+        line-height: 1.5vh;
+    }
+
+    .header-11 .navbar .navbar-form .btn-danger {
+        float: left;
+        margin-left: 66vw;
+        margin-top: -5vh;
+        line-height: 1.5vh;
+    }
+
+    .signup-form .form-control {
+        height: 4vh;
+        margin: 0;
+    }
+
+    .signup-form .form-group {
+        margin-bottom: 1vh;
+    }
+
+    .signup-form .btn {
+        height: 4vh;
+        font-size: 2vh;
+    }
+}
