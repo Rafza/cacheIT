@@ -29,9 +29,16 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Tr
   $scope.newSaving;
   $scope.currentUser;
 
-  //Transaction Modal Function
-  $scope.updateCurrentUser = function(myUser) {
-    $scope.currentUser = myUser;
+  /*
+   * Get the latest data for a single user
+   */
+  $scope.updateCurrentUser = function(user) {
+    console.log("What");
+    $http.get('/api/users/' + user.email + '/email')
+    .success(function(data) {
+      $scope.currentUser = data[0];
+      user = data[0];
+    });
   }
 
   $scope.delete = function(user) {
@@ -43,35 +50,50 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Tr
     });
   };
 
-  $scope.closeAccount = function(accType) {
+  $scope.closeAccount = function(user, accType) {
     var usr = $scope.currentUser;
     var myData;
+    if(usr.accountType === 'none') {
+      console.log("none...exiting");
+      return false;
+    }
     if(accType=='both') {
       $scope.delete(usr);
       $scope.users = User.query();
     } else {
+      console.log("Current AccountType: " + angular.toJson(user.accountType));
       switch(accType) {
         case 'checking':
-          myData = { checking : null, accountType : 'saving' };
+          if(user.accountType === 'checking') {
+            myData = { checking : null, accountType : 'none' };
+            console.log("None");
+          } else {
+            myData = { checking : null, accountType : 'saving' };
+            console.log("removing saving");
+          }
           break;
         case 'saving':
-          myData = { saving : null, accountType : 'checking' };
+          if(user.accountType === 'saving') {
+            myData = { saving : null, accountType : 'none' };
+            console.log("None");
+          } else {
+            console.log("removing saving");
+            myData = { saving : null, accountType : 'checking' };
+          }
           break;
       }
 
-
-      console.log(myData);
+      // console.log(myData);
 
 
       $http.put('/api/users/' + usr._id + '/update',  myData ).
       success(function(data, status, headers, config) {
         usr.checking = data.checking;
         usr.saving = data.saving;
-
-        console.log("Success Delete!");
+        $scope.users = User.query();
       }).
       error(function(data, status, headers, config) {
-
+        console.log("error!");
         // called asynchronously if an error occurs
         // or server returns response with an error status.
       });
@@ -84,201 +106,91 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Tr
   $scope.getTime = function() {
     return $scope.date = new Date();
   };
-  $scope.newDeposit = function(usr, amt,type) {
-    
-  }
+
+/*
+ * Description: Deposit to an account
+ * Function: depositAmt()
+ * Parameters: Object  usr   --  user data
+ *             Float   amt   --  amount to deposit
+ *             String  type  --  account type to deposit
+ */
   $scope.depositAmt = function(usr, amt, type) {
-    var userID = usr._id;
-    var chk = usr.checking;
-    var sav = usr.saving;
-    //var trans = usr.transactions;
-    var checkTrans = usr.checkTransactions;
-    var savTrans = usr.savTransactions;
 
+    console.log("Inside depositAmt()..." + amt);
+    var negativeError = false;
+    var transactionError = false;
+    if ( parseFloat(amt) < 0 ) {
+        negativeError = true;
+    } else {
+      Transaction.modifyAccount(usr,'deposit', type, amt, false,
+      function(err){
+          transactionError = err;
+      }).then(function(data){
+          usr.checking = data.checking;
+          usr.saving = data.saving;
 
-    console.log("Called Deposit.");
-    if( type == 'Saving' ) {
-      var newAmount = parseFloat(sav)+parseFloat(amt);
-      // console.log("Deposit to Saving: " + amt + " Sav + Amt: " + newAmount);
-      //
-      // trans.forEach(function(entry){
-      //   delete entry._id;
-      // });
-      //
-      // trans = trans.concat([{
-      //   date : $scope.getTime(),
-      //   description : 'Deposit to Saving',
-      //   debit : 0 ,
-      //   credit : amt ,
-      //   balance : newAmount
-      // }]);
-      // var myVar = angular.toJson(trans, true);
-      // console.log( myVar  );
-
-
-      // var myData = { saving : newAmount, transactions : trans};
-
-
-      // console.log("My Data: " + angular.toJson(myData) );
-      // BEGIN put function
-      $http.put('/api/users/' + userID + '/update',  { saving : newAmount } ).
-      success(function(data, status, headers, config) {
-        var transaction = { credit : amt , balance : newAmount, description : "Deposit" };
-        Transaction.push(data.email,transaction,0)
-        .then( function(data) {
-          console.log("SUccess! " + data);
-        })
-        .catch( function(err) {
-          console.log("Failed!");
-        });
-
-
-        // this callback will be called asynchronously
-        // when the response is available
-        console.log("Success Deposit! Returning new saving amount:");
-        console.log(data.saving);
-        //$scope.newChecking = data.checking;
-        usr.saving = data.saving;
-        // TODO: return json to update only one row to reduce refreshing effect
-      }).
-      error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-
+          //Get new users
+          $scope.updateUsers();
       });
-      // END put function
-
-
-    } else if (type == 'Checking') {
-      var newAmount = parseFloat(chk)+parseFloat(amt);
-      // console.log("Deposit from Checking: " + amt + " Chk + Amt: " + newAmount);
-
-      // BEGIN put function
-      $http.put('/api/users/' + userID + '/update', { checking : newAmount} ).
-      success(function(data, status, headers, config) {
-        var transaction = { credit : amt , balance : newAmount, description : "Deposit" };
-        Transaction.push(data.email,transaction,1)
-        .then( function(data) {
-          console.log("Success! " + data);
-        })
-        .catch( function(err) {
-          console.log("Failed!");
-        });
-        //var transaction = { debit : , credit : amt, description : "Deposit" };
-        // this callback will be called asynchronously
-        // when the response is available
-        console.log("Success Deposit! Returning new checking amount:");
-        console.log(data.checking);
-        //$scope.newChecking = data.checking;
-        usr.checking = data.checking;
-        // TODO: return json to update only one row to reduce refreshing effect
-      }).
-      error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-
-      });
-      // END put function
-
     }
-    //$scope.updateUsers();
-    return usr;
-  };
 
-  // Function: withdrawAmt
-  // Description: Used to withdraw money from users account
-  // TODO: validation checks
+  }
+
+  $scope.withdrawError = {};
+  /*
+   * Description: Withdraw from an account
+   * Function: withdrawAmt()
+   * Parameters: Object  usr   --  user data
+   *             Float   amt   --  amount to withdraw
+   *             String  type  --  account type to withdraw
+   */
   $scope.withdrawAmt = function(usr, amt, type) {
-    var userID = usr._id;
-    var chk = usr.checking;
-    var sav = usr.saving;
-    //var trans = usr.transactions;
-    var checkTrans = usr.checkTransactions;
-    var savTrans = usr.savTransactions;
+    console.log("Inside withdrawAmt()...A " + amt + " T" + type);
 
-    // console.log("Called Withdraw.");
-    if( type == 'Saving' && sav-amt >= 0 ) {
-      var newAmount = sav-amt;
-      // console.log("Withdraw Saving: " + amt + " Sav - Amt: " + newAmount + "Date: " + $scope.getTime() );
-      $http.put('/api/users/' + userID + '/update', { saving : newAmount } ).
-      success(function(data, status, headers, config) {
+    var withdrawErr = {}
+    withdrawErr.neg = false;
+    withdrawErr.trans = false;
+    withdrawErr.overdraw = false;
 
-
-        var transaction = { debit : amt, balance : newAmount, description : "Withdraw" };
-        Transaction.push(data.email,transaction,0)
-        .then( function(data) {
-          console.log("Success! " + data);
-        })
-        .catch( function(err) {
-          console.log("Failed!");
-        });
-
-
-        // this callback will be called asynchronously
-        // when the response is available
-        console.log("Success Withdraw! Returning new saving amount:");
-        console.log(data.checking);
-        //$scope.newChecking = data.checking;
-        usr.saving = data.saving;
-        // TODO: return json to update only one row to reduce refreshing effect
-      }).
-      error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-
-      });
-
-    } else if (type == 'Checking' && chk-amt >= 0 ) {
-      var newAmount = chk-amt;
-      // console.log("Withdraw from Checking: " + amt + " Chk - Amt: " + newAmount);
-      $http.put('/api/users/' + userID + '/update', { checking : newAmount}).
-      success(function(data, status, headers, config) {
-
-        var transaction = { debit : amt, balance : newAmount, description : "Withdraw" };
-        Transaction.push(data.email,transaction,1)
-        .then( function(data) {
-          console.log("Success! " + data);
-        })
-        .catch( function(err) {
-          console.log("Failed!");
-        });
-        // this callback will be called asynchronously
-        // when the response is available
-        console.log("Success Withdraw! Returning new checking amount:");
-        console.log(data.checking);
-        //$scope.newChecking = data.checking;
-        usr.checking = data.checking;
-        // TODO: return json to update only one row to reduce refreshing effect
-      }).
-      error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-
-      });
+    if(angular.lowercase(type) === 'saving' && usr.saving < amt) {
+      withdrawErr.overdraw = true;
+    } else if (angular.lowercase(type) === 'checking' && usr.checking < amt) {
+      withdrawErr.overdraw = true;
     }
-    //$scope.updateUsers();
-    return usr;
-  };
+
+    if( amt <= 0 ) {
+        withdrawErr.neg = true;
+    } else if (!withdrawErr.overdraw) {
+      Transaction.modifyAccount(usr,'withdraw', type, amt, false,
+      function(err){
+          withdrawErr.trans = err;
+      }).then(function(data){
+          usr.checking = data.checking;
+          usr.saving = data.saving;
+
+          //Get new users
+          $scope.updateUsers();
+      });
+    } else {
+      console.log("Transaction not completed. Error Occured!");
+    }
+    $scope.withdrawError = withdrawErr;
+
+  }
 
   $scope.updateUsers = function() {
     $scope.users = User.query();
   }
-
+  $scope.updateOne = function(id) {
+    $scope.currentUser;
+  }
 
   $scope.setTrans = function(trans) {
-    //console.log(trans);
     console.log(checkTrans);
     console.log(savTrans);
-    //$scope.currentTrans = trans;
+
     $scope.currentTrans = checkTrans;
     $scope.currentTrans = savTrans;
-    // $scope.currentTrans = trans.concat([{
-    //                          date : $scope.getTime(),
-    //                          description : 'Deposit to Saving',
-    //                          debit : 0,
-    //                          credit : 12 ,
-    //                          balance : 12
-    //                      }]);
   }
 
 

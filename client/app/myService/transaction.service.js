@@ -2,26 +2,15 @@
 
 var mod = angular.module('cacheItApp');
  mod.factory('Transaction', function ($q, $http) {
-    // var currentUser = {};
-    // if($cookieStore.get('token')) {
-    //   currentUser = User.get();
-
-    // }
-
-
 
     return {
       /**
-       * Withdraw from user
+       * Transfer from  and to users
        *
        * @param  {Object}   user     - login info
        * @param  {Function} callback - optional
        * @return {Promise}
        */
-      withdraw: function(email, callback) {
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
-      },
       transfer: function(fromEmail, toEmail, fromType, toType, fromAmount, toAmount, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
@@ -187,11 +176,6 @@ var mod = angular.module('cacheItApp');
           .catch( function(err) {
             console.log("Failed!");
           });
-
-
-
-
-
           deferred.resolve(data);
           return cb();
         }).
@@ -201,18 +185,6 @@ var mod = angular.module('cacheItApp');
             deferred.reject(err);
             return cb(err);
         }.bind(this));
-
-        //Make a http PUT to push a transactionmyJson
-        // $http.put(query, myJson).
-        // success(function(data) {
-        //   deferred.resolve(data);
-        //   return cb();
-        // }).
-        // error(function(err) {
-        //   deferred.reject(err);
-        //   return cb(err);
-        // }.bind(this));
-
         return deferred.promise;
       }
     };//Return

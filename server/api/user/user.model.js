@@ -31,7 +31,7 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-  accountType: String,
+  accountType: { type : String, default : 'both'},
   saving: Number,
   checking: Number,
   checkTransactions :  [transSchema],
