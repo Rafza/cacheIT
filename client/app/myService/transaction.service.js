@@ -32,6 +32,70 @@ var mod = angular.module('cacheItApp');
       deposit: function(email, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
+        console.log("depsoit()");
+      },
+      transfer: function(fromEmail, toEmail, fromType, toType, fromAmount, toAmount, callback) {
+        var cb = callback || angular.noop;
+        var deferred = $q.defer();
+
+        //JSON variables to store transfer amounts
+        var fromJson = {};
+        var toJson = {};
+
+        //Select Account Type for FROM user
+        switch(angular.lowercase(fromType)) {
+          case "checking":
+            fromJson = { checking : fromAmount };
+            break;
+          case "saving":
+            fromJson = { saving : fromAmount };
+            break;
+        }
+
+        //Select Account Type for TO user
+        switch(angular.lowercase(toType)) {
+          case "checking":
+            toJson = { checking : toAmount };
+            break;
+          case "saving":
+            toJson = { saving : toAmount };
+            break;
+        }
+        this.deposit("hi");
+        // //User to transfer FROM
+        // $http.put('/api/users/' + accID + '/update', fromJson ).
+        // success(function(data, status, headers, config) {
+        //   // this callback will be called asynchronously
+        //   // when the response is available
+        //   console.log("Success Withdraw! Returning new saving amount:");
+        //   console.log("NEW amount ON FROM C " + data.checking);
+        //   console.log("NEW amount ON FROM S " + data.saving);
+        //   //$scope.newChecking = data.checking;
+        //   // usr.saving = data.saving;
+        //   // TODO: return json to update only one row to reduce refreshing effect
+        // }).
+        // error(function(data, status, headers, config) {
+        //   // called asynchronously if an error occurs
+        //   // or server returns response with an error status.
+        // });
+        //
+        // //User to transfer TO
+        // $http.put('/api/users/' + accID + '/update', toJson ).
+        // success(function(data, status, headers, config) {
+        //   // this callback will be called asynchronously
+        //   // when the response is available
+        //   console.log("Success Withdraw! Returning new saving amount:");
+        //   console.log("NEW amount ON FROM C " + data.checking);
+        //   console.log("NEW amount ON FROM S " + data.saving);
+        //   //$scope.newChecking = data.checking;
+        //   // usr.saving = data.saving;
+        //   // TODO: return json to update only one row to reduce refreshing effect
+        // }).
+        // error(function(data, status, headers, config) {
+        //   // called asynchronously if an error occurs
+        //   // or server returns response with an error status.
+        // });
+
       },
 
       /**

@@ -84,12 +84,14 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Tr
   $scope.getTime = function() {
     return $scope.date = new Date();
   };
-
+  $scope.newDeposit = function(usr, amt,type) {
+    
+  }
   $scope.depositAmt = function(usr, amt, type) {
     var userID = usr._id;
     var chk = usr.checking;
     var sav = usr.saving;
-    //var trans = usr.transactions;    
+    //var trans = usr.transactions;
     var checkTrans = usr.checkTransactions;
     var savTrans = usr.savTransactions;
 
