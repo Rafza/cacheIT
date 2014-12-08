@@ -35,13 +35,23 @@ myModule.controller('LoginCtrl', function ($scope, Auth, $location) {
   });
 
 // Signup Handling
-myModule.controller('SignCtrl', function ($scope, Auth, $location) {
+myModule.controller('SignCtrl', function ($scope, Auth, $location, myService) {
     $scope.user = {};
     $scope.errors = {};
 
     $scope.register = function(signupForm) {
       $scope.submitted = true;
-      $location.path('/signup');
+      myService.saveField($scope.signup.name);
+      myService.setEmail($scope.signup.email);
+      myService.setPassword($scope.signup.password);
+      // myService.savePassword($scope.signup.password);
+      // myService.setEmail($scope.signup.email);
+      // myService.setPassword($scope.signup.password);
+      // myService.saveFeild($scope.signup.email);
+      // myService.saveFeild($scope.signup.password);
+
+      $location.path('/signup');//.search({name: $scope.signup.name, email: $scope.signup.email, password: $scope.signup.password});
+
 
       // if(signupForm.$valid) {
       //   Auth.createUser({

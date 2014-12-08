@@ -33,7 +33,15 @@
 <div class="container">
   <div class="row centered-form"> 
     <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-       <div class="signup-form">
+       <div class="signup-form" ng-controller="SignupCtrl">
+<!--         <div
+          ng-init="tranData={
+                              name: SignipCtrl.myService.getField(),
+                              email: myService.getEmail(),
+                              password: myService.getPassword()
+                            }">
+        </div>
+ -->
           <form class="form" name="form" ng-submit="register(form)" novalidate>
             <div class="row">
               <!-- First Name -->
@@ -86,12 +94,12 @@
               <label style="color:#16A085">Password</label>
 
               <input type="password" name="password" class="form-control" ng-model="user.password"
-              ng-minlength="3"
+              ng-minlength="6"
               required
               mongoose-error/>
               <p class="help-block"
               ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
-                Password must be at least 3 characters.
+                Password must be at least 6 characters.
               </p>
               <p class="help-block" ng-show="form.password.$error.mongoose">
                 {{ errors.password }}
