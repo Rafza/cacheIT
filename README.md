@@ -28,7 +28,7 @@ Overview of important files/directories in our application structure
  	│  	│								       
     │   └── assets                      - Images, Bootstrap Templates
     │                     
-    └── Server                          - Server-side
+    └── server                          - Server-side
         ├── api                         - Our apps server api
         │   └── user                    - The main code to manage user data and 
         │                                 checking/saving accounts through REST api calls 
