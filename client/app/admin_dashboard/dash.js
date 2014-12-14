@@ -1,6 +1,7 @@
 // dash.js
 'use strict';
 
+// Routing
 angular.module('cacheItApp')
   .config(function ($stateProvider) {
     $stateProvider

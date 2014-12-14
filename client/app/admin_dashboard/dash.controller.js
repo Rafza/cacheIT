@@ -2,9 +2,10 @@
 'use strict';
 angular.module('cacheItApp')
   .controller('AdminDashCtrl', function ($scope, $location, Auth) {
-    $scope.items = ['teller','transfer'];//TODO: Change back to teller first
+    $scope.items = ['teller','transfer'];
     $scope.selection = $scope.items[0];
 
+    // Menu options
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -16,7 +17,7 @@ angular.module('cacheItApp')
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.checkLogin = function() {
-    //  console.log("User is: " + $scope.isLoggedIn());
+      //console.log("User is: " + $scope.isLoggedIn());
       //console.log($scope.isActive('/logout'));
       if($scope.isActive('/login') == false)
       {
@@ -27,12 +28,13 @@ angular.module('cacheItApp')
       return true;
     };
 
-
+    // Logs user out and redirects to marketing page
     $scope.logout = function() {
       Auth.logout();
       $location.path('/');
     };
 
+    // Check if route is loaded
     $scope.isActive = function(route) {
       return route === $location.path();
     };

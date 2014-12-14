@@ -40,7 +40,7 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Tr
       user = data[0];
     });
   }
-
+//deletes the user
   $scope.delete = function(user) {
     User.remove({ id: user._id });
     angular.forEach($scope.users, function(u, i) {
@@ -49,7 +49,14 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Tr
       }
     });
   };
-
+/*
+ * Function: closeAccount()
+ * Parameters: Object  usr   --  user data
+ *             String  type  --  account type to close
+ * Description: closes account type cheking and saving and closes
+ *              account as a whole.
+ * 
+ */
   $scope.closeAccount = function(user, accType) {
     var usr = $scope.currentUser;
     var myData;
@@ -83,9 +90,9 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Tr
           break;
       }
 
-      // console.log(myData);
 
 
+      //Updating the database
       $http.put('/api/users/' + usr._id + '/update',  myData ).
       success(function(data, status, headers, config) {
         usr.checking = data.checking;
@@ -178,10 +185,11 @@ myApp.controller('TellerCtrl', function ($scope, $location, $http ,Auth, User,Tr
     $scope.withdrawError = withdrawErr;
 
   }
-
+//update all users
   $scope.updateUsers = function() {
     $scope.users = User.query();
   }
+  //updates current user
   $scope.updateOne = function(id) {
     $scope.currentUser;
   }

@@ -29,7 +29,9 @@ exports.index = function(req, res) {
   });
 };
 
-// Get a single user by name
+/**
+* Get a single user by name
+*/
 exports.showName = function(req, res) {
   User.find({ email: req.params.email }, function (err, usr) {
     if(err) { return handleError(res, err); }
@@ -39,14 +41,11 @@ exports.showName = function(req, res) {
   });
 };
 
-
-// Updates an existing thing in the DB.
+/**
+* Get a single user by name
+*/
 exports.update = function(req, res) {
   console.log("update() looping");
-  // if(req.body.checkTransactions) {
-  //   req.body.checkTransactions.forEach(function(transacts)}
-  // if(req.body.savTransactions) {
-  //   req.body.savTransactions.forEach(function(transacts);}
 
   if(req.body.transactions) {
     req.body.transactions.forEach(function(transacts) {
@@ -77,17 +76,7 @@ exports.update = function(req, res) {
 exports.pushCreate = function(req, res) {
   var bodyData = req.body;
   var myName = req.params.name;
-  // console.log("Pushing to " + myName + " Data: " + bodyData);
-  // var myData = {
-  //   riskyrisky: {
-  //     hold : 1,
-  //     pass : 2
-  //   },
-  //   safesafe: {
-  //     hold : 1,
-  //     pass : 2
-  //   }
-  // }
+
   if(req.body._id) { delete req.body._id; }
   User.findOneAndUpdate({email : myName },{$pushAll : bodyData}, {upsert:true},
   function(err, data) {
@@ -99,33 +88,6 @@ exports.pushCreate = function(req, res) {
     return res.json(200, data);
   });
 };
-
-// exports.addTransaction = function(myEmail, data) {
-//   var chkJson = {
-//     savTransactions :
-//     [{
-//       description : data.description,
-//       debit : data.debit,
-//       credit : data.credit,
-//       balance : data.balance
-//     }]
-//   };
-//   User.findOneAndUpdate({email : myEmail },{$pushAll : chkJson}, {upsert:true},
-//   function(err, data) {
-//     if(!data) { console.log("No Data!"); }
-//     if (err) { console.log("Error!");  }
-//     // console.log("Data returned: " + data);
-//   });
-// }
-
-// exports.updateById =  function(req, res) {
-//     {$push: {items: item}},
-//     {safe: true, upsert: true},
-//     function(err, model) {
-//         console.log(err);
-//     }
-//
-// };
 
 /**
  * Creates a new user
@@ -216,7 +178,6 @@ exports.incrementDays = function() {
       // console.log("Day: " + element.accountDays + " Checking: " + element.checking);
       var newDays = ((element.accountDays+1) % 30);
       // console.log("Apply Interest and Penalty.");
-      //exports.accruedInterest();
       User.update({ _id : element._id },{ accountDays : newDays},function(err){});
     });
     exports.accruedPenalty();

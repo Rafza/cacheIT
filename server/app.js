@@ -32,13 +32,11 @@ server.listen(config.port, config.ip, function () {
 // Expose app
 exports = module.exports = app;
 
-var counter = 0;
-// Use Cron
+// Use Cron to handle the timing of penalty and interests
 var CronJob = require('cron').CronJob;
 var job = new CronJob({
   cronTime: '*/1 * * * * *',
   onTick: function() {
-    // console.log("Day " + (1+(++counter)%30) +" Updating Penalty/Interest...");
     controller.incrementDays();
   },
   start: false,

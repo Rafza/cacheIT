@@ -2,6 +2,7 @@
 /*
  * Two Seperate Controllers to Handle Login/Signup for main.html
  */
+ 
 // Login handling
 var myModule = angular.module('cacheItApp');
 
@@ -32,13 +33,14 @@ myModule.controller('LoginCtrl', function ($scope, Auth, $location) {
       }
     };
 
+    // Redirect to recovery page
     $scope.recover = function() {
       $location.path('/recovery');
     };
 
   });
 
-// Signup Handling
+// Signup Handling. Transfers user input to signup page
 myModule.controller('SignCtrl', function ($scope, Auth, $location, myService) {
     $scope.user = {};
     $scope.errors = {};
@@ -49,36 +51,8 @@ myModule.controller('SignCtrl', function ($scope, Auth, $location, myService) {
       myService.setEmail($scope.signup.email);
       myService.setPassword($scope.signup.password);
       myService.setlastName($scope.signup.lastName);
-      // myService.savePassword($scope.signup.password);
-      // myService.setEmail($scope.signup.email);
-      // myService.setPassword($scope.signup.password);
-      // myService.saveFeild($scope.signup.email);
-      // myService.saveFeild($scope.signup.password);
 
-      $location.path('/signup');//.search({name: $scope.signup.name, email: $scope.signup.email, password: $scope.signup.password});
-
-
-      // if(signupForm.$valid) {
-      //   Auth.createUser({
-      //     name: $scope.signup.name,
-      //     email: $scope.signup.email,
-      //     password: $scope.signup.password
-      //   })
-      //   .then( function() {
-      //     // Account created, redirect to home
-
-      //   })
-      //   .catch( function(err) {
-      //     err = err.data;
-      //     $scope.errors = {};
-
-      //     // Update validity of form fields that match the mongoose errors
-      //     angular.forEach(err.errors, function(error, field) {
-      //       signupForm[field].$setValidity('mongoose', false);
-      //       $scope.errors[field] = error.message;
-      //     });
-      //   });
-      // }
+      // Redirect to signup page with autofilled data
+      $location.path('/signup');
     };
-
   });
