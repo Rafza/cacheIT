@@ -1,3 +1,8 @@
+/*
+ * Filename: user.controller.js
+ * Description: File that has the core Business Logic
+ */ 
+
 'use strict';
 /**
  * Using Rails-like standard naming convention for endpoints.

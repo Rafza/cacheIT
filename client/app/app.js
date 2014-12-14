@@ -2,6 +2,7 @@
  * Filename: app.js
  * Description: Main AngularJS file to configure and run the application
  */ 
+
 'use strict';
 
 angular.module('cacheItApp', [

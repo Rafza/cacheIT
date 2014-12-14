@@ -1,5 +1,6 @@
 /**
- * Main application file
+ * Filename: app.js
+ * Description: Main application file
  */
 
 'use strict';

@@ -1,3 +1,8 @@
+/*
+ * Filename: recover.controller.js
+ * Description: Handles recover user and assigning new temp password
+ */ 
+
 'use strict';
 
 angular.module('cacheItApp')
@@ -6,6 +11,7 @@ angular.module('cacheItApp')
   $scope.errFlag = false;
   $scope.message = "";
 
+  // Recover user with some validation and also temporary password replacement
   $scope.recoverUser = function(form) {
     Auth.checkUser($scope.user.email, function(err){
       console.log("Err: " + err);

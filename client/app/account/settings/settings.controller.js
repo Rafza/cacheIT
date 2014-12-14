@@ -1,9 +1,15 @@
+/*
+ * Filename: setting.controller.js
+ * Description: Changes password.
+ */ 
+
 'use strict';
 
 angular.module('cacheItApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
 
+    // Changes password
     $scope.changePassword = function(form) {
       $scope.submitted = true;
       if(form.$valid) {

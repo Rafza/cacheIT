@@ -1,7 +1,9 @@
-'use strict';
 /*
- * Two Seperate Controllers to Handle Login/Signup for main.html
- */
+ * Filename: main.controller.js
+ * Description: Controller for the marketing/main page.  Two Seperate Controllers to Handle Login/Signup for main.html
+ */ 
+
+'use strict';
  
 // Login handling
 var myModule = angular.module('cacheItApp');

@@ -1,3 +1,8 @@
+/*
+ * Filename: signup.controller.js
+ * Description: Registers user.
+ */ 
+
 'use strict';
 
 angular.module('cacheItApp')
@@ -9,7 +14,7 @@ angular.module('cacheItApp')
     $scope.user.password = myService.getPassword();
     $scope.user.lastName = myService.getlastName();
 
-
+    // Register user and redirect to dash after account creation
     $scope.register = function(form) {
       console.log("register(): " + form.$valid);
       console.log("Err: " + form.$valid);

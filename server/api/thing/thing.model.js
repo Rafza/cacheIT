@@ -1,3 +1,8 @@
+/*
+ * Filename: thing.model.js
+ * Description: Model for testing data
+ */ 
+
 'use strict';
 
 var mongoose = require('mongoose'),

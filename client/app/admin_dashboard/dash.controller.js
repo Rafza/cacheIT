@@ -1,3 +1,8 @@
+/*
+ * Filename: dash.controller.js
+ * Description: Contains logic for Dash redirects, and also dealing with login status.
+ */ 
+
 // dash.controller.js
 'use strict';
 angular.module('cacheItApp')

@@ -1,3 +1,8 @@
+/*
+ * Filename: account.js
+ * Description: Handles account routing.
+ */ 
+
 'use strict';
 
 angular.module('cacheItApp')
