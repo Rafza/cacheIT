@@ -30,8 +30,8 @@ Overview of important files/directories in our application structure
     │                     
     └── Server                          - Server-side
         ├── api                         - Our apps server api
-        │   └── user                    - The main code to manage user data and checking/saving accounts
-        │                                 through REST api calls 
+        │   └── user                    - The main code to manage user data and 
+        │                                 checking/saving accounts through REST api calls 
         ├── auth                        - For handling authentication with different auth strategies
         ├── config                      - Where we do the bulk of our apps configuration
         │   └── local.env.js            - Keep our environment variables out of source control
