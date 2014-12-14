@@ -1,13 +1,10 @@
-cacheIT
-=======
+#cacheIT
 cacheIT's MEAN stack project
 
-Installation Guide:
-=======
+##Installation Guide
 https://docs.google.com/document/d/1iDTn3sGbDSNgVxrtCFV2m18_CvJ0QyVSrW4a2n1kQSs/edit?usp=sharing
 
-App Structure
-=======
+##App Structure
 Overview of important files/directories in our application structure
 
     ├── client                          - Client-side
