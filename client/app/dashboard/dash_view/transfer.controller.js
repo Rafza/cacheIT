@@ -1,5 +1,5 @@
 /*
- * transfer.controller.js
+ * Filename: transfer.controller.js
  * Description: Handles the transfer.html view, which allows for 
  *              user to perform internal and external transfers.
  */ 
@@ -277,5 +277,5 @@ myApp.controller('UserTranCtrl', function ($scope, $location, $http ,Auth, User,
     $scope.users = User.query();
     console.log(users);
   }
-  
+
 });
