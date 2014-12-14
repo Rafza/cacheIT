@@ -5,8 +5,8 @@ cacheIT's MEAN stack project
 
 Overview of important files/directories in our application structure
 
-    ├── client							- Client-side
-    │   ├── app               		 	- All of our app specific components go in here
+    ├── client                          - Client-side
+    │   ├── app               		    - All of our app specific components go in here
     │   │   ├── account       
     │   │   │   └── login				- Login functions(moved to main)
     │   │   │   └── recovery 			- Recover passward
@@ -24,16 +24,16 @@ Overview of important files/directories in our application structure
     │   │   ├── main					- The front marketing page, includes login, signup
     │   │   └── myService  				- Contains singletons that are used throughout the app
     │   │       └── transaction.service - A singleton responsible for transactions like deposit, 
-	│  	│    						      withdraw, transfer,adding transaction history 
+	│  	│                                 withdraw, transfer,adding transaction history 
  	│  	│								       
     │   └── assets 					    - Images, Bootstrap Templates
     │                     
     └── Server                          - Server-side
-        ├── api                 		- Our apps server api
-        │ 	└── user					- The main code to manage user data and checking/saving accounts
-        │ 								  through REST api calls 
-        ├── auth                		- For handling authentication with different auth strategies
-        ├── config              		- Where we do the bulk of our apps configuration
-        │   └── local.env.js    		- Keep our environment variables out of source control
-        │   └── environment     		- Configuration specific to the node environment
-        └── views               		- Server rendered views
+        ├── api                         - Our apps server api
+        │ 	└── user                    - The main code to manage user data and checking/saving accounts
+                                          through REST api calls 
+        ├── auth                        - For handling authentication with different auth strategies
+        ├── config                      - Where we do the bulk of our apps configuration
+        │   └── local.env.js            - Keep our environment variables out of source control
+        │   └── environment             - Configuration specific to the node environment
+        └── views                       - Server rendered views
