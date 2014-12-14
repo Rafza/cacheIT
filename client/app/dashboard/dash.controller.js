@@ -5,6 +5,7 @@
     an action that a logged in user can execute. The user authentication
     automatically handles this causing it to act as login check.
  */ 
+ 
 'use strict';
 angular.module('cacheItApp')
   .controller('DashCtrl', function ($scope, $location, Auth, User) {

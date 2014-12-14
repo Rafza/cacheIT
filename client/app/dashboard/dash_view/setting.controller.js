@@ -2,6 +2,7 @@
  * Filename: setting.controller.js
  * Description: Handles the setting.html view, which performs settings
  */ 
+ 
 'use strict';
 
 angular.module('cacheItApp')

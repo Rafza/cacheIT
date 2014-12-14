@@ -1,3 +1,9 @@
+/*
+ * Filename: transaction.service.js
+ * Description: Factory that handles push, transfer, and modifying user accounts.
+ *              Also contains a Service which acts as a getter/setter service.
+ */ 
+
 'use strict';
 
 var mod = angular.module('cacheItApp');

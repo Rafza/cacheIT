@@ -1,4 +1,8 @@
-// dash.js
+/*
+ * Filename: dash.js
+ * Description: Dashboard routing.
+ */ 
+
 'use strict';
 
 // Routing

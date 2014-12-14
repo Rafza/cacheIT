@@ -1,3 +1,8 @@
+/*
+ * Filename: app.js
+ * Description: File to start the app and handle 401s
+ */ 
+
 'use strict';
 
 angular.module('cacheItApp', [

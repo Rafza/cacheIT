@@ -1,3 +1,8 @@
+/*
+ * Filename: teller.controller.js
+ * Description: Contains directive and controller for teller operations.
+ */ 
+
 // dash.controller.js
 'use strict';
 var myApp = angular.module('cacheItApp');
