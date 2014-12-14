@@ -1,3 +1,8 @@
+/*
+ * Filename: user.model.js
+ * Description: The model for our app
+ */ 
+
 'use strict';
 
 var mongoose = require('mongoose');
