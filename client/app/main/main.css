@@ -13,6 +13,7 @@
     letter-spacing: -1px;
 }
 
+/*background video*/
 video#bgvid {
     position: fixed; right: 0; top: 0;
     min-width: 100%; min-height: 720px;
@@ -21,6 +22,7 @@ video#bgvid {
 	background-size: cover;
 }
 
+/*git whiskey gif*/
 .bgcinema {
     position: relative; right: 0;
     min-width: 100%; min-height: 720px;
@@ -37,6 +39,7 @@ video#bgvid {
     width: 75vw;
 }
 
+/*primary box for gif text*/
 .bgcinema .container .minibox {
     height: auto;
     width: 25vw;
@@ -113,6 +116,7 @@ video#bgvid {
     left: 0;
 }
 
+/*marketing features*/
 .features {
     background-color: #e0e0e0;
     padding-top: 80px;
@@ -149,6 +153,7 @@ video#bgvid {
     margin-top: 50px;
 }
 
+/*blocks for each of the three features*/
 .features .container .featblock {
     float: left;
     width: 22vw;
@@ -226,6 +231,7 @@ video#bgvid {
   position: relative;
 }
 
+/*custom responsive code for mobile*/
 @media (orientation: portrait) {
     .collist {
         width: 0;

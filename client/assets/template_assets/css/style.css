@@ -1146,6 +1146,8 @@ section * {
     height: 160px;
   }
 }
+
+/*transparent box on marketing page*/
 .header-11-sub .transparent_overlay_box {
   background-color: rgba(0,0,0,0.5);
   border-radius: 0.16vh;
@@ -1156,6 +1158,7 @@ section * {
   margin-left: 10vw;
 }
 
+/*custom code for mobile responsiveness*/
 @media (orientation: portrait) {
   .header-11 .transbox {
     height: 13vh;

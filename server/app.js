@@ -35,7 +35,7 @@ exports = module.exports = app;
 // Use Cron to handle the timing of penalty and interests
 var CronJob = require('cron').CronJob;
 var job = new CronJob({
-  cronTime: '*/10 * * * * *',
+  cronTime: '*/1 * * * * *',
   onTick: function() {
     controller.incrementDays();
   },
