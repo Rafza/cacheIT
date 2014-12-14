@@ -1,4 +1,8 @@
-// dash.controller.js
+/*
+ * Filename: transfer.controller.js
+ * Description: 
+    Transfer funds for user
+ */ 
 'use strict';
 var myApp = angular.module('cacheItApp');
 

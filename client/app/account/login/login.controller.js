@@ -1,3 +1,8 @@
+/*
+ * Filename: login.controller.js
+ * Description: 
+   Using login, moved to main.controller.js
+ */ 
 // 'use strict';
 
 // angular.module('cacheItApp')
