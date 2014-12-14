@@ -8,7 +8,7 @@ Overview of important files/directories in our application structure
     ├── client                          - Client-side
     │   ├── app                         - All of our app specific components go in here
     │   │   ├── account       
-    │   │   │   └── login				- Login functions(moved to main)
+    │   │   │   └── login				- Login functions(no longer used, moved to main)
     │   │   │   └── recovery 			- Recover passward
     │   │   │   └── settings			- Change password
     │   │   │   └── signup 				- Signup
