@@ -1,10 +1,13 @@
 cacheIT
 =======
-Installation Guide:
-https://docs.google.com/document/d/1iDTn3sGbDSNgVxrtCFV2m18_CvJ0QyVSrW4a2n1kQSs/edit?usp=sharing
-=======
-
 cacheIT's MEAN stack project
+
+Installation Guide:
+=======
+https://docs.google.com/document/d/1iDTn3sGbDSNgVxrtCFV2m18_CvJ0QyVSrW4a2n1kQSs/edit?usp=sharing
+
+
+
 
 Overview of important files/directories in our application structure
 
