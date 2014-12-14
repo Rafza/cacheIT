@@ -1,3 +1,8 @@
+/*
+ * Filename: thing.controller.js
+ * Description: API used for testing.
+ */ 
+
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /things              ->  index

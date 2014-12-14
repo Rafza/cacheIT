@@ -1,3 +1,8 @@
+/*
+ * Filename: index.js
+ * Description: Handles the HTTP requests by sending the parameters to the controllers
+ */ 
+
 'use strict';
 
 var express = require('express');
